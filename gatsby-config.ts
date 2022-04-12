@@ -8,18 +8,12 @@ const config: GatsbyConfig = {
     description: `Freelance software developer - Node.js, React, C++, Qt, ABAP, ABAP OO`,
     keywords: `softwareentwicklung, freelance, freiberuflich, nodejs, react, c++, qt, abap, abap oo`
   },
-  plugins: ["gatsby-plugin-styled-components", {
+  plugins: ["gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-plugin-styled-components", {
     resolve: `gatsby-plugin-typography`,
     options: {
       pathToConfigModule: `src/typography/typography.ts`,
     },
-  }, 
-  //{
-  //  resolve: 'gatsby-plugin-google-analytics',
-  //  options: {
-  //    "trackingId": "G-YGPL0GSL6E"
-  //  }
-  //}, 
+  },
   {
     resolve: `gatsby-plugin-gdpr-cookies`,
     options: {
