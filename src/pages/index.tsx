@@ -1,22 +1,25 @@
 import * as React from "react"
 import styled from 'styled-components';
 import Cover from "../components/Cover";
-import BouncingChevron from "../components/icons/BouncingChevron";
-//<BouncingChevron width="60px" height="60px" />
 import MainLayout from "../layout/MainLayout";
+import { useIsUnderCoverImage } from '../components/CoverImage';
 
 const Dummy = styled.div`
-  //background-color: #ffffff;
   height: 300vh;
 `;
 
 const IndexPage = () => {
+  const isUnderCoverImage = useIsUnderCoverImage(40);
+  const isSmallLogo = useIsUnderCoverImage(100);
+
   return (
-    <MainLayout>
+    <MainLayout 
+      isNavigationTransparent={!isUnderCoverImage} 
+      isSmallLogo={isSmallLogo}>
       <Cover />
       <Dummy />
     </MainLayout>
   )
 }
 
-export default IndexPage
+export default IndexPage;

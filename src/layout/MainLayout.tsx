@@ -6,13 +6,18 @@ import SeoWrapper from './Seo';
 
 type Props = {
     children?: React.ReactNode
+    isNavigationTransparent: boolean,
+    isSmallLogo: boolean,
 };
 
-const MainLayout: React.FC<Props> = ({children}) => {
+const MainLayout: React.FC<Props> = ({ children, isNavigationTransparent, isSmallLogo }) => {
     return (
         <SeoWrapper>
             <GlobalStyle />
-            <Navigation />
+            <Navigation
+                isNavigationTransparent={isNavigationTransparent}
+                isSmallLogo={isSmallLogo}
+            />
             <div>
                 {children}
             </div>

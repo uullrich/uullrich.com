@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { useCallback, useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import media from "styled-media-query";
+import CoverChevron from './CoverChevron';
 import CoverImage from './CoverImage';
+//import { getCookieConsentValue } from 'react-cookie-consent';
 
 type Props = {
     children?: React.ReactNode
@@ -36,9 +39,9 @@ const Jumbo = styled.div`
     `}
 
     ${media.between("small", "medium")`
-        left: 25%;
+        left: 17%;
         top: 42%;
-        width: 50%;
+        width: 65%;
         height: 15%;
     `}
  
@@ -62,9 +65,10 @@ const Jumbo = styled.div`
 
 
 const Name = styled.div`
+    font-family: 'Arvo',sans-serif;
     font-size: 60px;
     font-weight: 400;
-    border-bottom: 1px solid #FFFFFF;
+    border-bottom: 1px solid #856ffb;
     letter-spacing: 5.5px;
     text-align: center;
     margin-bottom: 10px;
@@ -106,9 +110,11 @@ const Description = styled.div`
 `;
 
 const Cover: React.FC<Props> = ({}) => {
-    return (
-        <CoverWrapper>
-            <CoverImage />
+    //The useScrollPosition Hook triggers lots of rerenders
+    //These compontents do not depend on scroll position change
+    const MemoizedComponents = useMemo(() => {
+        return (<>
+        <CoverImage />
             <Jumbo>
                 <div>
                     <Name>
@@ -120,6 +126,30 @@ const Cover: React.FC<Props> = ({}) => {
                 </div>
             </Jumbo>
             <Dimmer />
+        </>);
+    }, []);
+
+    //useEffect(() => {
+    //    console.log('------------------>', getCookieConsentValue('gatsby-gdpr-google-analytics'));
+    //}, []);
+
+    return (
+        <CoverWrapper>
+            <>
+            {
+                MemoizedComponents
+            }
+            {
+            //<CoverChevron />
+                /*
+            !isBouncingArrowHidden && (
+                <ChevronWrapper onClick={onChevronClickHandler}>
+                    <BouncingChevron width='100%' height='100%' />
+                </ChevronWrapper>
+            )
+            */
+            }
+            </>
         </CoverWrapper>
     );
 };
