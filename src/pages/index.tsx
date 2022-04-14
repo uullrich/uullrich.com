@@ -1,6 +1,7 @@
 import * as React from "react"
 import styled from 'styled-components';
 import Cover from "../components/Cover";
+import AboutMe from "../components/AboutMe";
 import MainLayout from "../layout/MainLayout";
 import { useIsUnderCoverImage } from '../components/CoverImage';
 
@@ -17,7 +18,7 @@ const IndexPage = () => {
       isNavigationTransparent={!isUnderCoverImage} 
       isSmallLogo={isSmallLogo}>
       <Cover />
-      <Dummy />
+      <AboutMe />
     </MainLayout>
   )
 }

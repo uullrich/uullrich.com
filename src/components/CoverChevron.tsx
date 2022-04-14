@@ -46,18 +46,19 @@ const CoverChevron: React.FC<CoverChevronProps> = ({isCookieConsentOpened}) => {
     const location = useLocation();
 
     const onChevronClickHandler = useCallback(()=>{
-      console.log("OnChevronClickHandler!");
-      const height = window.innerHeight;
-      window.scrollTo({ top: height + 1, behavior: 'smooth' });
-      setBouncingArrowHidden(true);
-    }, []);
+        if (isCookieConsentOpened === false) {
+            const height = window.innerHeight;
+            window.scrollTo({ top: height + 1, behavior: 'smooth' });
+            setBouncingArrowHidden(true);
+        }
+    }, [isCookieConsentOpened]);
   
     useEffect(() => {
         if (scrollY === 0 && isBouncingArrowHidden === true) {
             setBouncingArrowHidden(false);
         }
 
-        if (isBouncingArrowHidden === false) {
+        if (isBouncingArrowHidden === false && isCookieConsentOpened === false) {
             const coverImage = document.querySelector('#coverImage');
             if (coverImage) {
                 const boundingRect = coverImage.getBoundingClientRect();
@@ -74,7 +75,9 @@ const CoverChevron: React.FC<CoverChevronProps> = ({isCookieConsentOpened}) => {
     return (
         <>
         {
-            !isBouncingArrowHidden && location.pathname === '/' && (
+            !isBouncingArrowHidden && 
+            location.pathname === '/' 
+            && (
                 <ChevronWrapper 
                     isCookieConsentOpened={isCookieConsentOpened}
                     onClick={onChevronClickHandler}>

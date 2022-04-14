@@ -1,5 +1,6 @@
 import * as React from "react"
 import styled from 'styled-components';
+import media from "styled-media-query";
 import MainLayout from "../layout/MainLayout";
 
 const Content = styled.main`
@@ -17,6 +18,10 @@ const Section = styled.section`
     justify-content: baseline;
     max-width: 700px;
     
+    ${media.lessThan("small")`
+        padding-left: 20px;
+        padding-right: 20px;
+    `};
 `;
 
 const Line = styled.hr`

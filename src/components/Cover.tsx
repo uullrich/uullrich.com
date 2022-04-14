@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import media from "styled-media-query";
 import CoverChevron from './CoverChevron';
 import CoverImage from './CoverImage';
-//import { getCookieConsentValue } from 'react-cookie-consent';
+import { useGlobalContext } from '../context/Context';
+import type { CookieStatus } from '../context/Context';
 
 type Props = {
     children?: React.ReactNode
@@ -110,11 +111,13 @@ const Description = styled.div`
 `;
 
 const Cover: React.FC<Props> = ({}) => {
+    const { cookieStatus } : { cookieStatus: CookieStatus } = useGlobalContext();
+
     //The useScrollPosition Hook triggers lots of rerenders
     //These compontents do not depend on scroll position change
     const MemoizedComponents = useMemo(() => {
         return (<>
-        <CoverImage />
+            <CoverImage />
             <Jumbo>
                 <div>
                     <Name>
@@ -129,10 +132,6 @@ const Cover: React.FC<Props> = ({}) => {
         </>);
     }, []);
 
-    //useEffect(() => {
-    //    console.log('------------------>', getCookieConsentValue('gatsby-gdpr-google-analytics'));
-    //}, []);
-
     return (
         <CoverWrapper>
             <>
@@ -140,15 +139,8 @@ const Cover: React.FC<Props> = ({}) => {
                 MemoizedComponents
             }
             {
-            //<CoverChevron />
-                /*
-            !isBouncingArrowHidden && (
-                <ChevronWrapper onClick={onChevronClickHandler}>
-                    <BouncingChevron width='100%' height='100%' />
-                </ChevronWrapper>
-            )
-            */
-            }
+                cookieStatus?.googleAnalytics?.decided === true && <CoverChevron isCookieConsentOpened={false} />
+            }            
             </>
         </CoverWrapper>
     );
