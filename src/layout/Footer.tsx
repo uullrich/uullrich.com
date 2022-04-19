@@ -115,7 +115,7 @@ const Footer: React.FC<Props> = ({}) => {
                     <a href='https://github.com/uullrich' target="_blank" rel="noopener noreferrer"><IconGithub /></a>
                     <a href='https://twitter.com/uullrich4' target="_blank" rel="noopener noreferrer"><IconTwitter /></a>
                     <a href='https://www.xing.com/profile/Uwe_Ullrich19/cv' target="_blank" rel="noopener noreferrer"><IconXing /></a>
-                    <a href='mailto:mail@uullrich.com' target="_blank" rel="noopener noreferrer"><IconMail /></a>
+                    <a href={'mailto:mail@%1'.replace('%1', 'uullrich.com')} target="_blank" rel="noopener noreferrer"><IconMail /></a>
                 </Social>
                 <Right>
                     <Link to='/legal' className='footerLink' >Legal notice</Link>
