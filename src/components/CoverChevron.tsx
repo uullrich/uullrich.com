@@ -63,7 +63,6 @@ const CoverChevron: React.FC<CoverChevronProps> = ({isCookieConsentOpened}) => {
             if (coverImage) {
                 const boundingRect = coverImage.getBoundingClientRect();
                 if (boundingRect) {
-                    console.log("ScrollY: " + scrollY + " ImageHeight: " + boundingRect.height);
                     if (scrollY + 40 > boundingRect.height) {
                         setBouncingArrowHidden(true);
                     }
