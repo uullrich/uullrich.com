@@ -8,7 +8,7 @@ const config: GatsbyConfig = {
     description: `Freelance software developer - Node.js, React, C++, Qt, ABAP, ABAP OO`,
     keywords: `softwareentwicklung, freelance, freiberuflich, nodejs, react, c++, qt, abap, abap oo`
   },
-  plugins: ["gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-plugin-styled-components", {
+  plugins: ["gatsby-plugin-remove-console", "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-plugin-styled-components", {
     resolve: `gatsby-plugin-typography`,
     options: {
       pathToConfigModule: `src/typography/typography.ts`,
