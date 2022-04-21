@@ -3,6 +3,7 @@ import Footer from './Footer';
 import GlobalStyle from './GlobalStyle';
 import Navigation from './Navigation';
 import SeoWrapper from './Seo';
+import '../typography/fontFaces.css';
 
 type Props = {
     children?: React.ReactNode
