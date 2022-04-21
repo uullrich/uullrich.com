@@ -12,6 +12,7 @@ const config: GatsbyConfig = {
     resolve: `gatsby-plugin-typography`,
     options: {
       pathToConfigModule: `src/typography/typography.ts`,
+      omitGoogleFont: true,
     },
   },
   {

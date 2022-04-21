@@ -68,7 +68,7 @@ const Jumbo = styled.div`
 const Name = styled.div`
     font-family: 'Arvo',sans-serif;
     font-size: 60px;
-    font-weight: 400;
+    font-weight: bold;
     border-bottom: 1px solid #856ffb;
     letter-spacing: 5.5px;
     text-align: center;
