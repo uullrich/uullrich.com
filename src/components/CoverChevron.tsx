@@ -17,7 +17,7 @@ type ChevronWrapperProps = {
 
 const ChevronWrapper = styled.div<ChevronWrapperProps>`
     left: calc((100% - 60px) / 2);
-    top: ${props => props.isCookieConsentOpened === true ? '-60px' : 'calc(100% - 60px)'};
+    top: ${props => props.isCookieConsentOpened === true ? '-60px' : 'calc(100vh - 60px)'};
     position: absolute;
     width: 60px;
     height: 60px;
@@ -48,7 +48,7 @@ const CoverChevron: React.FC<CoverChevronProps> = ({isCookieConsentOpened}) => {
     const onChevronClickHandler = useCallback(()=>{
         if (isCookieConsentOpened === false) {
             const height = window.innerHeight;
-            window.scrollTo({ top: height + 1, behavior: 'smooth' });
+            window.scrollTo({ top: height - 20 + 1, behavior: 'smooth' });
             setBouncingArrowHidden(true);
         }
     }, [isCookieConsentOpened]);
