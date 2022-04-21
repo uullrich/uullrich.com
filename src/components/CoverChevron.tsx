@@ -14,10 +14,16 @@ type CoverChevronProps = {
 type ChevronWrapperProps = {
     isCookieConsentOpened: boolean,
 }
-
+////top: ${props => props.isCookieConsentOpened === true ? '-60px' : 'calc(100% - 60px)'};
 const ChevronWrapper = styled.div<ChevronWrapperProps>`
     left: calc((100% - 60px) / 2);
-    top: ${props => props.isCookieConsentOpened === true ? '-60px' : 'calc(100vh - 60px)'};
+    
+    ${props => props.isCookieConsentOpened === true ? `
+        top: -60px;
+    `: `
+        bottom: 0px;
+    `};
+
     position: absolute;
     width: 60px;
     height: 60px;
