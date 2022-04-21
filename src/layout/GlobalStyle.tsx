@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
- 
+import '../typography/fontFaces.css';
+
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
