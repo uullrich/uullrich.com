@@ -103,7 +103,7 @@ const AboutMe: React.FC<Props> = ({}) => {
 
                 Several years later I got the chance to make my german Abitur (graduation) with a strong focus on information technology.
                 During that time I have learned programming with Java from scratch and the basics of information technology. 
-                We have developed some funny games in class even with a 3D Engine (jMonkey).
+                We have developed some funny games in class with a 3D Engine (jMonkey Engine).
 
             </Description>
             </Card>
