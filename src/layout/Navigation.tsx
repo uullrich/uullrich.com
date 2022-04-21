@@ -188,7 +188,6 @@ const Navigation: React.FC<NavigationProps> = ({isNavigationTransparent, isSmall
                         <Link className={'gatsbyLink ' + (isNavigationTransparent ? 'transparentNavigation' : 'standardNavigation')} to='/'>About</Link>
                     }                    
                     </NavlistItem>
-                    <NavlistItem>Blog</NavlistItem>
                     <NavlistItem>
                     {
                         <Link className={'gatsbyLink ' + (isNavigationTransparent ? 'transparentNavigation' : 'standardNavigation')} to='/contact'>Contact</Link>
