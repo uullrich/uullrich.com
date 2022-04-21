@@ -172,13 +172,15 @@ const Navigation: React.FC<NavigationProps> = ({isNavigationTransparent, isSmall
         return (
             <Navbar>                
                 {
-                    <ImageWrapper isLargeLogo={!isSmallLogo}>
-                        <StaticImage 
-                            src="../images/icon.png" 
-                            className='logo'
-                            imgClassName='logoImg'
-                            alt={'Logo'}/>
-                    </ImageWrapper>
+                    <Link to="/">
+                        <ImageWrapper isLargeLogo={!isSmallLogo}>
+                            <StaticImage 
+                                src="../images/icon.png" 
+                                className='logo'
+                                imgClassName='logoImg'
+                                alt={'Logo'}/>
+                        </ImageWrapper>
+                    </Link>
                 }
                 <NavigationList>
                     <NavlistItem>
