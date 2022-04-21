@@ -12,8 +12,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve --host 0.0.0.0 --port 9000",
     "clean": "gatsby clean",
-    "typecheck": "tsc --noEmit",
-    "install": "npm install --save --legacy-peer-deps"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
