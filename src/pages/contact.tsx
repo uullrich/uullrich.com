@@ -3,6 +3,8 @@ import { useCallback, useState, useEffect } from "react";
 import styled from 'styled-components';
 import media from "styled-media-query";
 import MainLayout from "../layout/MainLayout";
+import IconSuccess from '../images/circle-check-regular.inline.svg';
+import IconError from '../images/circle-xmark-regular.inline.svg';
 
 const Content = styled.div`
     padding-top: 80px;
@@ -108,6 +110,45 @@ const Status = styled.div`
     `};    
 `;
 
+const StatusWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    svg {
+        width: 100px;
+    }
+
+    ${media.lessThan("small")`
+        svg {
+            width: 50px;
+        }
+    `};
+
+    ${media.between("small", "large")`
+        svg {
+            width: 70px;
+        }
+    `};
+`;
+
+const SuccessWrapper = styled(StatusWrapper)`
+    svg {
+        fill: #856ffb;
+    }
+`;
+
+const FailedWrapper = styled(SuccessWrapper)`
+    svg {
+        fill: #f3b31b;
+    }
+`;
+
 type UserInputState = {
     firstName: string,
     lastName: string,
@@ -116,6 +157,14 @@ type UserInputState = {
     subject: string,
     message: string,
 }
+
+enum CardTypeOption { 
+    Input, 
+    Success, 
+    Failed 
+};
+
+type CardType = CardTypeOption.Input | CardTypeOption.Success | CardTypeOption.Failed;
 
 function randomIntFromInterval(min: number, max: number) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -134,6 +183,7 @@ const ContactPage = () => {
     const [numbers, setNumbers] = useState<number[]>([0, 0]);
     const [isPrivacyAgreed, setIsPrivacyAgreed] = useState<boolean>(false);
     const [isFieldMissing, setIsFieldMissing] = useState<boolean>(false);
+    const [cardType, setCardType] = useState<CardType>(CardTypeOption.Input);
 
     useEffect(() => {
         setNumbers([randomIntFromInterval(1, 10), randomIntFromInterval(1, 10)]);
@@ -170,11 +220,21 @@ const ContactPage = () => {
                     return response.json();
                 })
                 .then((response) => {
-                    console.log('Email sent successfully!');
+                    console.log('Email sent successfully!', response);
                     setSendButtonStatus(true);
+                    setUserInput({
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        url: '',
+                        subject: '',
+                        message: '',
+                    });
+                    setCardType(CardTypeOption.Success);
                 })
                 .catch((error) => {
-                    console.log('An unkown error occured.');
+                    console.log('An unkown error occured.', error);
+                    setCardType(CardTypeOption.Failed);
                 });
         }
     }, [userInput]);
@@ -203,47 +263,77 @@ const ContactPage = () => {
             isSmallLogo={true}>
             <Content>
                 <Section>
-                    <Card>
-                        <Header>
-                            <h1>Contact me:</h1>
-                            <Line />
-                        </Header>
-                        <Description>
-                            <form>
-                                <Inputs>
-                                    <h2>About you</h2>
-                                    <label>First Name:</label>
-                                    <Input name="firstName" type="text" onChange={inputChangeHandler} />
-                                    <label>Last Name:</label>
-                                    <Input name="lastName" type="text" onChange={inputChangeHandler} />
-                                    <label>Email:</label>
-                                    <Input name="email" type="email" onChange={inputChangeHandler} />
-                                    <label style={{ display: 'none' }}>Bot protection</label>
-                                    <Input style={{ display: 'none' }} name="url" type="text" onChange={inputChangeHandler} />
-                                    <h2>Message</h2>
-                                    <label>Subject:</label>
-                                    <Input name="subject" type="text" onChange={inputChangeHandler} />
-                                    <label>Your Message:</label>
-                                    <TextArea name="message" onChange={inputChangeHandler}></TextArea>
-                                    <div>
-                                        <Input style={{width: '20px', height: '20px' }} type="checkbox" name="privacyConsent" onChange={(event) => { setIsPrivacyAgreed(event.target.checked) }}/>&nbsp;
-                                        Yes, I have noted the data protection and agree that the data provided by me will be electronically collected and stored.
-                                    </div>
-                                    
-                                    <Task>
-                                        <label>{numbers[0] + ' + ' + numbers[1] + ' ='}</label>
-                                        <TaskInput type="number" onChange={taskInputHandler} />
-                                    </Task>
-                                    <Button disabled={!sendButtonStatus || !isPrivacyAgreed} onClick={sendClickHandler}>Send</Button>
-                                </Inputs>
-                            </form>
-                            {isFieldMissing && 
-                                <Status>    
-                                    <label>All fields are mandatory. Fill out every field please.</label> 
-                                </Status>
-                            }
-                        </Description>
-                    </Card>
+                    {
+                        cardType === CardTypeOption.Input &&
+                            <Card>
+                                <Header>
+                                    <h1>Contact me:</h1>
+                                    <Line />
+                                </Header>
+                                <Description>
+                                    <form>
+                                        <Inputs>
+                                            <h2>About you</h2>
+                                            <label>First Name:</label>
+                                            <Input name="firstName" type="text" onChange={inputChangeHandler} />
+                                            <label>Last Name:</label>
+                                            <Input name="lastName" type="text" onChange={inputChangeHandler} />
+                                            <label>Email:</label>
+                                            <Input name="email" type="email" onChange={inputChangeHandler} />
+                                            <label style={{ display: 'none' }}>Bot protection</label>
+                                            <Input style={{ display: 'none' }} name="url" type="text" onChange={inputChangeHandler} />
+                                            <h2>Message</h2>
+                                            <label>Subject:</label>
+                                            <Input name="subject" type="text" onChange={inputChangeHandler} />
+                                            <label>Your Message:</label>
+                                            <TextArea name="message" onChange={inputChangeHandler}></TextArea>
+                                            <div>
+                                                <Input style={{width: '20px', height: '20px' }} type="checkbox" name="privacyConsent" onChange={(event) => { setIsPrivacyAgreed(event.target.checked) }}/>&nbsp;
+                                                Yes, I have noted the data protection and agree that the data provided by me will be electronically collected and stored.
+                                            </div>
+                                            
+                                            <Task>
+                                                <label>{numbers[0] + ' + ' + numbers[1] + ' ='}</label>
+                                                <TaskInput type="number" onChange={taskInputHandler} />
+                                            </Task>
+                                            <Button disabled={!sendButtonStatus || !isPrivacyAgreed} onClick={sendClickHandler}>Send</Button>
+                                        </Inputs>
+                                    </form>
+                                    {isFieldMissing && 
+                                        <Status>    
+                                            <label>All fields are mandatory. Fill out every field please.</label> 
+                                        </Status>
+                                    }
+                                </Description>
+                            </Card>
+
+                    }
+                    {
+                        cardType === CardTypeOption.Success &&
+                            <Card>
+                                <Header>
+                                    <h1>Success!</h1>
+                                    <Line />
+                                </Header>
+                                <SuccessWrapper>
+                                    <IconSuccess />
+                                    <label>I have recieved your note. Please feel free to look around! Talk to you soon!</label>
+                                </SuccessWrapper>
+                            </Card>
+                    }
+                    {
+                        cardType === CardTypeOption.Failed &&
+                            <Card>
+                                <Header>
+                                    <h1>Failed!</h1>
+                                    <Line />
+                                </Header>
+                                <FailedWrapper>
+                                    <IconError />
+                                    <label>Something went wrong! I have not received your message. Please send me an email to: mail(at)uullrich.com</label>
+                                </FailedWrapper>
+                            </Card>
+                    }
                 </Section>
             </Content>
         </MainLayout>
