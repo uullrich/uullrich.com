@@ -19,12 +19,12 @@ const ChevronWrapper = styled.div<ChevronWrapperProps>`
     left: calc((100% - 60px) / 2);
     
     ${props => props.isCookieConsentOpened === true ? `
+        position: absolute;
         top: -60px;
     `: `
+        position: fixed;
         bottom: 0px;
     `};
-
-    position: absolute;
     width: 60px;
     height: 60px;
     color: #ffffff;
