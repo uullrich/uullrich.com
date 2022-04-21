@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
     color: #ffffff;
   }
 
-  html, body { height: 100vh; }
+  html, body { height: 100%; }
 `;
  
 export default GlobalStyle;
