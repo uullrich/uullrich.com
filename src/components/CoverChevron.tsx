@@ -23,7 +23,7 @@ const ChevronWrapper = styled.div<ChevronWrapperProps>`
         top: -60px;
     `: `
         position: fixed;
-        bottom: 0px;
+        bottom: 10px;
     `};
     width: 60px;
     height: 60px;
@@ -53,8 +53,11 @@ const CoverChevron: React.FC<CoverChevronProps> = ({isCookieConsentOpened}) => {
 
     const onChevronClickHandler = useCallback(()=>{
         if (isCookieConsentOpened === false) {
-            const height = window.innerHeight;
-            window.scrollTo({ top: height - 20 + 1, behavior: 'smooth' });
+            const coverImage = document.getElementById('coverImage');
+            const imageHeight = coverImage?.getBoundingClientRect().height;
+
+            const height = imageHeight || window.innerHeight;
+            window.scrollTo({ top: height - 20, behavior: 'smooth' });
             setBouncingArrowHidden(true);
         }
     }, [isCookieConsentOpened]);
