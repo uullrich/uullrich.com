@@ -14,7 +14,7 @@ type CoverChevronProps = {
 type ChevronWrapperProps = {
     isCookieConsentOpened: boolean,
 }
-////top: ${props => props.isCookieConsentOpened === true ? '-60px' : 'calc(100% - 60px)'};
+
 const ChevronWrapper = styled.div<ChevronWrapperProps>`
     left: calc((100% - 60px) / 2);
     
@@ -40,9 +40,7 @@ const ChevronWrapper = styled.div<ChevronWrapperProps>`
         height: 40px;
         ${ props.isCookieConsentOpened === true ? `
             top: -40px;
-        ` : `
-            top: 'calc(100% - 40px)'
-        ` };
+        ` : `` };
     `};
 `;
 
@@ -67,16 +65,8 @@ const CoverChevron: React.FC<CoverChevronProps> = ({isCookieConsentOpened}) => {
             setBouncingArrowHidden(false);
         }
 
-        if (isBouncingArrowHidden === false && isCookieConsentOpened === false) {
-            const coverImage = document.querySelector('#coverImage');
-            if (coverImage) {
-                const boundingRect = coverImage.getBoundingClientRect();
-                if (boundingRect) {
-                    if (scrollY + 40 > boundingRect.height) {
-                        setBouncingArrowHidden(true);
-                    }
-                }
-            }
+        if (isBouncingArrowHidden === false && isCookieConsentOpened === false && scrollY > 0) {
+            setBouncingArrowHidden(true);
         }
     }, [scrollY]);
 
