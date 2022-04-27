@@ -19,10 +19,6 @@ const meta: MetaPropsArray = [
         content: siteKeywords,
     } as MetaProps,
     {
-        name: "google-site-verification",
-        content: "ToDo!"
-    } as MetaProps,
-    {
         name: "twitter:title",
         content: "uullrich"
     } as MetaProps,
