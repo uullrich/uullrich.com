@@ -6,8 +6,8 @@
 
 # [uullrich.com](https://uullrich.com)
 
-## Introductoin
-My personal site with a minimal blog system. Based on the Gatsby minimal TypeScript starter. I am not a designer. The design is kept very simple without any css framework.
+## Introduction
+My personal site with a minimal blog system. Based on the [Gatsby minimal TypeScript](https://github.com/gatsbyjs/gatsby-starter-minimal-ts) starter. I am not a designer. The design is kept very simple without any css framework.
 
 ## Development
 
