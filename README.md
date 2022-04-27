@@ -3,52 +3,29 @@
     <img alt="logo" src="https://github.com/uullrich/uullrich.com/blob/master/src/images/icon.png?raw=true" width="60" />
   </a>
 </p>
-<h1 align="center">
-  Gatsby minimal TypeScript starter
-</h1>
 
-## 🚀 Quick start
+# [uullrich.com](https://uullrich.com)
 
-1.  **Create a Gatsby site.**
+## Introductoin
+My personal site with a minimal blog system. Based on the Gatsby minimal TypeScript starter. I am not a designer. The design is kept very simple without any css framework.
 
-    Use the Gatsby CLI to create a new site, specifying the minimal TypeScript starter.
+## Development
 
+1.  **Installation of dependencys.**
+    To run the page locally you have to install the dependencys. I am using React 18 and due to the short time it was released most dependencys still checking for React < 18. As a workaround use the --legacy-peer-deps option.
     ```shell
-    # create a new Gatsby site using the minimal TypeScript starter
-    npm init gatsby
+    # Call with no strict peer dependecy check.
+    npm install --legacy-peer-deps
     ```
 
-2.  **Start developing.**
-
-    Navigate into your new site’s directory and start it up.
-
+2.  **Startup the development server.**
+    My dev environment is in WSL and at first glance the hot reloading stucks. The solution was to add the following options to <em>gatsby develop</em>: --host localhost --port 8000
+    These options are set in the npm script development.
     ```shell
-    cd my-gatsby-site/
-    npm run develop
+    npm run development
+    //or just
+    gatsby develop
     ```
 
-3.  **Open the code and start customizing!**
-
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.tsx` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal-ts)
+## Hosting
+[uullrich.com](https://uullrich.com) is hosted with AWS and based on a serverless architecture.
