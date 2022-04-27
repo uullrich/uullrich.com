@@ -12,6 +12,7 @@ My personal site with a minimal blog system. Based on the Gatsby minimal TypeScr
 ## Development
 
 1.  **Installation of dependencys.**
+
     To run the page locally you have to install the dependencys. I am using React 18 and due to the short time it was released most dependencys still checking for React < 18. As a workaround use the --legacy-peer-deps option.
     ```shell
     # Call with no strict peer dependecy check.
@@ -19,6 +20,7 @@ My personal site with a minimal blog system. Based on the Gatsby minimal TypeScr
     ```
 
 2.  **Startup the development server.**
+
     My dev environment is in WSL and at first glance the hot reloading stucks. The solution was to add the following options to <em>gatsby develop</em>: --host localhost --port 8000
     These options are set in the npm script development.
     ```shell
