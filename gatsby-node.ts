@@ -1,6 +1,24 @@
 const path = require("path");
 
 /**
+ * Generate custom schema for MdxFrontmatter.
+ * Without this schema we get an build error due to the 
+ * fact that all fields in MdxFrontmatter are mandatory. 
+ */
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+
+  createTypes(`
+    type MdxFrontmatter implements Node {
+      slug: String
+      date: String
+      author: String
+      spoiler: String
+    }
+  `)
+}
+
+/**
  * Generate blog post pages
  */
 exports.createPages = async ({ graphql, actions, reporter }) => {
@@ -31,13 +49,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   posts.forEach(({ node }, index) => {
     let previous = null;
     let next = null;
-    if (index === posts.length - 1) {
-      previous = posts[index - 1].node;
-    } else if (index === 0) {
-      next = posts[index + 1].node;
-    } else {
-      next = posts[index + 1].node;
-      previous = posts[index - 1].node;
+    if (posts.length > 1) {
+      if (index === posts.length - 1) {
+        previous = posts[index - 1].node;
+      } else if (index === 0) {
+        next = posts[index + 1].node;
+      } else {
+        next = posts[index + 1].node;
+        previous = posts[index - 1].node;
+      }
     }
 
     createPage({
