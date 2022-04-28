@@ -36,7 +36,7 @@ const config: GatsbyConfig = {
       environments: ['production', 'development']
     },
   },
-  "gatsby-plugin-image", "gatsby-plugin-react-helmet", {
+  "gatsby-plugin-image", "gatsby-plugin-react-helmet", "gatsby-transformer-json", {
     resolve: 'gatsby-plugin-manifest',
     options: {
       "icon": "src/images/icon.png"
@@ -62,6 +62,13 @@ const config: GatsbyConfig = {
       path: `./src/blog/posts/`,
     },
     __key: "posts"
+  }, {
+    resolve: "gatsby-source-filesystem",
+    options: {
+      name: "content",
+      path: `./src/content/`,
+    },
+    __key: "content"
   }]
 };
 

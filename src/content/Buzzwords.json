@@ -1,0 +1,52 @@
+[
+    {
+        "title": "Frontend",
+        "buzzwords": [
+            {
+                "title": "React",
+                "explanation": "Frontent library",
+                "githubLink": "https://github.com/facebook/react"
+            },
+            {
+                "title": "Axios",
+                "explanation": "Fetching library",
+                "githubLink": "https://github.com/axios/axios"
+            },
+            {
+                "title": "Redux",
+                "explanation": "State managment library",
+                "githubLink": "https://github.com/reduxjs/redux"
+            },
+            {
+                "title": "Redux Toolkit",
+                "explanation": "State managment library. Simplified Redux bootstraping and usage.",
+                "githubLink": "https://github.com/reduxjs/redux-toolkit"
+            },
+            {
+                "title": "Storrybook.js",
+                "explanation": "Build react components in any way and use Storrybook.js as component explorer. You can add your documentation in your component and it will also appear in Storrybook.js.",
+                "githubLink": "https://github.com/storybookjs/storybook"
+            },
+            {
+                "title": "Gatsby",
+                "explanation": "Static site generator. This page is build with Gatsby.",
+                "githubLink": "https://github.com/gatsbyjs/gatsby"
+            }
+        ]
+    },
+    {
+        "title": "Backend",
+        "buzzwords": [
+            {
+                "title": "Node.js",
+                "explanation": "JavaScript runtime",
+                "githubLink": "https://github.com/nodejs"
+            },
+            {
+                "title": "Express",
+                "explanation": "Node.js module to create robust HTTP / REST APIs",
+                "githubLink": "https://github.com/expressjs/express"
+            }
+        ]
+    }
+]

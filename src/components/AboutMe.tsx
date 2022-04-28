@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 import media from "styled-media-query";
 import { StaticImage } from "gatsby-plugin-image"
+import BuzzwordBingo, { queryToContent } from './BuzzwordBingo';
+import { StaticQuery, graphql } from 'gatsby';
 
 type Props = {
     children?: React.ReactNode
@@ -75,7 +78,31 @@ const Description = styled.div`
         padding-right: 20px;
     `};
 `;
+
 const AboutMe: React.FC<Props> = ({}) => {
+    const Buzzwords = useMemo(() => <StaticQuery query={
+        graphql`
+            query DeveloperBuzzwords {
+                allBuzzwordsJson {
+                    edges {
+                        node {
+                            title
+                            buzzwords {
+                                explanation
+                                githubLink
+                                title
+                            }
+                        }
+                    }
+                }
+            }
+        `
+    } 
+
+    render={data =>
+        <BuzzwordBingo content={ queryToContent(data) }/>
+    } />, [])
+
     return (
         <Content>
             <Section>
@@ -144,7 +171,7 @@ const AboutMe: React.FC<Props> = ({}) => {
                                     since 2022-04
                                 </td>
                                 <td>
-                                    <strong>Freelance software developer</strong>
+                                    <strong>Freelance Software Developer</strong>
                                 </td>
                             </tr>
                             <tr>
@@ -185,6 +212,16 @@ const AboutMe: React.FC<Props> = ({}) => {
                             </tr>
                         </tbody>
                     </table>
+                    If you want to hire me, I will send you my profile with more details about my former projects.
+                </Description>
+                </Card>
+                <Card>
+                <Header>
+                    <h1>Developer Buzzwords...</h1>
+                    <Line />
+                </Header>
+                <Description style={{marginBottom: '20px'}}>
+                     { Buzzwords }
                 </Description>
                 </Card>
             </Section>
