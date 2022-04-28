@@ -144,7 +144,7 @@ const AboutMe: React.FC<Props> = ({}) => {
                                     since 2022-04
                                 </td>
                                 <td>
-                                    Freelance software developer
+                                    <strong>Freelance software developer</strong>
                                 </td>
                             </tr>
                             <tr>
