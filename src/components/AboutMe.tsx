@@ -120,8 +120,71 @@ const AboutMe: React.FC<Props> = ({}) => {
 
                     Several years later I got the chance to make my german Abitur (graduation) with a strong focus on information technology.
                     During that time I have learned programming with Java from scratch and the basics of information technology. 
-                    We have developed some funny games in class with a 3D Engine (jMonkey Engine).
+                    We have developed some funny games in class with a 3D Engine (jMonkey Engine). 
+                    During that time it was always clear to me to study computer science afterwards. <br/><br/>
 
+                    In October 2011 my studies in computer science started at the Univerity of Ulm.
+                    I knew that it would be challenging for me especially in math.
+                    As a consequence I focused myself for the first two years on math (analysis, linear algebra, stochastics, etc. ) and theoretical computer science.
+                    In the last year of my studies I had the possibility to choose lectures in web engineering and functional programming.
+                    By the way it is great to see how many aspects of functional programming are used in JavaScript these days.
+                    
+                </Description>
+                </Card>
+                <Card>
+                <Header>
+                    <h1>Career by now...</h1>
+                    <Line />
+                </Header>
+                <Description style={{marginBottom: '20px'}}>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    since 2022-04
+                                </td>
+                                <td>
+                                    Freelance software developer
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2018-03 &mdash; 2022-03
+                                </td>
+                                <td>
+                                    <strong>Software Developer</strong><br/>
+                                    Gebr. Märklin &amp; Cie. GmbH
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2017-08 &mdash; 2018-01
+                                </td>
+                                <td>
+                                    <strong>Junior Project Manager</strong><br/>
+                                    Alfred Ritter GmbH &amp; Co. KG
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2016-05 &mdash; 2017-07
+                                </td>
+                                <td>
+                                    <strong>Project Software Developer</strong><br/>
+                                    AFI Solutions GmbH
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2015-03 &mdash; 2016-04
+                                </td>
+                                <td>
+                                    <strong>Junior Technology Consultant</strong><br/>
+                                    ITM Beratungsgesellschaft mbH
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </Description>
                 </Card>
             </Section>
