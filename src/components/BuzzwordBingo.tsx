@@ -43,6 +43,9 @@ const Details = styled.div<{ isOpen:boolean }>`
   margin-bottom: 20px;
   transition: height 0.5s;
   ${ props => props.isOpen === true ? `
+    ${media.lessThan("small")`
+      height: 220px;
+    `};
     height: 150px;
   ` : `
     height: 0px;
