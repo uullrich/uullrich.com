@@ -12,8 +12,13 @@ const Wrapper = styled.div`
   }
 `;
 
-const Buzz = styled.div`
-  background-color: rgb(133, 111, 251, 0.7);
+const Buzz = styled.div<{ isSelected: boolean}>`
+  ${ props => props.isSelected === true ? `
+    background-color: rgb(133, 111, 251, 1);
+  ` : `
+    background-color: rgb(133, 111, 251, 0.7);
+  `}
+  
   width: fit-content; 
   padding-left: 20px;
   padding-right: 20px;
@@ -42,10 +47,17 @@ const Details = styled.div<{ isOpen:boolean }>`
   clear: both;
   margin-bottom: 20px;
   transition: height 0.5s;
-  ${ props => props.isOpen === true ? `
-    ${media.lessThan("small")`
+
+  ${ props => media.lessThan("small")`
+    ${ props.isOpen === true ? `
       height: 220px;
-    `};
+    ` : `
+      height: 0px;
+      overflow: hidden;
+    ` };
+  `};
+
+  ${ props => props.isOpen === true ? `
     height: 150px;
   ` : `
     height: 0px;
@@ -134,7 +146,10 @@ const BuzzwordBingo: React.FC<Props> = ({ content }) => {
                 <h4>{category.title}</h4>
                 {
                   category.buzzwords.map((buzzword, j) => {
-                    return <Buzz key={j} onClick={() => {
+                    return <Buzz 
+                      key={j} 
+                      isSelected={buzzword.title === detail?.buzzword?.title && detail?.category?.title === category?.title}
+                      onClick={() => {
                       setDetail({
                         isExpanded: true,
                         category,
