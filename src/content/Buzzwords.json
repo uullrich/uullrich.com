@@ -1,6 +1,6 @@
 [
     {
-        "title": "Frontend",
+        "title": "JavaScript Frontend",
         "buzzwords": [
             {
                 "title": "React",
@@ -31,11 +31,16 @@
                 "title": "Gatsby",
                 "explanation": "Static site generator. This page is build with Gatsby.",
                 "githubLink": "https://github.com/gatsbyjs/gatsby"
+            },
+            {
+                "title": "redux-i18n",
+                "explanation": "This library manages translations within the Redux state. The react components have access to the translations via the React legacy context api. This project also contains great extraction scripts for strings. Unfortunately there is no official support for the current React context api yet.",
+                "githubLink": "https://github.com/APSL/redux-i18n"
             }
         ]
     },
     {
-        "title": "Backend",
+        "title": "JavaScript Backend",
         "buzzwords": [
             {
                 "title": "Node.js",
@@ -46,6 +51,21 @@
                 "title": "Express",
                 "explanation": "Node.js module to create robust HTTP / REST APIs",
                 "githubLink": "https://github.com/expressjs/express"
+            }
+        ]
+    },
+    {
+        "title": "C++",
+        "buzzwords": [
+            {
+                "title": "Qt Framework",
+                "explanation": "Mighty C++ Framework.",
+                "githubLink": "https://github.com/qt"
+            },
+            {
+                "title": "Crow",
+                "explanation": "Easy to use C++ micro web framework. It is very fast and includes a lot of toolings for creating great backends. It has a BSD3 license therefore it is open source. No strange static / dynamic linking restrictions.",
+                "githubLink": "https://github.com/ipkn/crow"
             }
         ]
     }

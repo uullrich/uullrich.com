@@ -7,8 +7,8 @@ import IconGithub from '../images/social/github-brands.inline.svg';
 
 const Wrapper = styled.div`
   h1, h2, h3, h4, h5, h6 {
-      margin-top: 10px;
-      margin-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
 `;
 
@@ -43,7 +43,7 @@ const Details = styled.div<{ isOpen:boolean }>`
   margin-bottom: 20px;
   transition: height 0.5s;
   ${ props => props.isOpen === true ? `
-    height: 100px;
+    height: 150px;
   ` : `
     height: 0px;
     overflow: hidden;
@@ -79,12 +79,13 @@ const DelayedVisibility = styled.div<{isVisible: boolean}>`
   visibility: hidden;
 
   ${ props => props.isVisible === true ? `
-    animation: 0s linear 0.5s forwards delayedShow;
+    animation: 0s linear 0.4s forwards delayedShow;
   ` : ``};
 `;
 
 const DetailExplanation = styled.div`
-  width: calc(100% - 40px);
+  width: calc(100% - 45px);
+  padding-right: 5px;
 `;
 
 type Buzzword = {
