@@ -37,7 +37,7 @@ const Lane = styled.div`
   width: 100%;
 `;
 
-const Details = styled.div<DetailProps>`
+const Details = styled.div<{ isOpen:boolean }>`
   position: relative;
   clear: both;
   margin-bottom: 20px;
@@ -70,6 +70,19 @@ const GithubWrapper = styled.div`
   }
 `;
 
+const DelayedVisibility = styled.div<{isVisible: boolean}>` 
+  @keyframes delayedShow {
+    to {
+      visibility: visible;
+    }
+  }
+  visibility: hidden;
+
+  ${ props => props.isVisible === true ? `
+    animation: 0s linear 0.5s forwards delayedShow;
+  ` : ``};
+`;
+
 const DetailExplanation = styled.div`
   width: calc(100% - 40px);
 `;
@@ -87,10 +100,6 @@ type Category = {
 
 type Content = {
   categories: Category[]
-}
-
-type DetailProps = {
-  isOpen: boolean
 }
 
 type Detail = {
@@ -127,27 +136,22 @@ const BuzzwordBingo: React.FC<Props> = ({ content }) => {
                         category,
                         buzzword
                       } as Detail)
-                      console.log("Category: ", category);
-                      console.log("Buzzword: ", buzzword);
                     }}>{buzzword.title}</Buzz>
                   })
                 }
               </Lane>
-              {
-                <Details key={'detail' + i} isOpen={detail?.isExpanded && detail?.category?.title === category?.title}>
-                   {
-                     detail?.category?.title === category?.title && 
-                     <>
-                      <DetailExplanation>
-                        {
-                          detail?.buzzword?.explanation                            
-                        }
-                        </DetailExplanation>
-                        <GithubWrapper>
-                          <a href={detail?.buzzword?.githubLink} target="_blank" rel="noopener noreferrer"><IconGithub /></a>
-                        </GithubWrapper>
-                      </>
-                   }                
+              {                
+                <Details key={'detail' + i} isOpen={detail?.isExpanded && detail?.category?.title === category?.title}>                  
+                  <DelayedVisibility isVisible={detail?.isExpanded && detail?.category?.title === category?.title}>
+                    <DetailExplanation>
+                    {
+                      detail?.buzzword?.explanation                            
+                    }
+                    </DetailExplanation>  
+                    <GithubWrapper>
+                      <a href={detail?.buzzword?.githubLink} target="_blank" rel="noopener noreferrer"><IconGithub /></a>
+                    </GithubWrapper>
+                  </DelayedVisibility>         
                 </Details>
               }
             </React.Fragment>
