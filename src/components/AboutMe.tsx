@@ -177,7 +177,7 @@ const AboutMe: React.FC<Props> = ({}) => {
                             </tr>
                             <tr>
                                 <td>
-                                    2018-03 &mdash; 2022-03
+                                    <span>2018-03</span> &mdash; <span>2022-03</span>
                                 </td>
                                 <td>
                                     <strong>Software Developer</strong><br/>
@@ -186,7 +186,7 @@ const AboutMe: React.FC<Props> = ({}) => {
                             </tr>
                             <tr>
                                 <td>
-                                    2017-08 &mdash; 2018-01
+                                <span>2017-08</span> &mdash; <span>2018-01</span>
                                 </td>
                                 <td>
                                     <strong>Junior Project Manager</strong><br/>
@@ -195,7 +195,7 @@ const AboutMe: React.FC<Props> = ({}) => {
                             </tr>
                             <tr>
                                 <td>
-                                    2016-05 &mdash; 2017-07
+                                    <span>2016-05</span> &mdash; <span>2017-07</span>
                                 </td>
                                 <td>
                                     <strong>Project Software Developer</strong><br/>
@@ -204,7 +204,7 @@ const AboutMe: React.FC<Props> = ({}) => {
                             </tr>
                             <tr>
                                 <td>
-                                    2015-03 &mdash; 2016-04
+                                    <span>2015-03</span> &mdash; <span>2016-04</span>
                                 </td>
                                 <td>
                                     <strong>Junior Technology Consultant</strong><br/>
