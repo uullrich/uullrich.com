@@ -28,6 +28,7 @@ const Wrapper = styled.div<WrapperProps>`
   .img {
     width: 100px;
     height: 100px;
+    border-radius: 50%;
   }
 
   ${props => 
