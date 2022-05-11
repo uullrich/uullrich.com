@@ -38,16 +38,16 @@ const Metadata = styled.div`
 const PostPreview: React.FC<Props> = ({ post }) => {
   return (
     <PreviewWrapper>
-      <Link className='gatsbyLink' to={'../' + post.frontmatter?.slug}>
-        <h2>{post.frontmatter?.title}</h2>
+      <Link className='gatsbyLink' to={'../' + post?.frontmatter?.slug}>
+        <h2>{post?.frontmatter?.title}</h2>
       </Link>      
       <Line />
       <Metadata>
-        <div>{post.frontmatter?.date}</div>
+        <div>{post?.frontmatter?.date}</div>
         -
-        <div>{post.frontmatter?.author}</div>
+        <div>{post?.frontmatter?.author}</div>
       </Metadata>
-        <div>{post.frontmatter?.spoiler}</div>
+        <div>{post?.frontmatter?.spoiler}</div>
     </PreviewWrapper>
   )
 };

@@ -61,11 +61,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
 
     createPage({
-      path: node.frontmatter.slug,
+      path: node?.frontmatter?.slug,
       component: path.resolve(`./src/pages/blogPost.tsx`),
       context: { id: node.id, previous, next },
     });
   })
+
 }
 
 /**

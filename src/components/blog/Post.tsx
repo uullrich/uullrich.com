@@ -29,12 +29,16 @@ const Line = styled.hr`
 `;
 
 const PostComponent: React.FC<Props> = ({ post }) => {
+  if (post === null) {
+    return <></>
+  }
+
   return (
     <PostWrapper>
-      <h1>{post.frontmatter?.title}</h1>
+      <h1>{post?.frontmatter?.title}</h1>
       <Metadata>
       {
-        post.frontmatter?.date + ' - ' + post.frontmatter?.author
+        post?.frontmatter?.date + ' - ' + post.frontmatter?.author
       }
       </Metadata>
       <Line />
