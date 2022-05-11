@@ -8,7 +8,7 @@ const Content = styled.main`
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    color: #ffffff;
+    color: ${ props => props.theme.palette.background.contrastText };
     padding-bottom: 30px;
 `;
 
@@ -27,7 +27,7 @@ const Section = styled.section`
 
 const Line = styled.hr`
     margin-top: 10px;
-    background-color: #856ffb;
+    background-color: ${ props => props.theme.palette.separator };
 `;
 
 const LegalPage = () => {

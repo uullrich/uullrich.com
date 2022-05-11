@@ -15,14 +15,14 @@ const PreviewWrapper = styled.div`
     background-image: none;
 
     &>h2:hover {
-      color: #856ffb;
+      color: ${ props => props.theme.palette.primary.main };
     }
   }
 `;
 
 const Line = styled.hr`
     margin-top: 10px;
-    background-color: #856ffb;
+    background-color: ${ props => props.theme.palette.separator };
     margin-bottom: 0px;
 `;
 

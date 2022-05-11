@@ -18,8 +18,8 @@ const Dimmer = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: #000;
-    opacity: .2;
+    background-color: ${ props => props.theme.dimmer.color };
+    opacity: ${ props => props.theme.dimmer.opacity };
 `;
 
 const CoverWrapper = styled.div`
@@ -28,9 +28,9 @@ const CoverWrapper = styled.div`
 
 const Jumbo = styled.div`
     position: absolute;
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-    border-radius: 10px;
+    background-color: ${ props => props.theme.palette.jumbo.main };
+    color: ${ props => props.theme.palette.jumbo.contrastText };
+    border-radius: ${ props => props.theme.borderRadiusNormal };
 
     ${media.lessThan("small")`
         left: 12%;
@@ -69,7 +69,7 @@ const Name = styled.div`
     font-family: 'Arvo',sans-serif;
     font-size: 60px;
     font-weight: bold;
-    border-bottom: 1px solid #856ffb;
+    border-bottom: 1px solid ${ props => props.theme.palette.separator };
     letter-spacing: 5.5px;
     text-align: center;
     margin-bottom: 10px;

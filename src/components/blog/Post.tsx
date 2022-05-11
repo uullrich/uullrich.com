@@ -24,7 +24,7 @@ const Metadata = styled.div`
 
 const Line = styled.hr`
     margin-top: 10px;
-    background-color: #856ffb;
+    background-color: ${ props => props.theme.palette.separator };;
     margin-bottom: 0px;
 `;
 

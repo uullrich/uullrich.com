@@ -33,9 +33,9 @@ const Wrapper = styled.div<WrapperProps>`
 
   ${props => 
     props.withBackground === true ? `
-      background-color: rgba(0,0,0,0.5);
-      color: white;
-      border-radius: 10px;
+      background-color: ${ props.theme.palette.card.main };
+      color: ${ props.theme.palette.card.contrastText };
+      border-radius: ${ props.theme.borderRadiusNormal };
       padding: 10px;
     ` : ``
   };

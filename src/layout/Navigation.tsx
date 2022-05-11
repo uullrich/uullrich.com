@@ -22,11 +22,11 @@ const Nav = styled.nav<NavProps>`
     z-index: 10;
     ${props => 
         props.isTransparent === true ? `
-            color: #000000;
+            color: ${ props.theme.palette.navigation.transparent.contrastText };
+            background-color: ${ props.theme.palette.navigation.transparent.main };
         ` : `
-            //background-color: #e0d8d8;
-            background-color: #333333;
-            color: #ffffff;
+            background-color: ${ props.theme.palette.navigation.regular.main };
+            color: ${ props.theme.palette.navigation.regular.contrastText };
             box-shadow: 0 5px 20px -10px #000;   
         `
     }
@@ -50,16 +50,16 @@ const NavigationList = styled.ul`
         background-image: none;
 
         &:hover {
-            color: #856ffb;
+            color: ${ props => props.theme.palette.primary.main };
         }
     }
 
     .transparentNavigation {
-        color: #000000;
+        color: ${ props => props.theme.palette.navigation.transparent.contrastText };
     }
 
     .standardNavigation {
-        color: #ffffff;
+        color: ${ props => props.theme.palette.navigation.regular.contrastText };
     }
 `;
 

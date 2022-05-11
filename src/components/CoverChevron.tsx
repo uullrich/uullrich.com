@@ -27,11 +27,11 @@ const ChevronWrapper = styled.div<ChevronWrapperProps>`
     `};
     width: 60px;
     height: 60px;
-    color: #ffffff;
+    color: ${ props => props.theme.palette.chevron.main };
     cursor: pointer;
 
     &:hover{
-        color: #856ffb;
+        color: ${ props => props.theme.palette.chevron.hover };
     }
 
     ${(props) => media.lessThan("small")`

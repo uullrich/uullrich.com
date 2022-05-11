@@ -23,7 +23,7 @@ const Navigation = styled.nav`
   .gatsbyLink {
     text-shadow: none;
     background-image: none;
-    color: #856ffb;
+    color: ${ props => props.theme.palette.primary.main };
 
     span {
       text-decoration: underline;

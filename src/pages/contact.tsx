@@ -10,7 +10,6 @@ const Content = styled.div`
     padding-top: 80px;
     display: flex;
     justify-content: center;
-    color: #ffffff;
     padding-bottom: 30px;
     min-height: calc(90vh - 30px);
 
@@ -36,15 +35,15 @@ const Section = styled.section`
 `;
 
 const Card = styled.div`
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-    border-radius: 10px;
+    background-color: ${ props => props.theme.palette.card.main };
+    color: ${ props => props.theme.palette.card.contrastText };
+    border-radius: ${ props => props.theme.borderRadiusNormal };
     max-width: 700px;
 `;
 
 const Line = styled.hr`
     margin-top: 10px;
-    background-color: #856ffb;
+    background-color: ${ props => props.theme.palette.primary.main };
 `;
 
 const Header = styled.div`
@@ -72,17 +71,17 @@ type ButtonProps = {
     disabled?: boolean,
 }
 const Button = styled.button<ButtonProps>`
-    background-color: #856ffb;
-    opacity: ${props => props.disabled ? .8 : 1};
-    color: #ffffff;
-    border-radius: 10px;
+    background-color: ${ props => props.theme.palette.primary.main };
+    opacity: ${props => props.disabled ? props.theme.disabledOpacity : 1};
+    color: ${ props => props.theme.palette.primary.contrastText };
+    border-radius: ${ props => props.theme.borderRadiusNormal };
     height: 40px;
     text-align: center;
     cursor: pointer;
 `;
 
 const Input = styled.input`
-    border-radius: 8px;
+    border-radius: ${ props => props.theme.borderRadiusSmall };
     height: 40px;
 `;
 
@@ -93,7 +92,7 @@ const TaskInput = styled(Input)`
 `;
 
 const TextArea = styled.textarea`
-    border-radius: 8px;
+    border-radius: ${ props => props.theme.borderRadiusSmall };
     height: 100px;
 `;
 
@@ -103,7 +102,7 @@ const Task = styled.div`
 
 const Status = styled.div`
     height: 40px;
-    color: #f3b31b;
+    color: ${ props => props.theme.palette.secondary.main };
 
     ${media.lessThan("small")`
         height: 70px;
@@ -139,13 +138,13 @@ const StatusWrapper = styled.div`
 
 const SuccessWrapper = styled(StatusWrapper)`
     svg {
-        fill: #856ffb;
+        fill: ${ props => props.theme.palette.primary.main };
     }
 `;
 
-const FailedWrapper = styled(SuccessWrapper)`
+const FailedWrapper = styled(StatusWrapper)`
     svg {
-        fill: #f3b31b;
+        fill: ${ props => props.theme.palette.secondary.main };
     }
 `;
 

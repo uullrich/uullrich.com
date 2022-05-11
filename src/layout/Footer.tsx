@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'gatsby';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import CookieConsent from 'react-cookie-consent';
 import media from "styled-media-query";
 import CoverChevron from '../components/CoverChevron';
@@ -16,13 +16,13 @@ type Props = {
 };
 
 const FooterNavigationBar = styled.div`
-    background-color:#856ffb;
+    background-color: ${ props => props.theme.palette.footer.main };
+    color: ${ props => props.theme.palette.footer.contrastText };
     height: 10vh;
     box-shadow: 0 -4px 5px rgba(0,0,0,0.2);
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    color: #ffffff;
     margin-top: 30px;
 
     ${media.lessThan("small")`
@@ -33,7 +33,7 @@ const FooterNavigationBar = styled.div`
         text-shadow: none;
         text-decoration: none;
         background-image: none;
-        color: #ffffff;
+        color: ${ props => props.theme.palette.footer.contrastText };
     }
 `;
 
@@ -56,7 +56,7 @@ const Social = styled.div`
         width: 40px;
         height: 40px;
         cursor: pointer;
-        fill: #ffffff;
+        fill: ${ props => props.theme.palette.footer.contrastText };
     }
 
     ${media.lessThan("small")`
@@ -82,7 +82,7 @@ const Left = styled.div`
     svg {
         width: 20px;
         height: 20px;
-        fill: #ffffff;
+        fill: ${ props => props.theme.palette.footer.contrastText };
     }
 
     ${media.lessThan("small")`
@@ -101,8 +101,9 @@ const Right = styled.div`
     align-items: center;
 `;
 
-const Footer: React.FC<Props> = ({}) => {
+const Footer: React.FC<Props> = ({}, context) => {
     const { changeGoogleAnalyticsCookie } = useGlobalContext();
+    const theme = useTheme();
 
     return (
         <>
@@ -127,18 +128,19 @@ const Footer: React.FC<Props> = ({}) => {
                 enableDeclineButton
                 declineButtonText="Decline"
                 style={{ 
-                    background: '#333333',
+                    backgroundColor: theme.palette.background.main,
+                    color: theme.palette.background.contrastText,
                     boxShadow: '0 -4px 5px rgba(0,0,0,0.2)',
                 }}
                 buttonStyle={{
-                    background: '#856ffb',
-                    color: '#ffffff',
-                    borderRadius: '10px'
+                    backgroundColor: theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
+                    borderRadius: theme.borderRadiusNormal
                 }}
                 declineButtonStyle={{
-                    background: '#f3b31b',
-                    color: '#ffffff',
-                    borderRadius: '10px'
+                    backgroundColor: theme.palette.secondary.main,
+                    color: theme.palette.secondary.contrastText,
+                    borderRadius: theme.borderRadiusNormal
                 }}
                 onAccept={() => {
                     changeGoogleAnalyticsCookie(true);

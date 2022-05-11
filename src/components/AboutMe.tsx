@@ -18,10 +18,6 @@ const Content = styled.div`
     gap: 40px;
     padding-top: 60px;
 
-    h1 {
-        margin-top: 15px;
-    }
-
     .outerWrapper {
         width: 250px;
         height: 250px;
@@ -51,18 +47,21 @@ const Section = styled.section`
     `};
 `;
 
-const Cards = styled.div``;
-
 const Card = styled.div`
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-    border-radius: 10px;
+    background-color: ${ props => props.theme.palette.card.main };
+    color: ${ props => props.theme.palette.card.contrastText };
+    border-radius: ${ props => props.theme.borderRadiusNormal };
     max-width: 700px;
+
+    h1 {
+        color: ${ props => props.theme.palette.card.contrastText };
+        margin-top: 15px;
+    }
 `;
 
 const Line = styled.hr`
     margin-top: 10px;
-    background-color: #856ffb;
+    background-color: ${ props => props.theme.palette.separator };
 `;
 
 const Header = styled.div`
