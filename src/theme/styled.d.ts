@@ -1,43 +1,43 @@
-import 'styled-components';
+import "styled-components";
 
-type Color = string
+type Color = string;
 
 interface Palette {
-  main: Color
-  contrastText: Color
+  main: Color;
+  contrastText: Color;
 }
 
 interface Dimmer {
-  color: Color
-  opacity: string
+  color: Color;
+  opacity: string;
 }
 
 interface Hoverable {
-  main: Color
-  hover: Color
+  main: Color;
+  hover: Color;
 }
 
 interface Navigation {
-  regular: Palette,
-  transparent: Palette
+  regular: Palette;
+  transparent: Palette;
 }
 
-declare module 'styled-components' {
+declare module "styled-components" {
   export interface DefaultTheme {
-    borderRadiusSmall: string
-    borderRadiusNormal: string
-    disabledOpacity: string
-    dimmer: Dimmer
+    borderRadiusSmall: string;
+    borderRadiusNormal: string;
+    disabledOpacity: string;
+    dimmer: Dimmer;
     palette: {
-      separator: Color
-      chevron: Hoverable
-      background: Palette
-      jumbo: Palette
-      card: Palette
-      primary: Palette
-      secondary: Palette
-      navigation: Navigation
-      footer: Palette
-    }
+      separator: Color;
+      chevron: Hoverable;
+      background: Palette;
+      jumbo: Palette;
+      card: Palette;
+      primary: Palette;
+      secondary: Palette;
+      navigation: Navigation;
+      footer: Palette;
+    };
   }
 }

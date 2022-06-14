@@ -1,8 +1,8 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
 type Props = {
-  children?: React.ReactNode
+  children?: React.ReactNode;
 };
 
 const Wrapper = styled.div`
@@ -10,8 +10,8 @@ const Wrapper = styled.div`
 `;
 
 const Line = styled.hr`
-    margin-top: 10px;
-    background-color: ${ props => props.theme.palette.separator };
+  margin-top: 10px;
+  background-color: ${(props) => props.theme.palette.separator};
 `;
 
 const EmptyBlog: React.FC<Props> = () => {

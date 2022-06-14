@@ -1,52 +1,52 @@
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme } from "styled-components";
 
 export const defaultTheme: DefaultTheme = {
-  borderRadiusSmall: '8px',
-  borderRadiusNormal: '10px',
-  disabledOpacity: '0.8',
+  borderRadiusSmall: "8px",
+  borderRadiusNormal: "10px",
+  disabledOpacity: "0.8",
   dimmer: {
-    color: '#000000',
-    opacity: '.2',
+    color: "#000000",
+    opacity: ".2",
   },
   palette: {
-    separator: '#856ffb',
+    separator: "#856ffb",
     background: {
-      main: '#333333',
-      contrastText: '#ffffff' 
+      main: "#333333",
+      contrastText: "#ffffff",
     },
     navigation: {
       regular: {
-        main: '#333333',
-        contrastText: '#ffffff',
+        main: "#333333",
+        contrastText: "#ffffff",
       },
       transparent: {
-        main: 'inherit',
-        contrastText: '#000000',
-      }
+        main: "inherit",
+        contrastText: "#000000",
+      },
     },
     footer: {
-      main: '#856ffb',
-      contrastText: '#ffffff'
+      main: "#856ffb",
+      contrastText: "#ffffff",
     },
     chevron: {
-      main: '#ffffff',
-      hover: '#856ffb',
+      main: "#ffffff",
+      hover: "#856ffb",
     },
     jumbo: {
-      main: 'rgba(0,0,0,0.5)',
-      contrastText: '#ffffff',
+      main: "rgba(0,0,0,0.5)",
+      contrastText: "#ffffff",
     },
     card: {
-      main: 'rgba(0,0,0,0.5)',
-      contrastText: '#ffffff',
+      main: "rgba(0,0,0,0.5)",
+      contrastText: "#ffffff",
     },
     primary: {
-      main: '#856ffb',
-      contrastText: '#ffffff',
+      main: "#856ffb",
+      contrastText: "#ffffff",
     },
     secondary: {
-      main: '#f3b31b',
-      contrastText: '#ffffff'
-    }
-  }
-}
+      main: "#f3b31b",
+      contrastText: "#ffffff",
+    },
+  },
+};

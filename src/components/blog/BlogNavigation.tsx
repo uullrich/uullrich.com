@@ -1,13 +1,13 @@
-import * as React from 'react';
+import * as React from "react";
 import media from "styled-media-query";
-import { Link } from 'gatsby';
-import styled from 'styled-components';
-import type { PostLink } from '../../pages/blogPost';
+import { Link } from "gatsby";
+import styled from "styled-components";
+import type { PostLink } from "../../pages/blogPost";
 
 type Props = {
-  children?: React.ReactNode
-  previous: PostLink,
-  next: PostLink
+  children?: React.ReactNode;
+  previous: PostLink;
+  next: PostLink;
 };
 
 const Navigation = styled.nav`
@@ -23,7 +23,7 @@ const Navigation = styled.nav`
   .gatsbyLink {
     text-shadow: none;
     background-image: none;
-    color: ${ props => props.theme.palette.primary.main };
+    color: ${(props) => props.theme.palette.primary.main};
 
     span {
       text-decoration: underline;
@@ -34,23 +34,19 @@ const Navigation = styled.nav`
 const BlogNavigation: React.FC<Props> = ({ previous, next }) => {
   return (
     <Navigation>
-      {
-        previous && (
-          <Link className='gatsbyLink' to={'../' + previous.slug}>
-            {'← '} 
-            <span>{ previous.title }</span>
-          </Link>
-        )
-      }
+      {previous && (
+        <Link className="gatsbyLink" to={"../" + previous.slug}>
+          {"← "}
+          <span>{previous.title}</span>
+        </Link>
+      )}
       <div></div>
-      {
-        next && (
-          <Link className='gatsbyLink' to={'../' + next.slug}>
-            <span>{ next.title }</span>
-            {' →'}
-          </Link>
-        )
-      }
+      {next && (
+        <Link className="gatsbyLink" to={"../" + next.slug}>
+          <span>{next.title}</span>
+          {" →"}
+        </Link>
+      )}
     </Navigation>
   );
 };

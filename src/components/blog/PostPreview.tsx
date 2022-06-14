@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { Link } from 'gatsby';
-import styled from 'styled-components';
-import type { Post } from '../../pages/blog';
+import * as React from "react";
+import { Link } from "gatsby";
+import styled from "styled-components";
+import type { Post } from "../../pages/blog";
 
 type Props = {
-  children?: React.ReactNode,
-  post: Post,
+  children?: React.ReactNode;
+  post: Post;
 };
 
 const PreviewWrapper = styled.div`
@@ -14,16 +14,16 @@ const PreviewWrapper = styled.div`
     text-decoration: none;
     background-image: none;
 
-    &>h2:hover {
-      color: ${ props => props.theme.palette.primary.main };
+    & > h2:hover {
+      color: ${(props) => props.theme.palette.primary.main};
     }
   }
 `;
 
 const Line = styled.hr`
-    margin-top: 10px;
-    background-color: ${ props => props.theme.palette.separator };
-    margin-bottom: 0px;
+  margin-top: 10px;
+  background-color: ${(props) => props.theme.palette.separator};
+  margin-bottom: 0px;
 `;
 
 const Metadata = styled.div`
@@ -38,18 +38,17 @@ const Metadata = styled.div`
 const PostPreview: React.FC<Props> = ({ post }) => {
   return (
     <PreviewWrapper>
-      <Link className='gatsbyLink' to={'../' + post?.frontmatter?.slug}>
+      <Link className="gatsbyLink" to={"../" + post?.frontmatter?.slug}>
         <h2>{post?.frontmatter?.title}</h2>
-      </Link>      
+      </Link>
       <Line />
       <Metadata>
-        <div>{post?.frontmatter?.date}</div>
-        -
+        <div>{post?.frontmatter?.date}</div>-
         <div>{post?.frontmatter?.author}</div>
       </Metadata>
-        <div>{post?.frontmatter?.spoiler}</div>
+      <div>{post?.frontmatter?.spoiler}</div>
     </PreviewWrapper>
-  )
+  );
 };
 
 export default PostPreview;
