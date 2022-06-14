@@ -98,7 +98,20 @@ const Left = styled.div`
 const Right = styled.div`
   height: 100%;
   display: flex;
-  align-items: center;
+  /*align-items: center;*/
+  flex-direction: column;
+  justify-content: center;
+  font-size: 16px;
+
+  a {
+    color: inherit;
+    text-shadow: none;
+    background-image: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Footer: React.FC<Props> = ({}, context) => {
@@ -143,6 +156,13 @@ const Footer: React.FC<Props> = ({}, context) => {
           </a>
         </Social>
         <Right>
+          <a
+            href="https://github.com/uullrich/uullrich.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            This site
+          </a>
           <Link to="/legal" className="footerLink">
             Legal notice
           </Link>
