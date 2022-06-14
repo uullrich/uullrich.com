@@ -48,7 +48,7 @@ const Card = styled.div`
 
 const Line = styled.hr`
   margin-top: 10px;
-  background-color: ${(props) => props.theme.palette.primary.main};
+  background-color: ${(props) => props.theme.palette.separator};
 `;
 
 const Header = styled.div`
@@ -70,19 +70,35 @@ const Inputs = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  textarea,
+  input {
+    border: ${(props) => props.theme.palette.inputs.border};
+  }
+
+  textarea:focus,
+  input:focus {
+    outline: ${(props) => props.theme.palette.inputs.outline};
+    outline-color: ${(props) => props.theme.palette.inputs.outlineColor};
+  }
 `;
 
 type ButtonProps = {
   disabled?: boolean;
 };
 const Button = styled.button<ButtonProps>`
-  background-color: ${(props) => props.theme.palette.primary.main};
-  opacity: ${(props) => (props.disabled ? props.theme.disabledOpacity : 1)};
-  color: ${(props) => props.theme.palette.primary.contrastText};
-  border-radius: ${(props) => props.theme.borderRadiusNormal};
+  background-color: ${(props) =>
+    props.theme.palette.button.standard.palette.main};
+  opacity: ${(props) =>
+    props.disabled
+      ? props.theme.palette.button.standard.disabled.opacity
+      : props.theme.palette.button.standard.enabled.opacity};
+  color: ${(props) => props.theme.palette.button.standard.palette.contrastText};
+  border-radius: ${(props) => props.theme.palette.button.standard.borderRadius};
   height: 40px;
   text-align: center;
   cursor: pointer;
+  border: 0px;
 `;
 
 const Input = styled.input`
@@ -143,13 +159,13 @@ const StatusWrapper = styled.div`
 
 const SuccessWrapper = styled(StatusWrapper)`
   svg {
-    fill: ${(props) => props.theme.palette.primary.main};
+    fill: ${(props) => props.theme.palette.iconPrimary};
   }
 `;
 
 const FailedWrapper = styled(StatusWrapper)`
   svg {
-    fill: ${(props) => props.theme.palette.secondary.main};
+    fill: ${(props) => props.theme.palette.iconSecondary};
   }
 `;
 

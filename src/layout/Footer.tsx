@@ -179,14 +179,14 @@ const Footer: React.FC<Props> = ({}, context) => {
           boxShadow: "0 -4px 5px rgba(0,0,0,0.2)",
         }}
         buttonStyle={{
-          backgroundColor: theme.palette.primary.main,
-          color: theme.palette.primary.contrastText,
-          borderRadius: theme.borderRadiusNormal,
+          backgroundColor: theme.palette.button.standard.palette.main,
+          color: theme.palette.button.standard.palette.contrastText,
+          borderRadius: theme.palette.button.standard.borderRadius,
         }}
         declineButtonStyle={{
-          backgroundColor: theme.palette.secondary.main,
-          color: theme.palette.secondary.contrastText,
-          borderRadius: theme.borderRadiusNormal,
+          backgroundColor: theme.palette.button.alternative.palette.main,
+          color: theme.palette.button.alternative.palette.contrastText,
+          borderRadius: theme.palette.button.alternative.borderRadius,
         }}
         onAccept={() => {
           changeGoogleAnalyticsCookie(true);

@@ -21,10 +21,12 @@ const Buzz = styled.div<{ isSelected: boolean }>`
   ${(props) =>
     props.isSelected === true
       ? `
-    background-color: rgb(133, 111, 251, 1);
+    background-color: ${props.theme.palette.buzzword.selected.main};
+    color: ${props.theme.palette.buzzword.selected.contrastText};
   `
       : `
-    background-color: rgb(133, 111, 251, 0.7);
+    background-color: ${props.theme.palette.buzzword.unselected.main};
+    color: ${props.theme.palette.buzzword.unselected.contrastText};
   `}
 
   width: fit-content;
@@ -37,12 +39,21 @@ const Buzz = styled.div<{ isSelected: boolean }>`
   user-select: none;
 
   &:hover {
-    background-color: rgb(133, 111, 251, 1);
+    ${(props) => `
+      background-color: ${props.theme.palette.buzzword.hover.main};
+      color: ${props.theme.palette.buzzword.hover.contrastText};
+    `}
   }
 
   float: left;
   margin-right: 15px;
   margin-bottom: 15px;
+`;
+
+const BuzzCategory = styled.div`
+  h4 {
+    color: ${(props) => props.theme.palette.background.contrastText};
+  }
 `;
 
 const Lane = styled.div`
@@ -96,7 +107,7 @@ const GithubWrapper = styled.div`
     width: 40px;
     height: 40px;
     cursor: pointer;
-    fill: #ffffff;
+    fill: ${(props) => props.theme.palette.buzzword.githubFill};
   }
 `;
 
@@ -159,7 +170,9 @@ const BuzzwordBingo: React.FC<Props> = ({ content }) => {
         return (
           <React.Fragment key={i}>
             <Lane key={i}>
-              <h4>{category.title}</h4>
+              <BuzzCategory>
+                <h4>{category.title}</h4>
+              </BuzzCategory>
               {category.buzzwords.map((buzzword, j) => {
                 return (
                   <Buzz

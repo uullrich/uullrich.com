@@ -20,6 +20,43 @@ interface Hoverable {
 interface Navigation {
   regular: Palette;
   transparent: Palette;
+  hover: Color;
+}
+
+interface Buzzword {
+  unselected: Palette;
+  selected: Palette;
+  hover: Palette;
+  githubFill: Color;
+}
+
+interface Button {
+  standard: {
+    palette: Palette;
+    borderRadius: string;
+    enabled: {
+      opacity: string;
+    };
+    disabled: {
+      opacity: string;
+    };
+  };
+  alternative: {
+    palette: Palette;
+    borderRadius: string;
+    enabled: {
+      opacity: string;
+    };
+    disabled: {
+      opacity: string;
+    };
+  };
+}
+
+interface Inputs {
+  border: string;
+  outline: string;
+  outlineColor: string;
 }
 
 declare module "styled-components" {
@@ -38,6 +75,11 @@ declare module "styled-components" {
       secondary: Palette;
       navigation: Navigation;
       footer: Palette;
+      buzzword: Buzzword;
+      button: Button;
+      inputs: Inputs;
+      iconPrimary: Color;
+      iconSecondary: Color;
     };
   }
 }

@@ -13,7 +13,7 @@ const CoverImage: React.FC<Props> = ({}) => {
   return (
     <StaticImage
       id={coverImageId}
-      src="../images/background/cover.JPG"
+      src="../images/background/cover2.JPG"
       imgStyle={{ height: "100vh", width: "100%" }}
       style={{ height: "100vh", width: "100%" }}
       alt={"Cover Image"}
