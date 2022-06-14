@@ -49,7 +49,7 @@ const LegalPage = () => {
                 E-Mail: mail(at)uullrich.com<br/>
                 Web: uullrich.com <br/><br/>
                 Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: 
-                <br/>Diese wurde beim zuständigen Finanzamt beantragt.
+                <br/>DE352265519
                 <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
                 <Line/>
                 Uwe Ullrich <br/>
