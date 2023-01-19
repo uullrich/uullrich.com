@@ -81,14 +81,13 @@ type ImageWrapperProps = {
 const ImageWrapper = styled.div<ImageWrapperProps>`
   .logo {
     position: absolute;
-    left: 20px;
-    top: 0px;
+    left: 10px;
+    top: 10px;
 
     ${(props) => media.lessThan("small")`
             ${
               props.isLargeLogo === true
                 ? `
-                height: 100px;
                 width: 100px;
                 transition: width 0.5s;
             `
@@ -100,7 +99,6 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             ${
               props.isLargeLogo === true
                 ? `
-                height: 100px;
                 width: 100px;
                 transition: width 0.5s;
             `
@@ -112,7 +110,6 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             ${
               props.isLargeLogo === true
                 ? `
-                height: 160px;
                 width: 160px;
                 transition: width 0.5s;
             `
@@ -124,8 +121,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             ${
               props.isLargeLogo === true
                 ? `
-                height: 160px;
-                width: 160px;
+                width: 200px;
                 transition: width 0.5s;
             `
                 : ``
@@ -136,10 +132,9 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
       props.isLargeLogo === true
         ? ``
         : `
-            margin-left: 10px;
-            margin-top: 10px;
-            height: 40px;
-            width: 40px;
+            left: 10px;
+            top: 6px;
+            width: 80px;
             transition: width 0.5s;
         `}
   }
@@ -149,7 +144,6 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             ${
               props.isLargeLogo === true
                 ? `
-                height: 100px;
                 width: 100px;
                 transition: width 0.5s;
             `
@@ -161,7 +155,6 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             ${
               props.isLargeLogo === true
                 ? `
-                height: 100px;
                 width: 100px;
                 transition: width 0.5s;
             `
@@ -173,7 +166,6 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             ${
               props.isLargeLogo === true
                 ? `
-                height: 160px;
                 width: 160px;
                 transition: width 0.5s;
             `
@@ -185,8 +177,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             ${
               props.isLargeLogo === true
                 ? `
-                height: 160px;
-                width: 160px;
+                width: 200px;
                 transition: width 0.5s;
             `
                 : ``
@@ -197,8 +188,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
       props.isLargeLogo === true
         ? ``
         : `
-            height: 40px;
-            width: 40px;
+            width: 80px;
             transition: width 0.5s;
         `}
   }
