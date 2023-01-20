@@ -206,7 +206,7 @@ const Navigation: React.FC<NavigationProps> = ({
           <Link to="/">
             <ImageWrapper isLargeLogo={!isSmallLogo}>
               <StaticImage
-                src="../images/icon.png"
+                src="../images/icon_bright2.png"
                 className="logo"
                 imgClassName="logoImg"
                 alt={"Logo"}
