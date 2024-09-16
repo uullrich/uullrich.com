@@ -199,7 +199,19 @@ const AboutMe: React.FC<Props> = ({}) => {
             <table>
               <tbody>
                 <tr>
-                  <td>since 2022-04</td>
+                  <td>
+                    since 2024-07
+                  </td>
+                  <td>
+                    <strong>Software Developer</strong>
+                    <br />
+                    WMF GmbH
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span>2022-04</span> &mdash; <span>2024-05</span>
+                  </td>
                   <td>
                     <strong>Freelance Software Developer</strong>
                   </td>
