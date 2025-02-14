@@ -271,7 +271,7 @@ const ContactPage = () => {
             });
         }
       },
-      [userInput]
+      [userInput],
     );
 
   const inputChangeHandler = useCallback(
@@ -284,7 +284,7 @@ const ContactPage = () => {
         });
       }
     },
-    [userInput]
+    [userInput],
   );
 
   const taskInputHandler = useCallback(
@@ -295,7 +295,7 @@ const ContactPage = () => {
         setSendButtonStatus(false);
       }
     },
-    [numbers]
+    [numbers],
   );
 
   return (

@@ -12,7 +12,7 @@ export type Frontmatter = {
   date: string;
   spoiler: string;
   author: string;
-}
+};
 
 export type Post = {
   id: number;
@@ -25,7 +25,7 @@ type DataProps = {
     edges: [
       {
         node: Post;
-      }
+      },
     ];
   };
 };
@@ -33,9 +33,12 @@ type DataProps = {
 const BlogOverview: React.FC<PageProps<DataProps>> = ({ data }) => {
   const { edges: allPosts } = data.allMdx;
 
-  const posts = process.env.NODE_ENV === "production"
-    ? allPosts.filter(({ node }) => !node?.frontmatter?.slug?.startsWith("/blog/demo"))
-    : allPosts;
+  const posts =
+    process.env.NODE_ENV === "production"
+      ? allPosts.filter(
+          ({ node }) => !node?.frontmatter?.slug?.startsWith("/blog/demo"),
+        )
+      : allPosts;
 
   return (
     <MainLayout isNavigationTransparent={false} isSmallLogo={true}>
@@ -55,23 +58,23 @@ const BlogOverview: React.FC<PageProps<DataProps>> = ({ data }) => {
   );
 };
 
-export const pageQuery = graphql`query blogIndex {
-  allMdx(
-    sort: {frontmatter: {date: DESC}}
-  ) {
-    edges {
-      node {
-        id
-        frontmatter {
-          author
-          title
-          slug
-          date
-          spoiler
+export const pageQuery = graphql`
+  query blogIndex {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
+      edges {
+        node {
+          id
+          frontmatter {
+            author
+            title
+            slug
+            date
+            spoiler
+          }
         }
       }
     }
   }
-}`;
+`;
 
 export default BlogOverview;

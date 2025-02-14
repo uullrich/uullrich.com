@@ -26,18 +26,17 @@ type ContextProps = {
 };
 
 const BlogPost: React.FC<PageProps<DataProps, ContextProps>> = ({
-  data: { mdx: { frontmatter } },
+  data: {
+    mdx: { frontmatter },
+  },
   pageContext,
-  children
+  children,
 }) => {
-
   return (
     <MainLayout isNavigationTransparent={false} isSmallLogo={true}>
       <Content>
         <Section>
-          <PostComponent frontmatter={frontmatter}>
-            { children }
-          </PostComponent>
+          <PostComponent frontmatter={frontmatter}>{children}</PostComponent>
           <BlogNavigation
             next={pageContext?.next?.frontmatter}
             previous={pageContext?.previous?.frontmatter}

@@ -121,7 +121,7 @@ const AboutMe: React.FC<Props> = ({}) => {
         render={(data) => <BuzzwordBingo content={queryToContent(data)} />}
       />
     ),
-    []
+    [],
   );
 
   return (
@@ -199,9 +199,7 @@ const AboutMe: React.FC<Props> = ({}) => {
             <table>
               <tbody>
                 <tr>
-                  <td>
-                    since 2024-07
-                  </td>
+                  <td>since 2024-07</td>
                   <td>
                     <strong>Software Developer</strong>
                     <br />
@@ -268,24 +266,37 @@ const AboutMe: React.FC<Props> = ({}) => {
             <Line />
           </Header>
           <Description style={{ marginBottom: "20px" }}>
-            <div style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center"
-            }}>
-              <h3 style={{marginTop: 0}}>AWS Solutions Architect - Associate</h3>
-              <ExternalLink href="https://www.credly.com/badges/5767b25f-1a58-4e2e-b823-c42beec4b8c3/public_url" target="_blank">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <h3 style={{ marginTop: 0 }}>
+                AWS Solutions Architect - Associate
+              </h3>
+              <ExternalLink
+                href="https://www.credly.com/badges/5767b25f-1a58-4e2e-b823-c42beec4b8c3/public_url"
+                target="_blank"
+              >
                 <StaticImage
-                    id="aws-solution-architect-badge"
-                    src="../images/certifications/aws-certified-solutions-architect-associate.png"
-                    className="certificateWrapper"
-                    imgClassName="certificateImg"
-                    alt={"Image from AWS Solutions Architect certification"}
-                    />
+                  id="aws-solution-architect-badge"
+                  src="../images/certifications/aws-certified-solutions-architect-associate.png"
+                  className="certificateWrapper"
+                  imgClassName="certificateImg"
+                  alt={"Image from AWS Solutions Architect certification"}
+                />
               </ExternalLink>
               <span>
-                Proud holder of the <em>AWS Solutions Architect - Associate</em> certification, validating my extensive knowledge and skills in developing high-performance, scalable, and secure cloud solutions on the Amazon Web Services (AWS) platform. 
-                This certification underscores my commitment to excellence in architecting cloud-based systems, providing you with the assurance that your projects are in the hands of a qualified AWS Solutions Architect.
+                Proud holder of the <em>AWS Solutions Architect - Associate</em>{" "}
+                certification, validating my extensive knowledge and skills in
+                developing high-performance, scalable, and secure cloud
+                solutions on the Amazon Web Services (AWS) platform. This
+                certification underscores my commitment to excellence in
+                architecting cloud-based systems, providing you with the
+                assurance that your projects are in the hands of a qualified AWS
+                Solutions Architect.
               </span>
             </div>
           </Description>
