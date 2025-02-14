@@ -30,7 +30,6 @@ const BlogPost: React.FC<PageProps<DataProps, ContextProps>> = ({
   pageContext,
   children
 }) => {
-    console.log("MDX Children Content:", children); // 🔍 Debugging line
 
   return (
     <MainLayout isNavigationTransparent={false} isSmallLogo={true}>
