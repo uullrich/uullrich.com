@@ -35,14 +35,14 @@ const BlogNavigation: React.FC<Props> = ({ previous, next }) => {
   return (
     <Navigation>
       {previous && (
-        <Link className="gatsbyLink" to={"../" + previous.slug}>
+        <Link className="gatsbyLink" to={"../../." + previous.slug}>
           {"← "}
           <span>{previous.title}</span>
         </Link>
       )}
       <div></div>
       {next && (
-        <Link className="gatsbyLink" to={"../" + next.slug}>
+        <Link className="gatsbyLink" to={"../../." + next.slug}>
           <span>{next.title}</span>
           {" →"}
         </Link>

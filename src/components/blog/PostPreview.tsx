@@ -38,7 +38,7 @@ const Metadata = styled.div`
 const PostPreview: React.FC<Props> = ({ post }) => {
   return (
     <PreviewWrapper>
-      <Link className="gatsbyLink" to={"../" + post?.frontmatter?.slug}>
+      <Link className="gatsbyLink" to={"../." + post?.frontmatter?.slug}>
         <h2>{post?.frontmatter?.title}</h2>
       </Link>
       <Line />

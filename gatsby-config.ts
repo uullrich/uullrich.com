@@ -1,4 +1,5 @@
 import type { GatsbyConfig } from "gatsby";
+import remarkGfm from "remark-gfm"
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -41,7 +42,25 @@ const config: GatsbyConfig = {
     options: {
       "icon": "src/images/icon.png"
     }
-  }, "gatsby-plugin-mdx", "gatsby-plugin-sharp", "gatsby-transformer-sharp", {
+  },
+  {
+    resolve: `gatsby-plugin-mdx`,
+    options: {
+      extensions: [".mdx", ".md", ".markdown"],
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+      },
+      gatsbyRemarkPlugins: [
+        {
+          resolve: `gatsby-remark-images`,
+          options: {
+            maxWidth: 690,
+          },
+        },
+      ],
+    },
+  }, 
+  "gatsby-plugin-sharp", "gatsby-transformer-sharp", {
     resolve: 'gatsby-source-filesystem',
     options: {
       "name": "images",
@@ -56,14 +75,14 @@ const config: GatsbyConfig = {
     },
     __key: "pages"
   }, 
-  // {
-  //   resolve: "gatsby-source-filesystem",
-  //   options: {
-  //     name: "posts",
-  //     path: `./src/blog/posts/`,
-  //   },
-  //   __key: "posts"
-  // }, 
+  {
+    resolve: "gatsby-source-filesystem",
+    options: {
+      name: "posts",
+      path: `./src/blog/posts/`,
+    },
+    __key: "posts"
+  }, 
   {
     resolve: "gatsby-source-filesystem",
     options: {

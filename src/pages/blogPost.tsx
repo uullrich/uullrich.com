@@ -1,62 +1,66 @@
-// import * as React from "react";
-// import { graphql, PageProps } from "gatsby";
-// import MainLayout from "../layout/MainLayout";
-// import PostComponent from "../components/blog/Post";
-// import type { Post } from "../pages/blog";
-// import AuthorDescription from "../components/blog/AuthorDescription";
-// import BlogNavigation from "../components/blog/BlogNavigation";
-// import { Content, Section } from "../components/blog/SharedStyledComponents";
+import * as React from "react";
+import { graphql, PageProps } from "gatsby";
+import MainLayout from "../layout/MainLayout";
+import PostComponent from "../components/blog/Post";
+import type { Post } from "../pages/blog";
+import AuthorDescription from "../components/blog/AuthorDescription";
+import BlogNavigation from "../components/blog/BlogNavigation";
+import { Content, Section } from "../components/blog/SharedStyledComponents";
 
-// type DataProps = {
-//   mdx: Post;
-// };
+type DataProps = {
+  mdx: Post;
+};
 
-// export type PostLink = {
-//   slug: string;
-//   title: string;
-// };
+export type PostLink = {
+  slug: string;
+  title: string;
+};
 
-// type ContextProps = {
-//   previous: {
-//     frontmatter: PostLink;
-//   };
-//   next: {
-//     frontmatter: PostLink;
-//   };
-// };
+type ContextProps = {
+  previous: {
+    frontmatter: PostLink;
+  };
+  next: {
+    frontmatter: PostLink;
+  };
+};
 
-// const BlogPost: React.FC<PageProps<DataProps, ContextProps>> = ({
-//   data: { mdx: post },
-//   pageContext,
-// }) => {
-//   return (
-//     <MainLayout isNavigationTransparent={false} isSmallLogo={true}>
-//       <Content>
-//         <Section>
-//           <PostComponent post={post} />
-//           <BlogNavigation
-//             next={pageContext?.next?.frontmatter}
-//             previous={pageContext?.previous?.frontmatter}
-//           />
-//           <AuthorDescription enableBackground={true} />
-//         </Section>
-//       </Content>
-//     </MainLayout>
-//   );
-// };
+const BlogPost: React.FC<PageProps<DataProps, ContextProps>> = ({
+  data: { mdx: { frontmatter } },
+  pageContext,
+  children
+}) => {
+    console.log("MDX Children Content:", children); // 🔍 Debugging line
 
-// export const pageQuery = graphql`
-//   query BlogPostQuery($id: String) {
-//     mdx(id: { eq: $id }) {
-//       id
-//       body
-//       frontmatter {
-//         title
-//         date
-//         author
-//       }
-//     }
-//   }
-// `;
+  return (
+    <MainLayout isNavigationTransparent={false} isSmallLogo={true}>
+      <Content>
+        <Section>
+          <PostComponent frontmatter={frontmatter}>
+            { children }
+          </PostComponent>
+          <BlogNavigation
+            next={pageContext?.next?.frontmatter}
+            previous={pageContext?.previous?.frontmatter}
+          />
+          <AuthorDescription enableBackground={true} />
+        </Section>
+      </Content>
+    </MainLayout>
+  );
+};
 
-// export default BlogPost;
+export const pageQuery = graphql`
+  query BlogPostQuery($id: String) {
+    mdx(id: { eq: $id }) {
+      id
+      frontmatter {
+        title
+        date
+        author
+      }
+    }
+  }
+`;
+
+export default BlogPost;

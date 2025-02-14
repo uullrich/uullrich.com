@@ -1,12 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
-import { MDXRenderer } from "gatsby-plugin-mdx";
-import type { Post } from "../../pages/blog";
+import { Frontmatter } from "../../pages/blog";
 
 type Props = {
   children?: React.ReactNode;
-  post: Post;
+  frontmatter: Frontmatter
 };
 
 const PostWrapper = styled.div``;
@@ -26,20 +25,20 @@ const Line = styled.hr`
   margin-bottom: 0px;
 `;
 
-const PostComponent: React.FC<Props> = ({ post }) => {
-  if (post === null) {
+const PostComponent: React.FC<Props> = ({ children, frontmatter }) => {
+  if (!children) {
     return <></>;
   }
 
   return (
     <PostWrapper>
-      <h1>{post?.frontmatter?.title}</h1>
+      <h1>{frontmatter?.title}</h1>
       <Metadata>
-        {post?.frontmatter?.date + " - " + post.frontmatter?.author}
+        {frontmatter?.date + " - " + frontmatter?.author}
       </Metadata>
       <Line />
       <MDXProvider>
-        <MDXRenderer>{post.body}</MDXRenderer>
+        {children}
       </MDXProvider>
     </PostWrapper>
   );
