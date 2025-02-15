@@ -1,3 +1,19 @@
+import Prism from "prismjs";
+import "prismjs/themes/prism-okaidia.css";
+
+import "prismjs/components/prism-css"
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-jsx";
+import "prismjs/components/prism-tsx";
+import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-json";
+import "prismjs/components/prism-bash";
+import "prismjs/components/prism-c";
+import "prismjs/components/prism-cpp";
+import "prismjs/components/prism-cmake";
+import "prismjs/components/prism-qml";
+import "prismjs/components/prism-abap";
+
 import * as React from "react";
 import styled from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
@@ -29,6 +45,10 @@ const PostComponent: React.FC<Props> = ({ children, frontmatter }) => {
   if (!children) {
     return <></>;
   }
+
+  React.useEffect(() => {
+    Prism.highlightAll();
+  }, []);
 
   return (
     <PostWrapper>
