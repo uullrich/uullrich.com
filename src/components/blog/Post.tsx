@@ -24,7 +24,14 @@ type Props = {
   frontmatter: Frontmatter
 };
 
-const PostWrapper = styled.div``;
+const PostWrapper = styled.div`
+${(props) => `
+  background-color: ${props.theme.palette.card.main};
+  color: ${props.theme.palette.card.contrastText};
+  border-radius: ${props.theme.borderRadiusNormal};
+  padding: 10px;
+`}
+`;
 
 const Metadata = styled.div`
   display: flex;
