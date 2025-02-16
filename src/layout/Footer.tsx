@@ -1,23 +1,23 @@
-import * as React from "react";
-import { Link } from "gatsby";
-import styled, { useTheme } from "styled-components";
-import CookieConsent from "react-cookie-consent";
-import media from "styled-media-query";
-import CoverChevron from "../components/CoverChevron";
-import { useGlobalContext } from "../context/Context";
-import IconGithub from "../images/social/github-brands.inline.svg";
-import IconXing from "../images/social/xing-brands.inline.svg";
-import IconTwitter from "../images/social/twitter-brands.inline.svg";
-import IconMail from "../images/social/envelope-solid.inline.svg";
-import IconCopyright from "../images/copyright-solid.inline.svg";
+import * as React from 'react'
+import { Link } from 'gatsby'
+import styled, { useTheme } from 'styled-components'
+import CookieConsent from 'react-cookie-consent'
+import media from 'styled-media-query'
+import CoverChevron from '../components/CoverChevron'
+import { useGlobalContext } from '../context/Context'
+import IconGithub from '../images/social/github-brands.inline.svg'
+import IconXing from '../images/social/xing-brands.inline.svg'
+import IconTwitter from '../images/social/twitter-brands.inline.svg'
+import IconMail from '../images/social/envelope-solid.inline.svg'
+import IconCopyright from '../images/copyright-solid.inline.svg'
 
 type Props = {
-  children?: React.ReactNode;
-};
+  children?: React.ReactNode
+}
 
 const FooterNavigationBar = styled.div`
-  background-color: ${(props) => props.theme.palette.footer.main};
-  color: ${(props) => props.theme.palette.footer.contrastText};
+  background-color: ${props => props.theme.palette.footer.main};
+  color: ${props => props.theme.palette.footer.contrastText};
   height: 10vh;
   box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -25,7 +25,7 @@ const FooterNavigationBar = styled.div`
   padding: 20px;
   margin-top: 30px;
 
-  ${media.lessThan("small")`
+  ${media.lessThan('small')`
         padding: 10px;
     `}
 
@@ -33,9 +33,9 @@ const FooterNavigationBar = styled.div`
     text-shadow: none;
     text-decoration: none;
     background-image: none;
-    color: ${(props) => props.theme.palette.footer.contrastText};
+    color: ${props => props.theme.palette.footer.contrastText};
   }
-`;
+`
 
 const Social = styled.div`
   height: 100%;
@@ -56,10 +56,10 @@ const Social = styled.div`
     width: 40px;
     height: 40px;
     cursor: pointer;
-    fill: ${(props) => props.theme.palette.footer.contrastText};
+    fill: ${props => props.theme.palette.footer.contrastText};
   }
 
-  ${media.lessThan("small")`
+  ${media.lessThan('small')`
         gap: 10px;
 
         a {
@@ -72,7 +72,7 @@ const Social = styled.div`
             height: 20px;
         }
     `};
-`;
+`
 
 const Left = styled.div`
   height: 100%;
@@ -82,10 +82,10 @@ const Left = styled.div`
   svg {
     width: 20px;
     height: 20px;
-    fill: ${(props) => props.theme.palette.footer.contrastText};
+    fill: ${props => props.theme.palette.footer.contrastText};
   }
 
-  ${media.lessThan("small")`
+  ${media.lessThan('small')`
         svg {
             width: 10px;
             height: 10px;
@@ -93,7 +93,7 @@ const Left = styled.div`
 
         font-size: 10pt;
     `};
-`;
+`
 
 const Right = styled.div`
   height: 100%;
@@ -112,11 +112,11 @@ const Right = styled.div`
   a:hover {
     text-decoration: underline;
   }
-`;
+`
 
 const Footer: React.FC<Props> = ({}, context) => {
-  const { changeGoogleAnalyticsCookie } = useGlobalContext();
-  const theme = useTheme();
+  const { changeGoogleAnalyticsCookie } = useGlobalContext()
+  const theme = useTheme()
 
   return (
     <>
@@ -148,7 +148,7 @@ const Footer: React.FC<Props> = ({}, context) => {
             <IconXing />
           </a>
           <a
-            href={"mailto:mail@%1".replace("%1", "uullrich.com")}
+            href={'mailto:mail@%1'.replace('%1', 'uullrich.com')}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -176,7 +176,7 @@ const Footer: React.FC<Props> = ({}, context) => {
         style={{
           backgroundColor: theme.palette.background.main,
           color: theme.palette.background.contrastText,
-          boxShadow: "0 -4px 5px rgba(0,0,0,0.2)",
+          boxShadow: '0 -4px 5px rgba(0,0,0,0.2)',
         }}
         buttonStyle={{
           backgroundColor: theme.palette.button.standard.palette.main,
@@ -189,10 +189,10 @@ const Footer: React.FC<Props> = ({}, context) => {
           borderRadius: theme.palette.button.alternative.borderRadius,
         }}
         onAccept={() => {
-          changeGoogleAnalyticsCookie(true);
+          changeGoogleAnalyticsCookie(true)
         }}
         onDecline={() => {
-          changeGoogleAnalyticsCookie(false);
+          changeGoogleAnalyticsCookie(false)
         }}
         cookieName="gatsby-gdpr-google-analytics"
       >
@@ -208,7 +208,7 @@ const Footer: React.FC<Props> = ({}, context) => {
         <CoverChevron isCookieConsentOpened={true} />
       </CookieConsent>
     </>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

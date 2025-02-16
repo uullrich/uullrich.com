@@ -1,22 +1,22 @@
-import * as React from "react";
-import { useEffect, useState, useContext } from "react";
-import { getCookieConsentValue } from "react-cookie-consent";
+import * as React from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { getCookieConsentValue } from 'react-cookie-consent'
 
 type ProviderProps = {
-  children?: React.ReactNode;
-};
+  children?: React.ReactNode
+}
 
 type CookieStatus = {
   googleAnalytics: {
-    decided: boolean;
-    enabled: boolean | undefined;
-  };
-};
+    decided: boolean
+    enabled: boolean | undefined
+  }
+}
 
 type Context = {
-  cookieStatus: CookieStatus;
-  changeGoogleAnalyticsCookie: (value: boolean) => void;
-};
+  cookieStatus: CookieStatus
+  changeGoogleAnalyticsCookie: (value: boolean) => void
+}
 
 const defaultValue: Context = {
   cookieStatus: {
@@ -26,13 +26,13 @@ const defaultValue: Context = {
     },
   },
   changeGoogleAnalyticsCookie: (value: boolean) => {},
-};
+}
 
-export const Context = React.createContext<Context>(defaultValue);
+export const Context = React.createContext<Context>(defaultValue)
 
-export const useGlobalContext = () => useContext(Context);
+export const useGlobalContext = () => useContext(Context)
 
-export type { CookieStatus };
+export type { CookieStatus }
 
 const Provider: React.FC<ProviderProps> = ({ children }) => {
   const [cookieStatus, setCookieStatus] = useState<CookieStatus>({
@@ -40,19 +40,19 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
       decided: false,
       enabled: undefined,
     },
-  });
+  })
 
   useEffect(() => {
-    if (getCookieConsentValue("gatsby-gdpr-google-analytics") === "true") {
+    if (getCookieConsentValue('gatsby-gdpr-google-analytics') === 'true') {
       setCookieStatus({
         ...cookieStatus,
         googleAnalytics: {
           decided: true,
           enabled: true,
         },
-      });
+      })
     } else if (
-      getCookieConsentValue("gatsby-gdpr-google-analytics") === "false"
+      getCookieConsentValue('gatsby-gdpr-google-analytics') === 'false'
     ) {
       setCookieStatus({
         ...cookieStatus,
@@ -60,7 +60,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
           decided: true,
           enabled: false,
         },
-      });
+      })
     } else {
       setCookieStatus({
         ...cookieStatus,
@@ -68,9 +68,9 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
           decided: false,
           enabled: undefined,
         },
-      });
+      })
     }
-  }, []);
+  }, [])
 
   return (
     <Context.Provider
@@ -83,13 +83,13 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
               decided: true,
               enabled: value,
             },
-          });
+          })
         },
       }}
     >
       {children}
     </Context.Provider>
-  );
-};
+  )
+}
 
-export default Provider;
+export default Provider

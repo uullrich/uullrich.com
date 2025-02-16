@@ -1,85 +1,85 @@
-import "styled-components";
+import 'styled-components'
 
-type Color = string;
+type Color = string
 
 interface Palette {
-  main: Color;
-  contrastText: Color;
+  main: Color
+  contrastText: Color
 }
 
 interface Dimmer {
-  color: Color;
-  opacity: string;
+  color: Color
+  opacity: string
 }
 
 interface Hoverable {
-  main: Color;
-  hover: Color;
+  main: Color
+  hover: Color
 }
 
 interface Navigation {
-  regular: Palette;
-  transparent: Palette;
-  hover: Color;
+  regular: Palette
+  transparent: Palette
+  hover: Color
 }
 
 interface Buzzword {
-  unselected: Palette;
-  selected: Palette;
-  hover: Palette;
-  githubFill: Color;
+  unselected: Palette
+  selected: Palette
+  hover: Palette
+  githubFill: Color
 }
 
 interface Button {
   standard: {
-    palette: Palette;
-    borderRadius: string;
+    palette: Palette
+    borderRadius: string
     enabled: {
-      opacity: string;
-    };
+      opacity: string
+    }
     disabled: {
-      opacity: string;
-    };
-  };
+      opacity: string
+    }
+  }
   alternative: {
-    palette: Palette;
-    borderRadius: string;
+    palette: Palette
+    borderRadius: string
     enabled: {
-      opacity: string;
-    };
+      opacity: string
+    }
     disabled: {
-      opacity: string;
-    };
-  };
+      opacity: string
+    }
+  }
 }
 
 interface Inputs {
-  border: string;
-  outline: string;
-  outlineColor: string;
+  border: string
+  outline: string
+  outlineColor: string
 }
 
-declare module "styled-components" {
+declare module 'styled-components' {
   export interface DefaultTheme {
-    borderRadiusSmall: string;
-    borderRadiusNormal: string;
-    disabledOpacity: string;
-    dimmer: Dimmer;
+    borderRadiusSmall: string
+    borderRadiusNormal: string
+    disabledOpacity: string
+    dimmer: Dimmer
     palette: {
-      separator: Color;
-      chevron: Hoverable;
-      background: Palette;
-      jumbo: Palette;
-      card: Palette;
-      primary: Palette;
-      secondary: Palette;
-      navigation: Navigation;
-      footer: Palette;
-      buzzword: Buzzword;
-      button: Button;
-      inputs: Inputs;
-      iconPrimary: Color;
-      iconSecondary: Color;
-    };
+      separator: Color
+      chevron: Hoverable
+      background: Palette
+      jumbo: Palette
+      card: Palette
+      primary: Palette
+      secondary: Palette
+      navigation: Navigation
+      footer: Palette
+      buzzword: Buzzword
+      button: Button
+      inputs: Inputs
+      iconPrimary: Color
+      iconSecondary: Color
+    }
   }
 }

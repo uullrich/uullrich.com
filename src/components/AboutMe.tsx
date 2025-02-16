@@ -1,14 +1,14 @@
-import * as React from "react";
-import { useMemo } from "react";
-import styled from "styled-components";
-import media from "styled-media-query";
-import { StaticImage } from "gatsby-plugin-image";
-import BuzzwordBingo, { queryToContent } from "./BuzzwordBingo";
-import { StaticQuery, graphql } from "gatsby";
+import * as React from 'react'
+import { useMemo } from 'react'
+import styled from 'styled-components'
+import media from 'styled-media-query'
+import { StaticImage } from 'gatsby-plugin-image'
+import BuzzwordBingo, { queryToContent } from './BuzzwordBingo'
+import { StaticQuery, graphql } from 'gatsby'
 
 type Props = {
-  children?: React.ReactNode;
-};
+  children?: React.ReactNode
+}
 
 const Content = styled.div`
   display: flex;
@@ -40,7 +40,7 @@ const Content = styled.div`
     width: 150px;
     height: 150px;
   }
-`;
+`
 
 const Section = styled.section`
   display: flex;
@@ -50,45 +50,45 @@ const Section = styled.section`
   min-width: 500px;
   gap: 40px;
 
-  ${media.lessThan("small")`
+  ${media.lessThan('small')`
         padding-left: 20px;
         padding-right: 20px;
         min-width: 0;
         width: 100%;
     `};
-`;
+`
 
 const Card = styled.div`
-  background-color: ${(props) => props.theme.palette.card.main};
-  color: ${(props) => props.theme.palette.card.contrastText};
-  border-radius: ${(props) => props.theme.borderRadiusNormal};
+  background-color: ${props => props.theme.palette.card.main};
+  color: ${props => props.theme.palette.card.contrastText};
+  border-radius: ${props => props.theme.borderRadiusNormal};
   max-width: 700px;
 
   h1 {
-    color: ${(props) => props.theme.palette.card.contrastText};
+    color: ${props => props.theme.palette.card.contrastText};
     margin-top: 15px;
   }
-`;
+`
 
 const Line = styled.hr`
   margin-top: 10px;
-  background-color: ${(props) => props.theme.palette.separator};
-`;
+  background-color: ${props => props.theme.palette.separator};
+`
 
 const Header = styled.div`
   text-align: center;
-`;
+`
 
 const Description = styled.div`
   margin-top: 15px;
   padding-left: 20px;
   padding-right: 20px;
 
-  ${media.lessThan("small")`
+  ${media.lessThan('small')`
         padding-left: 20px;
         padding-right: 20px;
     `};
-`;
+`
 
 const ExternalLink = styled.a`
   color: inherit;
@@ -96,7 +96,7 @@ const ExternalLink = styled.a`
   cursor: pointer;
   background-image: none;
   text-shadow: none;
-`;
+`
 
 const AboutMe: React.FC<Props> = ({}) => {
   const Buzzwords = useMemo(
@@ -118,11 +118,11 @@ const AboutMe: React.FC<Props> = ({}) => {
             }
           }
         `}
-        render={(data) => <BuzzwordBingo content={queryToContent(data)} />}
+        render={data => <BuzzwordBingo content={queryToContent(data)} />}
       />
     ),
-    [],
-  );
+    []
+  )
 
   return (
     <Content>
@@ -136,7 +136,7 @@ const AboutMe: React.FC<Props> = ({}) => {
               src="../images/me.jpg"
               className="outerWrapper"
               imgClassName="img"
-              alt={"Image from Uwe Ullrich"}
+              alt={'Image from Uwe Ullrich'}
             />
           </Header>
           <Description>
@@ -165,7 +165,7 @@ const AboutMe: React.FC<Props> = ({}) => {
             <h1>How my story began...</h1>
             <Line />
           </Header>
-          <Description style={{ marginBottom: "20px" }}>
+          <Description style={{ marginBottom: '20px' }}>
             My programming journey started at the age of 14. Most of the time I
             hung around with my friends in Teamspeak. There was this cool
             programming dude who was able to create a tool to control the
@@ -195,7 +195,7 @@ const AboutMe: React.FC<Props> = ({}) => {
             <h1>Career by now...</h1>
             <Line />
           </Header>
-          <Description style={{ marginBottom: "20px" }}>
+          <Description style={{ marginBottom: '20px' }}>
             <table>
               <tbody>
                 <tr>
@@ -265,12 +265,12 @@ const AboutMe: React.FC<Props> = ({}) => {
             <h1>Certifications</h1>
             <Line />
           </Header>
-          <Description style={{ marginBottom: "20px" }}>
+          <Description style={{ marginBottom: '20px' }}>
             <div
               style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
               }}
             >
               <h3 style={{ marginTop: 0 }}>
@@ -285,11 +285,11 @@ const AboutMe: React.FC<Props> = ({}) => {
                   src="../images/certifications/aws-certified-solutions-architect-associate.png"
                   className="certificateWrapper"
                   imgClassName="certificateImg"
-                  alt={"Image from AWS Solutions Architect certification"}
+                  alt={'Image from AWS Solutions Architect certification'}
                 />
               </ExternalLink>
               <span>
-                Proud holder of the <em>AWS Solutions Architect - Associate</em>{" "}
+                Proud holder of the <em>AWS Solutions Architect - Associate</em>{' '}
                 certification, validating my extensive knowledge and skills in
                 developing high-performance, scalable, and secure cloud
                 solutions on the Amazon Web Services (AWS) platform. This
@@ -306,13 +306,13 @@ const AboutMe: React.FC<Props> = ({}) => {
             <h1>Developer Buzzwords...</h1>
             <Line />
           </Header>
-          <Description style={{ marginBottom: "20px" }}>
+          <Description style={{ marginBottom: '20px' }}>
             {Buzzwords}
           </Description>
         </Card>
       </Section>
     </Content>
-  );
-};
+  )
+}
 
-export default AboutMe;
+export default AboutMe
