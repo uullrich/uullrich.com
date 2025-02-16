@@ -1,6 +1,6 @@
-import * as React from "react";
-import styled, { keyframes } from "styled-components";
-import IconFactory from "./IconFactory";
+import * as React from 'react'
+import styled, { keyframes } from 'styled-components'
+import IconFactory from './IconFactory'
 
 const JumpingAnimation = keyframes`
 0% { 
@@ -24,7 +24,7 @@ const JumpingAnimation = keyframes`
 100% { 
     transform: translateY(0); 
 }
-`;
+`
 
 const Jumper = styled.div`
   animation: ${JumpingAnimation};
@@ -32,19 +32,19 @@ const Jumper = styled.div`
   animation-duration: 2s;
   animation-iteration-count: infinite;
   transform-origin: bottom;
-`;
+`
 
 type BouncingChevronProps = {
-  children?: React.ReactNode;
-  width: string;
-  height: string;
-};
+  children?: React.ReactNode
+  width: string
+  height: string
+}
 
 const BouncingChevron: React.FC<BouncingChevronProps> = ({ width, height }) => {
   const ChevronDown = (
     <IconFactory width={width} height={height} iconName="chevron-down" />
-  );
-  return <Jumper>{ChevronDown}</Jumper>;
-};
+  )
+  return <Jumper>{ChevronDown}</Jumper>
+}
 
-export default BouncingChevron;
+export default BouncingChevron
