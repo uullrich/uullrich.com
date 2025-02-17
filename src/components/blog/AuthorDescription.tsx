@@ -9,7 +9,7 @@ type Props = {
 }
 
 type WrapperProps = {
-  withBackground: boolean
+  $withBackground: boolean
 }
 
 const Wrapper = styled.div<WrapperProps>`
@@ -32,7 +32,7 @@ const Wrapper = styled.div<WrapperProps>`
   }
 
   ${props =>
-    props.withBackground === true
+    props.$withBackground
       ? `
       background-color: ${props.theme.palette.card.main};
       color: ${props.theme.palette.card.contrastText};
@@ -43,7 +43,7 @@ const Wrapper = styled.div<WrapperProps>`
 
   ${props => media.lessThan('small')`
     ${
-      props.withBackground === true
+      props.$withBackground
         ? `
       padding: 0 0 0 10px;
     `
@@ -59,7 +59,7 @@ const Description = styled.div`
 
 const AuthorDescription: React.FC<Props> = ({ enableBackground }) => {
   return (
-    <Wrapper withBackground={enableBackground}>
+    <Wrapper $withBackground={enableBackground}>
       <StaticImage
         id="me"
         src="../../images/me.jpg"
