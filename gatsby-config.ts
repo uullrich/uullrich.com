@@ -22,11 +22,13 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: 'gatsby-plugin-react-svg',
+      resolve: 'gatsby-plugin-svgr-svgo',
       options: {
-        rule: {
-          include: /\.inline\.svg$/,
-        },
+        inlineSvgOptions: [
+          {
+            test: /\.inline\.svg$/,
+          },
+        ],
       },
     },
     {
