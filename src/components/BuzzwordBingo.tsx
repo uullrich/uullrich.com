@@ -2,7 +2,6 @@ import * as React from 'react'
 import { useState } from 'react'
 import styled from 'styled-components'
 import media from 'styled-media-query'
-import { StaticImage } from 'gatsby-plugin-image'
 import IconGithub from '../images/social/github-brands.inline.svg'
 
 const Wrapper = styled.div`
@@ -237,13 +236,13 @@ export const queryToContent = (data: any) => {
     categories: [],
   }
 
-  data?.allBuzzwordsJson?.edges.map(({ node }) => {
+  data?.allBuzzwordsJson?.edges.forEach(({ node }) => {
     const category: Category = {
       title: node.title,
       buzzwords: [],
     }
 
-    node?.buzzwords.map((buzzword: any) => {
+    node?.buzzwords.forEach((buzzword: any) => {
       const buz: Buzzword = {
         title: buzzword.title,
         explanation: buzzword.explanation,

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useCallback, useState, useEffect, useMemo } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import media from 'styled-media-query'
 import useScrollPosition from '@react-hook/window-scroll'
@@ -81,7 +81,7 @@ const CoverChevron: React.FC<CoverChevronProps> = ({
     ) {
       setBouncingArrowHidden(true)
     }
-  }, [scrollY])
+  }, [scrollY, isBouncingArrowHidden, isCookieConsentOpened])
 
   return (
     <>

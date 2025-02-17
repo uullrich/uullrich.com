@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useCallback, useState, useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import styled from 'styled-components'
 import media from 'styled-media-query'
 import CoverChevron from './CoverChevron'
@@ -109,7 +109,7 @@ const Description = styled.div`
     `}
 `
 
-const Cover: React.FC<Props> = ({}) => {
+const Cover: React.FC<Props> = () => {
   const { cookieStatus }: { cookieStatus: CookieStatus } = useGlobalContext()
 
   //The useScrollPosition Hook triggers lots of rerenders

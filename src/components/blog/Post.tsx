@@ -49,13 +49,13 @@ const Line = styled.hr`
 `
 
 const PostComponent: React.FC<Props> = ({ children, frontmatter }) => {
-  if (!children) {
-    return <></>
-  }
-
   React.useEffect(() => {
     Prism.highlightAll()
   }, [])
+
+  if (!children) {
+    return <></>
+  }
 
   return (
     <PostWrapper>

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import useScrollPosition from '@react-hook/window-scroll'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
 const coverImageId = 'coverImage'
@@ -9,7 +9,7 @@ type Props = {
   children?: React.ReactNode
 }
 
-const CoverImage: React.FC<Props> = ({}) => {
+const CoverImage: React.FC<Props> = () => {
   return (
     <StaticImage
       id={coverImageId}
@@ -44,7 +44,7 @@ export const useIsUnderCoverImage = (tolerance: number) => {
         setIsUnderCoverImage(scrollY > coverImageHeight - tolerance)
       }
     }
-  }, [scrollY])
+  }, [coverImageHeight, isUnderCoverImage, scrollY, tolerance])
 
   return isUnderCoverImage
 }

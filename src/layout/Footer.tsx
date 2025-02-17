@@ -114,7 +114,7 @@ const Right = styled.div`
   }
 `
 
-const Footer: React.FC<Props> = ({}, context) => {
+const Footer: React.FC<Props> = () => {
   const { changeGoogleAnalyticsCookie } = useGlobalContext()
   const theme = useTheme()
 

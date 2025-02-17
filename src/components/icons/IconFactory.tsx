@@ -5,7 +5,7 @@ type RawProps = {
   children?: React.ReactNode
 }
 
-const ChevronDownRaw: React.FC<RawProps> = ({}) => (
+const ChevronDownRaw: React.FC<RawProps> = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="h-6 w-6"

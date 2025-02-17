@@ -98,7 +98,7 @@ const ExternalLink = styled.a`
   text-shadow: none;
 `
 
-const AboutMe: React.FC<Props> = ({}) => {
+const AboutMe: React.FC<Props> = () => {
   const Buzzwords = useMemo(
     () => (
       <StaticQuery

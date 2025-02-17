@@ -6,14 +6,14 @@ type ProviderProps = {
   children?: React.ReactNode
 }
 
-type CookieStatus = {
+export type CookieStatus = {
   googleAnalytics: {
     decided: boolean
     enabled: boolean | undefined
   }
 }
 
-type Context = {
+export type Context = {
   cookieStatus: CookieStatus
   changeGoogleAnalyticsCookie: (value: boolean) => void
 }
@@ -28,11 +28,8 @@ const defaultValue: Context = {
   changeGoogleAnalyticsCookie: (value: boolean) => {},
 }
 
-export const Context = React.createContext<Context>(defaultValue)
-
-export const useGlobalContext = () => useContext(Context)
-
-export type { CookieStatus }
+const GlobalContext = React.createContext<Context>(defaultValue)
+export const useGlobalContext = () => useContext(GlobalContext)
 
 const Provider: React.FC<ProviderProps> = ({ children }) => {
   const [cookieStatus, setCookieStatus] = useState<CookieStatus>({
@@ -44,36 +41,36 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (getCookieConsentValue('gatsby-gdpr-google-analytics') === 'true') {
-      setCookieStatus({
+      setCookieStatus(cookieStatus => ({
         ...cookieStatus,
         googleAnalytics: {
           decided: true,
           enabled: true,
         },
-      })
+      }))
     } else if (
       getCookieConsentValue('gatsby-gdpr-google-analytics') === 'false'
     ) {
-      setCookieStatus({
+      setCookieStatus(cookieStatus => ({
         ...cookieStatus,
         googleAnalytics: {
           decided: true,
           enabled: false,
         },
-      })
+      }))
     } else {
-      setCookieStatus({
+      setCookieStatus(cookieStatus => ({
         ...cookieStatus,
         googleAnalytics: {
           decided: false,
           enabled: undefined,
         },
-      })
+      }))
     }
   }, [])
 
   return (
-    <Context.Provider
+    <GlobalContext.Provider
       value={{
         cookieStatus,
         changeGoogleAnalyticsCookie: (value: boolean) => {
@@ -88,7 +85,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
       }}
     >
       {children}
-    </Context.Provider>
+    </GlobalContext.Provider>
   )
 }
 
