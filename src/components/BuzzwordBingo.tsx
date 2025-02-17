@@ -3,6 +3,10 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import media from 'styled-media-query'
 import IconGithub from '../images/social/github-brands.inline.svg'
+import useFetchBuzzwordCollection, {
+  Buzzword,
+  Category,
+} from '../hooks/useFetchBuzzwords'
 
 const Wrapper = styled.div`
   h1,
@@ -131,19 +135,8 @@ const DetailExplanation = styled.div`
   padding-right: 5px;
 `
 
-type Buzzword = {
-  title: String
-  githubLink?: string
-  explanation: String
-}
-
-type Category = {
-  title: String
-  buzzwords: Buzzword[]
-}
-
-type Content = {
-  categories: Category[]
+type Props = {
+  children?: React.ReactNode
 }
 
 type Detail = {
@@ -152,12 +145,8 @@ type Detail = {
   buzzword?: Buzzword
 }
 
-type Props = {
-  children?: React.ReactNode
-  content: Content
-}
-
-const BuzzwordBingo: React.FC<Props> = ({ content }) => {
+const BuzzwordBingo: React.FC<Props> = () => {
+  const buzzwordCollection = useFetchBuzzwordCollection()
   const [detail, setDetail] = useState<Detail>({
     isExpanded: false,
   })
@@ -165,7 +154,7 @@ const BuzzwordBingo: React.FC<Props> = ({ content }) => {
   return (
     <Wrapper>
       About my favorite libraries.
-      {content.categories.map((category, i) => {
+      {buzzwordCollection.categories.map((category: Category, i: number) => {
         return (
           <React.Fragment key={i}>
             <Lane key={i}>
@@ -230,30 +219,3 @@ const BuzzwordBingo: React.FC<Props> = ({ content }) => {
 }
 
 export default BuzzwordBingo
-
-export const queryToContent = (data: any) => {
-  const content: Content = {
-    categories: [],
-  }
-
-  data?.allBuzzwordsJson?.edges.forEach(({ node }) => {
-    const category: Category = {
-      title: node.title,
-      buzzwords: [],
-    }
-
-    node?.buzzwords.forEach((buzzword: any) => {
-      const buz: Buzzword = {
-        title: buzzword.title,
-        explanation: buzzword.explanation,
-        githubLink: buzzword.githubLink,
-      }
-
-      category.buzzwords.push(buz)
-    })
-
-    content.categories.push(category)
-  })
-
-  return content
-}

@@ -1,10 +1,8 @@
 import * as React from 'react'
-import { useMemo } from 'react'
 import styled from 'styled-components'
 import media from 'styled-media-query'
 import { StaticImage } from 'gatsby-plugin-image'
-import BuzzwordBingo, { queryToContent } from './BuzzwordBingo'
-import { StaticQuery, graphql } from 'gatsby'
+import BuzzwordBingo from './BuzzwordBingo'
 
 type Props = {
   children?: React.ReactNode
@@ -99,31 +97,6 @@ const ExternalLink = styled.a`
 `
 
 const AboutMe: React.FC<Props> = () => {
-  const Buzzwords = useMemo(
-    () => (
-      <StaticQuery
-        query={graphql`
-          query DeveloperBuzzwords {
-            allBuzzwordsJson {
-              edges {
-                node {
-                  title
-                  buzzwords {
-                    explanation
-                    githubLink
-                    title
-                  }
-                }
-              }
-            }
-          }
-        `}
-        render={data => <BuzzwordBingo content={queryToContent(data)} />}
-      />
-    ),
-    []
-  )
-
   return (
     <Content>
       <Section>
@@ -307,7 +280,7 @@ const AboutMe: React.FC<Props> = () => {
             <Line />
           </Header>
           <Description style={{ marginBottom: '20px' }}>
-            {Buzzwords}
+            <BuzzwordBingo />
           </Description>
         </Card>
       </Section>
