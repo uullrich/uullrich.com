@@ -16,9 +16,9 @@ const Wrapper = styled.div`
   }
 `
 
-const Buzz = styled.div<{ isSelected: boolean }>`
+const Buzz = styled.div<{ $isSelected: boolean }>`
   ${props =>
-    props.isSelected === true
+    props.$isSelected === true
       ? `
     background-color: ${props.theme.palette.buzzword.selected.main};
     color: ${props.theme.palette.buzzword.selected.contrastText};
@@ -60,7 +60,7 @@ const Lane = styled.div`
   width: 100%;
 `
 
-const Details = styled.div<{ isOpen: boolean }>`
+const Details = styled.div<{ $isOpen: boolean }>`
   position: relative;
   clear: both;
   margin-bottom: 20px;
@@ -68,7 +68,7 @@ const Details = styled.div<{ isOpen: boolean }>`
 
   ${props => media.lessThan('small')`
     ${
-      props.isOpen === true
+      props.$isOpen === true
         ? `
       height: 220px;
     `
@@ -80,7 +80,7 @@ const Details = styled.div<{ isOpen: boolean }>`
   `};
 
   ${props =>
-    props.isOpen === true
+    props.$isOpen === true
       ? `
     height: 150px;
   `
@@ -110,7 +110,7 @@ const GithubWrapper = styled.div`
   }
 `
 
-const DelayedVisibility = styled.div<{ isVisible: boolean }>`
+const DelayedVisibility = styled.div<{ $isVisible: boolean }>`
   @keyframes delayedShow {
     to {
       visibility: visible;
@@ -119,7 +119,7 @@ const DelayedVisibility = styled.div<{ isVisible: boolean }>`
   visibility: hidden;
 
   ${props =>
-    props.isVisible === true
+    props.$isVisible === true
       ? `
     animation: 0s linear 0.4s forwards delayedShow;
   `
@@ -176,7 +176,7 @@ const BuzzwordBingo: React.FC<Props> = ({ content }) => {
                 return (
                   <Buzz
                     key={j}
-                    isSelected={
+                    $isSelected={
                       buzzword.title === detail?.buzzword?.title &&
                       detail?.category?.title === category?.title
                     }
@@ -196,13 +196,13 @@ const BuzzwordBingo: React.FC<Props> = ({ content }) => {
             {
               <Details
                 key={'detail' + i}
-                isOpen={
+                $isOpen={
                   detail?.isExpanded &&
                   detail?.category?.title === category?.title
                 }
               >
                 <DelayedVisibility
-                  isVisible={
+                  $isVisible={
                     detail?.isExpanded &&
                     detail?.category?.title === category?.title
                   }

@@ -12,7 +12,7 @@ type NavigationProps = {
 }
 
 type NavProps = {
-  isTransparent: boolean
+  $isTransparent: boolean
 }
 
 const Nav = styled.nav<NavProps>`
@@ -21,7 +21,7 @@ const Nav = styled.nav<NavProps>`
   width: 100%;
   z-index: 10;
   ${props =>
-    props.isTransparent === true
+    props.$isTransparent === true
       ? `
             color: ${props.theme.palette.navigation.transparent.contrastText};
             background-color: ${props.theme.palette.navigation.transparent.main};
@@ -74,7 +74,7 @@ const NavlistItem = styled.li`
 `
 
 type ImageWrapperProps = {
-  isLargeLogo: boolean
+  $isLargeLogo: boolean
 }
 
 const ImageWrapper = styled.div<ImageWrapperProps>`
@@ -85,7 +85,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
 
     ${props => media.lessThan('small')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 100px;
                 transition: width 0.5s;
@@ -96,7 +96,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
 
     ${props => media.between('small', 'medium')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 100px;
                 transition: width 0.5s;
@@ -107,7 +107,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
 
     ${props => media.between('medium', 'large')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 160px;
                 transition: width 0.5s;
@@ -118,7 +118,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
 
     ${props => media.greaterThan('large')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 200px;
                 transition: width 0.5s;
@@ -128,7 +128,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
         `};
 
     ${props =>
-      props.isLargeLogo === true
+      props.$isLargeLogo === true
         ? ``
         : `
             left: 10px;
@@ -141,7 +141,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
   .logoImg {
     ${props => media.lessThan('small')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 100px;
                 transition: width 0.5s;
@@ -152,7 +152,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
 
     ${props => media.between('small', 'medium')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 100px;
                 transition: width 0.5s;
@@ -163,7 +163,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
 
     ${props => media.between('medium', 'large')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 160px;
                 transition: width 0.5s;
@@ -173,18 +173,18 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
         `};
 
     ${props => media.greaterThan('large')`
-            ${
-              props.isLargeLogo === true
-                ? `
-                width: 200px;
-                transition: width 0.5s;
-            `
-                : ``
-            };
-        `};
+      ${
+        props.$isLargeLogo === true
+          ? `
+          width: 200px;
+          transition: width 0.5s;
+      `
+          : ``
+      };
+    `};
 
     ${props =>
-      props.isLargeLogo === true
+      props.$isLargeLogo === true
         ? ``
         : `
             width: 80px;
@@ -203,7 +203,7 @@ const Navigation: React.FC<NavigationProps> = ({
       <Navbar>
         {
           <Link to="/">
-            <ImageWrapper isLargeLogo={!isSmallLogo}>
+            <ImageWrapper $isLargeLogo={!isSmallLogo}>
               <StaticImage
                 src="../images/icon_bright2.png"
                 className="logo"
@@ -264,7 +264,7 @@ const Navigation: React.FC<NavigationProps> = ({
     )
   }, [isSmallLogo, isNavigationTransparent])
 
-  return <Nav isTransparent={isNavigationTransparent}>{MemoizedNavbar}</Nav>
+  return <Nav $isTransparent={isNavigationTransparent}>{MemoizedNavbar}</Nav>
 }
 
 export default Navigation
