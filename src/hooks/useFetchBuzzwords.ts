@@ -31,6 +31,8 @@ const useFetchBuzzwordCollection = (): BuzzwordCollection => {
     }
   `)
 
+  //ToDo: Add validation!
+
   const content: BuzzwordCollection = {
     categories: data.allBuzzwordsJson.nodes.map((category: Category) => ({
       title: category.title,
