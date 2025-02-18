@@ -133,13 +133,15 @@ const Footer: React.FC<Props> = () => {
           >
             <IconGithub />
           </a>
-          <a
-            href="https://twitter.com/uullrich4"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <IconTwitter />
-          </a>
+          {
+            // <a
+            //   href="https://twitter.com/uullrich4"
+            //   target="_blank"
+            //   rel="noopener noreferrer"
+            // >
+            //   <IconTwitter />
+            // </a>
+          }
           <a
             href="https://www.xing.com/profile/Uwe_Ullrich19/cv"
             target="_blank"
