@@ -25,6 +25,23 @@ export const useIsUnderCoverImage = (tolerance: number) => {
   const scrollY = useScrollPosition(5) //Throttle as parameter
   const [coverImageHeight, setCoverImagegHeight] = useState(0)
   const [isUnderCoverImage, setIsUnderCoverImage] = useState(false)
+  const [logoHeight, setLogoHeight] = useState(0)
+
+  useEffect(() => {
+    const logo = document.querySelector('.logo')
+    if (!logo) {
+      return
+    }
+
+    const logoRect = logo.getBoundingClientRect()
+    setLogoHeight(logoHeight => {
+      if (logoHeight === 0) {
+        return logoRect.height
+      } else {
+        return logoHeight
+      }
+    })
+  }, [scrollY])
 
   useEffect(() => {
     if (coverImageHeight === 0) {
@@ -38,13 +55,13 @@ export const useIsUnderCoverImage = (tolerance: number) => {
         }
       }
       if (imageHeight !== null)
-        setIsUnderCoverImage(scrollY > imageHeight - tolerance)
+        setIsUnderCoverImage(scrollY > imageHeight - logoHeight)
     } else {
-      if (scrollY > coverImageHeight - tolerance !== isUnderCoverImage) {
-        setIsUnderCoverImage(scrollY > coverImageHeight - tolerance)
+      if (scrollY > coverImageHeight - logoHeight !== isUnderCoverImage) {
+        setIsUnderCoverImage(scrollY > coverImageHeight - logoHeight)
       }
     }
-  }, [coverImageHeight, isUnderCoverImage, scrollY, tolerance])
+  }, [coverImageHeight, isUnderCoverImage, scrollY, tolerance, logoHeight])
 
   return isUnderCoverImage
 }
