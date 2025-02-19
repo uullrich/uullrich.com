@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
 const coverImageId = 'coverImage'
+const logoSelector = '.logo'
 
 type Props = {
   children?: React.ReactNode
@@ -23,13 +24,18 @@ const CoverImage: React.FC<Props> = () => {
 
 export const useIsUnderCoverImage = (tolerance: number) => {
   const scrollY = useScrollPosition(5) //Throttle as parameter
-  const [coverImageHeight, setCoverImagegHeight] = useState(0)
+  const [coverImageHeight, setCoverImageHeight] = useState(0)
   const [isUnderCoverImage, setIsUnderCoverImage] = useState(false)
   const [logoHeight, setLogoHeight] = useState(0)
 
-  useEffect(() => {
-    const logo = document.querySelector('.logo')
+  const determineHeights = () => {
+    const logo = document.querySelector(logoSelector)
     if (!logo) {
+      return
+    }
+
+    const coverImage = document.getElementById(coverImageId)
+    if (!coverImage) {
       return
     }
 
@@ -37,31 +43,39 @@ export const useIsUnderCoverImage = (tolerance: number) => {
     setLogoHeight(logoHeight => {
       if (logoHeight === 0) {
         return logoRect.height
-      } else {
-        return logoHeight
       }
+      return logoHeight
     })
+
+    const coverImageRect = coverImage.getBoundingClientRect()
+    setCoverImageHeight(coverImageHeight => {
+      if (coverImageHeight === 0) {
+        return coverImageRect.height
+      }
+      return coverImageHeight
+    })
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      setCoverImageHeight(0)
+      setLogoHeight(0)
+      determineHeights()
+    })
+    return () => window.removeEventListener('resize', determineHeights)
+  }, [])
+
+  useEffect(() => {
+    determineHeights()
   }, [scrollY])
 
   useEffect(() => {
-    if (coverImageHeight === 0) {
-      let imageHeight = null
-      const coverImage = document.querySelector('#' + coverImageId)
-      if (coverImage !== null) {
-        const boundingRect = coverImage.getBoundingClientRect()
-        if (boundingRect) {
-          imageHeight = boundingRect.height
-          setCoverImagegHeight(imageHeight)
-        }
-      }
-      if (imageHeight !== null)
-        setIsUnderCoverImage(scrollY > imageHeight - logoHeight)
-    } else {
-      if (scrollY > coverImageHeight - logoHeight !== isUnderCoverImage) {
-        setIsUnderCoverImage(scrollY > coverImageHeight - logoHeight)
-      }
+    if (coverImageHeight === 0 || logoHeight === 0) {
+      return
     }
-  }, [coverImageHeight, isUnderCoverImage, scrollY, tolerance, logoHeight])
+
+    setIsUnderCoverImage(scrollY > coverImageHeight - logoHeight)
+  }, [coverImageHeight, scrollY, logoHeight])
 
   return isUnderCoverImage
 }
