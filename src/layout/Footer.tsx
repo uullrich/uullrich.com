@@ -7,9 +7,10 @@ import CoverChevron from '../components/CoverChevron'
 import { useGlobalContext } from '../context/Context'
 import IconGithub from '../images/social/github-brands.inline.svg'
 import IconXing from '../images/social/xing-brands.inline.svg'
-import IconTwitter from '../images/social/twitter-brands.inline.svg'
+//import IconTwitter from '../images/social/twitter-brands.inline.svg'
 import IconMail from '../images/social/envelope-solid.inline.svg'
 import IconCopyright from '../images/copyright-solid.inline.svg'
+import IconLinkedIn from '../images/social/linkedin.inline.svg'
 
 type Props = {
   children?: React.ReactNode
@@ -142,6 +143,13 @@ const Footer: React.FC<Props> = () => {
             //   <IconTwitter />
             // </a>
           }
+          <a
+            href="https://www.linkedin.com/in/uwe-ullrich-a900a7271"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconLinkedIn />
+          </a>
           <a
             href="https://www.xing.com/profile/Uwe_Ullrich19/cv"
             target="_blank"
