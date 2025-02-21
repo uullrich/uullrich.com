@@ -1,10 +1,12 @@
 import type { GatsbyConfig } from 'gatsby'
 import remarkGfm from 'remark-gfm'
 
+const siteUrl = `https://uullrich.com`
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Uwe Ullrich`,
-    siteUrl: `https://uullrich.com`,
+    siteUrl,
     author: `Uwe Ullrich`,
     description: `Freelance software developer - Node.js, React, C++, Qt, ABAP, ABAP OO`,
     keywords: `softwareentwicklung, freelance, freiberuflich, nodejs, react, c++, qt, abap, abap oo`,
@@ -14,6 +16,32 @@ const config: GatsbyConfig = {
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-plugin-styled-components',
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        query: `
+          {
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+          }
+        `,
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({
+          allSitePage,
+        }: {
+          allSitePage: { nodes: { path: string }[] }
+        }) => {
+          return allSitePage.nodes.filter(
+            page =>
+              !page.path.includes('blog/demo-') &&
+              !page.path.includes('blogPost')
+          )
+        },
+      },
+    },
     {
       resolve: `gatsby-plugin-typography`,
       options: {
