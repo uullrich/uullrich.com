@@ -1,14 +1,14 @@
-import * as React from "react";
-import Footer from "./Footer";
-import GlobalStyle from "./GlobalStyle";
-import Navigation from "./Navigation";
-import SeoWrapper from "./Seo";
+import * as React from 'react'
+import Footer from './Footer'
+import GlobalStyle from './GlobalStyle'
+import Navigation from './Navigation'
+import SeoWrapper from './Seo'
 
 type Props = {
-  children?: React.ReactNode;
-  isNavigationTransparent: boolean;
-  isSmallLogo: boolean;
-};
+  children?: React.ReactNode
+  isNavigationTransparent: boolean
+  isSmallLogo: boolean
+}
 
 const MainLayout: React.FC<Props> = ({
   children,
@@ -25,7 +25,7 @@ const MainLayout: React.FC<Props> = ({
       <div>{children}</div>
       <Footer />
     </SeoWrapper>
-  );
-};
+  )
+}
 
-export default MainLayout;
+export default MainLayout

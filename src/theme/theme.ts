@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme } from 'styled-components'
 
 /*
 const primaryColor = '#856ffb';
@@ -106,107 +106,107 @@ export const defaultTheme: DefaultTheme = {
 };
 */
 
-const primaryColor = "#3eb0ef";
-const secondaryColor = "#f3b31b";
+const primaryColor = '#3eb0ef'
+const secondaryColor = '#f3b31b'
 
 export const defaultTheme: DefaultTheme = {
-  borderRadiusSmall: "8px",
-  borderRadiusNormal: "10px",
-  disabledOpacity: "0.8",
+  borderRadiusSmall: '8px',
+  borderRadiusNormal: '10px',
+  disabledOpacity: '0.8',
   dimmer: {
-    color: "#000000",
-    opacity: ".2",
+    color: '#000000',
+    opacity: '.2',
   },
   palette: {
     separator: primaryColor,
     background: {
-      main: "#e4e4e4",
-      contrastText: "#333333",
+      main: '#e4e4e4',
+      contrastText: '#333333',
     },
     navigation: {
       regular: {
-        main: "#ffffff",
-        contrastText: "#000000",
+        main: '#ffffff',
+        contrastText: '#000000',
       },
       transparent: {
-        main: "inherit",
-        contrastText: "#000000",
+        main: 'inherit',
+        contrastText: '#000000',
       },
       hover: primaryColor,
     },
     footer: {
       main: primaryColor,
-      contrastText: "#ffffff",
+      contrastText: '#ffffff',
     },
     chevron: {
-      main: "#ffffff",
+      main: '#ffffff',
       hover: primaryColor,
     },
     jumbo: {
-      main: "rgba(225,225,225,0.7)",
-      contrastText: "#000000",
+      main: 'rgba(225,225,225,0.7)',
+      contrastText: '#000000',
     },
     card: {
-      main: "#f7f7f7",
-      contrastText: "#333333",
+      main: '#f7f7f7',
+      contrastText: '#333333',
     },
     primary: {
       main: primaryColor,
-      contrastText: "#ffffff",
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: "#f3b31b",
-      contrastText: "#ffffff",
+      main: '#f3b31b',
+      contrastText: '#ffffff',
     },
     buzzword: {
       unselected: {
-        main: "#aeaeae",
-        contrastText: "#000000",
+        main: '#aeaeae',
+        contrastText: '#000000',
       },
       selected: {
         main: primaryColor,
-        contrastText: "#ffffff",
+        contrastText: '#ffffff',
       },
       hover: {
         main: primaryColor,
-        contrastText: "#ffffff",
+        contrastText: '#ffffff',
       },
-      githubFill: "#171515",
+      githubFill: '#171515',
     },
     button: {
       standard: {
-        borderRadius: "10px",
+        borderRadius: '10px',
         enabled: {
-          opacity: "1",
+          opacity: '1',
         },
         disabled: {
-          opacity: "0.8",
+          opacity: '0.8',
         },
         palette: {
           main: primaryColor,
-          contrastText: "#ffffff",
+          contrastText: '#ffffff',
         },
       },
       alternative: {
-        borderRadius: "10px",
+        borderRadius: '10px',
         enabled: {
-          opacity: "1",
+          opacity: '1',
         },
         disabled: {
-          opacity: "0.8",
+          opacity: '0.8',
         },
         palette: {
           main: secondaryColor,
-          contrastText: "#ffffff",
+          contrastText: '#ffffff',
         },
       },
     },
     inputs: {
-      border: "0px",
-      outline: "auto",
+      border: '0px',
+      outline: 'auto',
       outlineColor: primaryColor,
     },
     iconPrimary: primaryColor,
     iconSecondary: secondaryColor,
   },
-};
+}

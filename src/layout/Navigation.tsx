@@ -1,27 +1,27 @@
-import * as React from "react";
-import { useMemo } from "react";
-import { StaticImage } from "gatsby-plugin-image";
-import styled from "styled-components";
-import media from "styled-media-query";
-import { Link } from "gatsby";
+import * as React from 'react'
+import { useMemo } from 'react'
+import { StaticImage } from 'gatsby-plugin-image'
+import styled from 'styled-components'
+import media from 'styled-media-query'
+import { Link } from 'gatsby'
 
 type NavigationProps = {
-  children?: React.ReactNode;
-  isNavigationTransparent: boolean;
-  isSmallLogo: boolean;
-};
+  children?: React.ReactNode
+  isNavigationTransparent: boolean
+  isSmallLogo: boolean
+}
 
 type NavProps = {
-  isTransparent: boolean;
-};
+  $isTransparent: boolean
+}
 
 const Nav = styled.nav<NavProps>`
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 10;
-  ${(props) =>
-    props.isTransparent === true
+  ${props =>
+    props.$isTransparent === true
       ? `
             color: ${props.theme.palette.navigation.transparent.contrastText};
             background-color: ${props.theme.palette.navigation.transparent.main};
@@ -31,7 +31,7 @@ const Nav = styled.nav<NavProps>`
             color: ${props.theme.palette.navigation.regular.contrastText};
             box-shadow: 0 5px 20px -10px #000;   
         `}
-`;
+`
 
 const Navbar = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ const Navbar = styled.div`
   align-items: center;
   min-height: 60px;
   padding: 10px 15px 10px 50px;
-`;
+`
 
 const NavigationList = styled.ul`
   display: flex;
@@ -51,32 +51,31 @@ const NavigationList = styled.ul`
     background-image: none;
 
     &:hover {
-      color: ${(props) => props.theme.palette.navigation.hover};
+      color: ${props => props.theme.palette.navigation.hover};
     }
   }
 
   .transparentNavigation {
-    color: ${(props) =>
-      props.theme.palette.navigation.transparent.contrastText};
+    color: ${props => props.theme.palette.navigation.transparent.contrastText};
   }
 
   .standardNavigation {
-    color: ${(props) => props.theme.palette.navigation.regular.contrastText};
+    color: ${props => props.theme.palette.navigation.regular.contrastText};
   }
-`;
+`
 
 const NavlistItem = styled.li`
   margin: 0 10px;
-  font-family: "Arvo", sans-serif;
+  font-family: 'Arvo', sans-serif;
   font-weight: 700;
   text-rendering: optimizeLegibility;
   padding: 0;
   list-style: none;
-`;
+`
 
 type ImageWrapperProps = {
-  isLargeLogo: boolean;
-};
+  $isLargeLogo: boolean
+}
 
 const ImageWrapper = styled.div<ImageWrapperProps>`
   .logo {
@@ -84,9 +83,9 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
     left: 10px;
     top: 10px;
 
-    ${(props) => media.lessThan("small")`
+    ${props => media.lessThan('small')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 100px;
                 transition: width 0.5s;
@@ -95,9 +94,9 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             };
         `};
 
-    ${(props) => media.between("small", "medium")`
+    ${props => media.between('small', 'medium')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 100px;
                 transition: width 0.5s;
@@ -106,9 +105,9 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             };
         `};
 
-    ${(props) => media.between("medium", "large")`
+    ${props => media.between('medium', 'large')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 160px;
                 transition: width 0.5s;
@@ -117,9 +116,9 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             };
         `};
 
-    ${(props) => media.greaterThan("large")`
+    ${props => media.greaterThan('large')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 200px;
                 transition: width 0.5s;
@@ -128,8 +127,8 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             };
         `};
 
-    ${(props) =>
-      props.isLargeLogo === true
+    ${props =>
+      props.$isLargeLogo === true
         ? ``
         : `
             left: 10px;
@@ -140,9 +139,9 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
   }
 
   .logoImg {
-    ${(props) => media.lessThan("small")`
+    ${props => media.lessThan('small')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 100px;
                 transition: width 0.5s;
@@ -151,9 +150,9 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             };
         `};
 
-    ${(props) => media.between("small", "medium")`
+    ${props => media.between('small', 'medium')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 100px;
                 transition: width 0.5s;
@@ -162,9 +161,9 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             };
         `};
 
-    ${(props) => media.between("medium", "large")`
+    ${props => media.between('medium', 'large')`
             ${
-              props.isLargeLogo === true
+              props.$isLargeLogo === true
                 ? `
                 width: 160px;
                 transition: width 0.5s;
@@ -173,26 +172,26 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
             };
         `};
 
-    ${(props) => media.greaterThan("large")`
-            ${
-              props.isLargeLogo === true
-                ? `
-                width: 200px;
-                transition: width 0.5s;
-            `
-                : ``
-            };
-        `};
+    ${props => media.greaterThan('large')`
+      ${
+        props.$isLargeLogo === true
+          ? `
+          width: 200px;
+          transition: width 0.5s;
+      `
+          : ``
+      };
+    `};
 
-    ${(props) =>
-      props.isLargeLogo === true
+    ${props =>
+      props.$isLargeLogo === true
         ? ``
         : `
             width: 80px;
             transition: width 0.5s;
         `}
   }
-`;
+`
 
 const Navigation: React.FC<NavigationProps> = ({
   isNavigationTransparent,
@@ -204,12 +203,12 @@ const Navigation: React.FC<NavigationProps> = ({
       <Navbar>
         {
           <Link to="/">
-            <ImageWrapper isLargeLogo={!isSmallLogo}>
+            <ImageWrapper $isLargeLogo={!isSmallLogo}>
               <StaticImage
                 src="../images/icon_bright2.png"
                 className="logo"
                 imgClassName="logoImg"
-                alt={"Logo"}
+                alt={'Logo'}
               />
             </ImageWrapper>
           </Link>
@@ -219,10 +218,10 @@ const Navigation: React.FC<NavigationProps> = ({
             {
               <Link
                 className={
-                  "gatsbyLink " +
+                  'gatsbyLink ' +
                   (isNavigationTransparent
-                    ? "transparentNavigation"
-                    : "standardNavigation")
+                    ? 'transparentNavigation'
+                    : 'standardNavigation')
                 }
                 to="/"
               >
@@ -234,10 +233,10 @@ const Navigation: React.FC<NavigationProps> = ({
             {
               <Link
                 className={
-                  "gatsbyLink " +
+                  'gatsbyLink ' +
                   (isNavigationTransparent
-                    ? "transparentNavigation"
-                    : "standardNavigation")
+                    ? 'transparentNavigation'
+                    : 'standardNavigation')
                 }
                 to="/blog"
               >
@@ -249,10 +248,10 @@ const Navigation: React.FC<NavigationProps> = ({
             {
               <Link
                 className={
-                  "gatsbyLink " +
+                  'gatsbyLink ' +
                   (isNavigationTransparent
-                    ? "transparentNavigation"
-                    : "standardNavigation")
+                    ? 'transparentNavigation'
+                    : 'standardNavigation')
                 }
                 to="/contact"
               >
@@ -262,10 +261,10 @@ const Navigation: React.FC<NavigationProps> = ({
           </NavlistItem>
         </NavigationList>
       </Navbar>
-    );
-  }, [isSmallLogo, isNavigationTransparent]);
+    )
+  }, [isSmallLogo, isNavigationTransparent])
 
-  return <Nav isTransparent={isNavigationTransparent}>{MemoizedNavbar}</Nav>;
-};
+  return <Nav $isTransparent={isNavigationTransparent}>{MemoizedNavbar}</Nav>
+}
 
-export default Navigation;
+export default Navigation

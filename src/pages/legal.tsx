@@ -1,16 +1,16 @@
-import * as React from "react";
-import styled from "styled-components";
-import media from "styled-media-query";
-import MainLayout from "../layout/MainLayout";
+import * as React from 'react'
+import styled from 'styled-components'
+import media from 'styled-media-query'
+import MainLayout from '../layout/MainLayout'
 
 const Content = styled.main`
   padding-top: 60px;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  color: ${(props) => props.theme.palette.background.contrastText};
+  color: ${props => props.theme.palette.background.contrastText};
   padding-bottom: 30px;
-`;
+`
 
 const Section = styled.section`
   display: flex;
@@ -18,17 +18,17 @@ const Section = styled.section`
   justify-content: baseline;
   max-width: 700px;
 
-  ${media.lessThan("small")`
+  ${media.lessThan('small')`
         padding-left: 20px;
         padding-right: 20px;
         width: 100%;
     `};
-`;
+`
 
 const Line = styled.hr`
   margin-top: 10px;
-  background-color: ${(props) => props.theme.palette.separator};
-`;
+  background-color: ${props => props.theme.palette.separator};
+`
 
 const LegalPage = () => {
   return (
@@ -137,7 +137,7 @@ const LegalPage = () => {
           Diese Daten werden so lange gespeichert, wie sie zur Durchführung des
           Vertrags erforderlich sind. Darüberhinausgehend speichere ich Ihre
           Daten nur um vertraglichen oder gesetzlichen Verpflichtungen (z.B.
-          steuerlichen Pflichten) nachzukommen (Art. 6 (1) lit. c DS-GVO).{" "}
+          steuerlichen Pflichten) nachzukommen (Art. 6 (1) lit. c DS-GVO).{' '}
           <br />
           <br />
           <h3>Kontakt über E-Mail</h3>
@@ -239,7 +239,7 @@ const LegalPage = () => {
         </Section>
       </Content>
     </MainLayout>
-  );
-};
+  )
+}
 
-export default LegalPage;
+export default LegalPage

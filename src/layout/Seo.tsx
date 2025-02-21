@@ -1,40 +1,45 @@
-import React from "react";
-import Helmet from "react-helmet";
-import config from "../../gatsby-config";
+import React from 'react'
+import Helmet, { HelmetProps } from 'react-helmet'
+import config from '../../gatsby-config'
 
-const title = config?.siteMetadata?.title;
-const siteDescription = config?.siteMetadata?.description;
-const siteKeywords = config?.siteMetadata?.keywords;
+const title = (config?.siteMetadata?.title as string) || ''
+const siteDescription = (config?.siteMetadata?.description as string) || ''
+const siteKeywords = (config?.siteMetadata?.keywords as string) || ''
 
-type MetaProps = JSX.IntrinsicElements["meta"];
-type MetaPropsArray = MetaProps[] | undefined;
-
-const meta: MetaPropsArray = [
+const meta: HelmetProps['meta'] = [
   {
-    name: "description",
+    name: 'description',
     content: siteDescription,
-  } as MetaProps,
+  },
   {
-    name: "keywords",
+    name: 'keywords',
     content: siteKeywords,
-  } as MetaProps,
+  },
   {
-    name: "twitter:title",
-    content: "uullrich",
-  } as MetaProps,
+    name: 'twitter:title',
+    content: title,
+  },
   {
-    name: "twitter:description",
+    name: 'twitter:description',
     content: siteDescription,
-  } as MetaProps,
-];
+  },
+  {
+    name: 'og:title',
+    content: title,
+  },
+  {
+    name: 'og:description',
+    content: siteDescription,
+  },
+]
 
 const SeoWrapper = ({ children }: { children: any }) => {
   return (
     <div>
-      <Helmet title={title as string} meta={meta} />
+      <Helmet title={title} meta={meta} />
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default SeoWrapper;
+export default SeoWrapper

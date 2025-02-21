@@ -1,9 +1,12 @@
-import * as React from "react";
-import { useState } from "react";
-import styled from "styled-components";
-import media from "styled-media-query";
-import { StaticImage } from "gatsby-plugin-image";
-import IconGithub from "../images/social/github-brands.inline.svg";
+import * as React from 'react'
+import { useState } from 'react'
+import styled from 'styled-components'
+import media from 'styled-media-query'
+import IconGithub from '../images/social/github-brands.inline.svg'
+import useFetchBuzzwordCollection, {
+  Buzzword,
+  Category,
+} from '../hooks/useFetchBuzzwords'
 
 const Wrapper = styled.div`
   h1,
@@ -15,11 +18,11 @@ const Wrapper = styled.div`
     margin-top: 10px;
     margin-bottom: 5px;
   }
-`;
+`
 
-const Buzz = styled.div<{ isSelected: boolean }>`
-  ${(props) =>
-    props.isSelected === true
+const Buzz = styled.div<{ $isSelected: boolean }>`
+  ${props =>
+    props.$isSelected === true
       ? `
     background-color: ${props.theme.palette.buzzword.selected.main};
     color: ${props.theme.palette.buzzword.selected.contrastText};
@@ -39,7 +42,7 @@ const Buzz = styled.div<{ isSelected: boolean }>`
   user-select: none;
 
   &:hover {
-    ${(props) => `
+    ${props => `
       background-color: ${props.theme.palette.buzzword.hover.main};
       color: ${props.theme.palette.buzzword.hover.contrastText};
     `}
@@ -48,28 +51,28 @@ const Buzz = styled.div<{ isSelected: boolean }>`
   float: left;
   margin-right: 15px;
   margin-bottom: 15px;
-`;
+`
 
 const BuzzCategory = styled.div`
   h4 {
-    color: ${(props) => props.theme.palette.background.contrastText};
+    color: ${props => props.theme.palette.background.contrastText};
   }
-`;
+`
 
 const Lane = styled.div`
   clear: both;
   width: 100%;
-`;
+`
 
-const Details = styled.div<{ isOpen: boolean }>`
+const Details = styled.div<{ $isOpen: boolean }>`
   position: relative;
   clear: both;
   margin-bottom: 20px;
   transition: height 0.5s;
 
-  ${(props) => media.lessThan("small")`
+  ${props => media.lessThan('small')`
     ${
-      props.isOpen === true
+      props.$isOpen === true
         ? `
       height: 220px;
     `
@@ -80,8 +83,8 @@ const Details = styled.div<{ isOpen: boolean }>`
     };
   `};
 
-  ${(props) =>
-    props.isOpen === true
+  ${props =>
+    props.$isOpen === true
       ? `
     height: 150px;
   `
@@ -89,7 +92,7 @@ const Details = styled.div<{ isOpen: boolean }>`
     height: 0px;
     overflow: hidden;
   `};
-`;
+`
 
 const GithubWrapper = styled.div`
   position: absolute;
@@ -107,11 +110,11 @@ const GithubWrapper = styled.div`
     width: 40px;
     height: 40px;
     cursor: pointer;
-    fill: ${(props) => props.theme.palette.buzzword.githubFill};
+    fill: ${props => props.theme.palette.buzzword.githubFill};
   }
-`;
+`
 
-const DelayedVisibility = styled.div<{ isVisible: boolean }>`
+const DelayedVisibility = styled.div<{ $isVisible: boolean }>`
   @keyframes delayedShow {
     to {
       visibility: visible;
@@ -119,54 +122,39 @@ const DelayedVisibility = styled.div<{ isVisible: boolean }>`
   }
   visibility: hidden;
 
-  ${(props) =>
-    props.isVisible === true
+  ${props =>
+    props.$isVisible === true
       ? `
     animation: 0s linear 0.4s forwards delayedShow;
   `
       : ``};
-`;
+`
 
 const DetailExplanation = styled.div`
   width: calc(100% - 45px);
   padding-right: 5px;
-`;
-
-type Buzzword = {
-  title: String;
-  githubLink?: string;
-  explanation: String;
-};
-
-type Category = {
-  title: String;
-  buzzwords: Buzzword[];
-};
-
-type Content = {
-  categories: Category[];
-};
-
-type Detail = {
-  isExpanded: boolean;
-  category?: Category;
-  buzzword?: Buzzword;
-};
+`
 
 type Props = {
-  children?: React.ReactNode;
-  content: Content;
-};
+  children?: React.ReactNode
+}
 
-const BuzzwordBingo: React.FC<Props> = ({ content }) => {
+type Detail = {
+  isExpanded: boolean
+  category?: Category
+  buzzword?: Buzzword
+}
+
+const BuzzwordBingo: React.FC<Props> = () => {
+  const buzzwordCollection = useFetchBuzzwordCollection()
   const [detail, setDetail] = useState<Detail>({
     isExpanded: false,
-  });
+  })
 
   return (
     <Wrapper>
       About my favorite libraries.
-      {content.categories.map((category, i) => {
+      {buzzwordCollection.categories.map((category: Category, i: number) => {
         return (
           <React.Fragment key={i}>
             <Lane key={i}>
@@ -177,7 +165,7 @@ const BuzzwordBingo: React.FC<Props> = ({ content }) => {
                 return (
                   <Buzz
                     key={j}
-                    isSelected={
+                    $isSelected={
                       buzzword.title === detail?.buzzword?.title &&
                       detail?.category?.title === category?.title
                     }
@@ -186,24 +174,24 @@ const BuzzwordBingo: React.FC<Props> = ({ content }) => {
                         isExpanded: true,
                         category,
                         buzzword,
-                      } as Detail);
+                      } as Detail)
                     }}
                   >
                     {buzzword.title}
                   </Buzz>
-                );
+                )
               })}
             </Lane>
             {
               <Details
-                key={"detail" + i}
-                isOpen={
+                key={'detail' + i}
+                $isOpen={
                   detail?.isExpanded &&
                   detail?.category?.title === category?.title
                 }
               >
                 <DelayedVisibility
-                  isVisible={
+                  $isVisible={
                     detail?.isExpanded &&
                     detail?.category?.title === category?.title
                   }
@@ -224,37 +212,10 @@ const BuzzwordBingo: React.FC<Props> = ({ content }) => {
               </Details>
             }
           </React.Fragment>
-        );
+        )
       })}
     </Wrapper>
-  );
-};
+  )
+}
 
-export default BuzzwordBingo;
-
-export const queryToContent = (data: any) => {
-  const content: Content = {
-    categories: [],
-  };
-
-  data?.allBuzzwordsJson?.edges.map(({ node }) => {
-    const category: Category = {
-      title: node.title,
-      buzzwords: [],
-    };
-
-    node?.buzzwords.map((buzzword: any) => {
-      const buz: Buzzword = {
-        title: buzzword.title,
-        explanation: buzzword.explanation,
-        githubLink: buzzword.githubLink,
-      };
-
-      category.buzzwords.push(buz);
-    });
-
-    content.categories.push(category);
-  });
-
-  return content;
-};
+export default BuzzwordBingo

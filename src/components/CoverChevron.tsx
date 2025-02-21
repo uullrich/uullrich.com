@@ -1,100 +1,86 @@
-import * as React from "react";
-import { useCallback, useState, useEffect, useMemo } from "react";
-import styled from "styled-components";
-import media from "styled-media-query";
-import useScrollPosition from "@react-hook/window-scroll";
-import { useLocation } from "@reach/router";
-import BouncingChevron from "./icons/BouncingChevron";
+import * as React from 'react'
+import { useCallback, useState, useEffect } from 'react'
+import styled, { css } from 'styled-components'
+import media from 'styled-media-query'
+import useScrollPosition from '@react-hook/window-scroll'
+import { useLocation } from '@reach/router'
+import BouncingChevron from './icons/BouncingChevron'
 
 type CoverChevronProps = {
-  children?: React.ReactNode;
-  isCookieConsentOpened: boolean;
-};
+  isCookieConsentOpened: boolean
+}
 
-type ChevronWrapperProps = {
-  isCookieConsentOpened: boolean;
-};
-
-const ChevronWrapper = styled.div<ChevronWrapperProps>`
-  left: calc((100% - 60px) / 2);
-
-  ${(props) =>
-    props.isCookieConsentOpened === true
-      ? `
-        position: absolute;
-        top: -60px;
+const getChevronPosition = (isCookieConsentOpened: boolean) => css`
+  ${isCookieConsentOpened
+    ? `
+      position: absolute;
+      top: -60px;
     `
-      : `
-        position: fixed;
-        bottom: 10px;
-    `};
+    : `
+      position: fixed;
+      bottom: 10px;
+    `}
+`
+
+const ChevronWrapper = styled.div<{ $isCookieConsentOpened: boolean }>`
+  left: calc((100% - 60px) / 2);
   width: 60px;
   height: 60px;
-  color: ${(props) => props.theme.palette.chevron.main};
+  color: ${props => props.theme.palette.chevron.main};
   cursor: pointer;
 
+  ${props => getChevronPosition(props.$isCookieConsentOpened)}
+
   &:hover {
-    color: ${(props) => props.theme.palette.chevron.hover};
+    color: ${props => props.theme.palette.chevron.hover};
   }
 
-  ${(props) => media.lessThan("small")`
-        left: calc((100% - 40px) / 2);
-        width: 40px;
-        height: 40px;
-        ${
-          props.isCookieConsentOpened === true
-            ? `
-            top: -40px;
-        `
-            : ``
-        };
-    `};
-`;
+  ${media.lessThan('small')`
+    left: calc((100% - 40px) / 2);
+    width: 40px;
+    height: 40px;
+    ${(props: { $isCookieConsentOpened: boolean }) => (props.$isCookieConsentOpened ? `top: -40px;` : ``)}
+  `}
+`
 
 const CoverChevron: React.FC<CoverChevronProps> = ({
   isCookieConsentOpened,
 }) => {
-  const [isBouncingArrowHidden, setBouncingArrowHidden] = useState(false);
-  const scrollY = useScrollPosition(5); //Throttle as parameter
-  const location = useLocation();
+  const [isBouncingArrowHidden, setBouncingArrowHidden] = useState(false)
+  const scrollY = useScrollPosition(5) // Throttle as parameter
+  const location = useLocation()
 
   const onChevronClickHandler = useCallback(() => {
-    if (isCookieConsentOpened === false) {
-      const coverImage = document.getElementById("coverImage");
-      const imageHeight = coverImage?.getBoundingClientRect().height;
-
-      const height = imageHeight || window.innerHeight;
-      window.scrollTo({ top: height - 20, behavior: "smooth" });
-      setBouncingArrowHidden(true);
+    if (!isCookieConsentOpened) {
+      const coverImage = document.getElementById('coverImage')
+      const imageHeight =
+        coverImage?.getBoundingClientRect().height || window.innerHeight
+      window.scrollTo({ top: imageHeight - 20, behavior: 'smooth' })
+      setBouncingArrowHidden(true)
     }
-  }, [isCookieConsentOpened]);
+  }, [isCookieConsentOpened])
 
   useEffect(() => {
-    if (scrollY === 0 && isBouncingArrowHidden === true) {
-      setBouncingArrowHidden(false);
+    if (scrollY === 0 && isBouncingArrowHidden) {
+      setBouncingArrowHidden(false)
     }
+    if (!isBouncingArrowHidden && !isCookieConsentOpened && scrollY > 0) {
+      setBouncingArrowHidden(true)
+    }
+  }, [scrollY, isBouncingArrowHidden, isCookieConsentOpened])
 
-    if (
-      isBouncingArrowHidden === false &&
-      isCookieConsentOpened === false &&
-      scrollY > 0
-    ) {
-      setBouncingArrowHidden(true);
-    }
-  }, [scrollY]);
+  if (isBouncingArrowHidden || location.pathname !== '/') {
+    return <></>
+  }
 
   return (
-    <>
-      {!isBouncingArrowHidden && location.pathname === "/" && (
-        <ChevronWrapper
-          isCookieConsentOpened={isCookieConsentOpened}
-          onClick={onChevronClickHandler}
-        >
-          <BouncingChevron width="100%" height="100%" />
-        </ChevronWrapper>
-      )}
-    </>
-  );
-};
+    <ChevronWrapper
+      $isCookieConsentOpened={isCookieConsentOpened}
+      onClick={onChevronClickHandler}
+    >
+      <BouncingChevron width="100%" height="100%" />
+    </ChevronWrapper>
+  )
+}
 
-export default CoverChevron;
+export default CoverChevron

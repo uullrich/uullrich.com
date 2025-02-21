@@ -1,16 +1,16 @@
-import * as React from "react";
-import styled from "styled-components";
-import media from "styled-media-query";
-import { StaticImage } from "gatsby-plugin-image";
+import * as React from 'react'
+import styled from 'styled-components'
+import media from 'styled-media-query'
+import { StaticImage } from 'gatsby-plugin-image'
 
 type Props = {
-  children?: React.ReactNode;
-  enableBackground: boolean;
-};
+  children?: React.ReactNode
+  enableBackground: boolean
+}
 
 type WrapperProps = {
-  withBackground: boolean;
-};
+  $withBackground: boolean
+}
 
 const Wrapper = styled.div<WrapperProps>`
   width: 100%;
@@ -31,8 +31,8 @@ const Wrapper = styled.div<WrapperProps>`
     border-radius: 50%;
   }
 
-  ${(props) =>
-    props.withBackground === true
+  ${props =>
+    props.$withBackground
       ? `
       background-color: ${props.theme.palette.card.main};
       color: ${props.theme.palette.card.contrastText};
@@ -41,38 +41,38 @@ const Wrapper = styled.div<WrapperProps>`
     `
       : ``};
 
-  ${(props) => media.lessThan("small")`
+  ${props => media.lessThan('small')`
     ${
-      props.withBackground === true
+      props.$withBackground
         ? `
       padding: 0 0 0 10px;
     `
         : ``
     };
   `};
-`;
+`
 
 const Description = styled.div`
   width: calc(100% - 100px);
   padding: 10px;
-`;
+`
 
 const AuthorDescription: React.FC<Props> = ({ enableBackground }) => {
   return (
-    <Wrapper withBackground={enableBackground}>
+    <Wrapper $withBackground={enableBackground}>
       <StaticImage
         id="me"
         src="../../images/me.jpg"
         className="outerWrapper"
         imgClassName="img"
-        alt={"Image from Uwe Ullrich"}
+        alt={'Image from Uwe Ullrich'}
       />
       <Description>
         Content by <strong>Uwe Ullrich</strong> who lives and works in Kirchheim
         unter Teck. Sometimes I try new things and want to share this in public.
       </Description>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default AuthorDescription;
+export default AuthorDescription
