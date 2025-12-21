@@ -115,7 +115,7 @@ const AboutMe: React.FC<Props> = () => {
           <Description>
           Hi! <br />
           I'm Uwe Ullrich, a fullstack software engineer based in Kirchheim unter Teck. 
-          I'm passionate about frontend development with the <strong>React</strong> 
+          I'm passionate about frontend development with the <strong>React</strong>&nbsp;
           ecosystem and backend development using <strong>Node.js</strong>.
           <br />
           <br />
