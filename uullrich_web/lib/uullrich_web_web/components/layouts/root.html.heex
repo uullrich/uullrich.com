@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" class="[scrollbar-gutter:stable]">
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title suffix=" · Phoenix Framework">
-      <%= assigns[:page_title] || "UullrichWeb" %>
-    </.live_title>
-    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
-    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uwe Ullrich</title>
+    <meta name="description" content="Freelance software developer - Node.js, React, C++, Qt, ABAP, ABAP OO" />
+    <meta name="keywords" content="softwareentwicklung, freelance, freiberuflich, nodejs, react, c++, qt, abap, abap oo" />
+    <meta property="og:title" content="Uwe Ullrich" />
+    <meta property="og:description" content="Freelance software developer - Node.js, React, C++, Qt, ABAP, ABAP OO" />
+    <link rel="icon" href="/images/icon.png" />
+    <link rel="stylesheet" href="/css/app.css" />
   </head>
-  <body class="bg-white">
+  <body>
     <%= @inner_content %>
+    <script src="/js/app.js"></script>
   </body>
 </html>

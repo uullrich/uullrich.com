@@ -2,8 +2,9 @@ defmodule UullrichWebWeb.PageController do
   use UullrichWebWeb, :controller
 
   def home(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
-    render(conn, :home, layout: false)
+    conn
+    |> assign(:nav_transparent, false)
+    |> assign(:small_logo, false)
+    |> render(:home)
   end
 end

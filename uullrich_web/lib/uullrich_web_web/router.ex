@@ -10,18 +10,13 @@ defmodule UullrichWebWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   scope "/", UullrichWebWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/blog", BlogController, :index
+    get "/blog/:slug", BlogController, :show
+    get "/contact", ContactController, :index
+    get "/legal", LegalController, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", UullrichWebWeb do
-  #   pipe_through :api
-  # end
 end
