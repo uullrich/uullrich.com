@@ -231,9 +231,7 @@ const ContactPage = () => {
         }
 
         setSendButtonStatus(false)
-
-        const endpoint =
-          'https://sgxzrq6vo7.execute-api.us-east-1.amazonaws.com/default/sendContanctEmail'
+        const contactEndpoint = process.env.GATSBY_CONTACT_ENDPOINT;
         const body = JSON.stringify({
           senderFirstName: userInput.firstName,
           senderLastName: userInput.lastName,
@@ -247,7 +245,7 @@ const ContactPage = () => {
         }
 
         if (userInput.url === '') {
-          fetch(endpoint, requestOptions)
+          fetch(contactEndpoint, requestOptions)
             .then(response => {
               if (!response.ok) throw new Error('Error in fetch')
               return response.json()
