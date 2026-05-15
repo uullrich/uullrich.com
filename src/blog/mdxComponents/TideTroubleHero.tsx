@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 const TideTroubleHero: React.FC = () => (
-  <figure style={{ position: 'relative', margin: 0 }}>
+  <figure style={{ position: 'relative', margin: 10 }}>
     <style>{`
       .tide-play-btn {
         transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;

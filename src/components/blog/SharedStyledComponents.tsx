@@ -17,7 +17,7 @@ export const Content = styled.div`
   h6 {
     color: ${props => props.theme.palette.background.contrastText};
     margin-top: 15px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
   }
 `
 
