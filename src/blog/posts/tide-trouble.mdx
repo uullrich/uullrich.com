@@ -2,7 +2,7 @@
 title: 'Game: Underwater platformer - Tide Trouble'
 slug: '/blog/tide-trouble'
 date: '2026-05-15'
-spoiler: 'From sprite mockup to playable browser game in one afternoon — and why quarter-heart damage made combat feel ten times better.'
+spoiler: 'From sprite mockup to playable browser game in one afternoon, and why quarter-heart damage made combat feel ten times better.'
 author: 'Uwe Ullrich'
 ---
 
@@ -14,17 +14,17 @@ It started as "make me a sprite set" and somehow ended as a working game with a 
 
 <TideTroubleHero />
 
-I asked an AI to mock up some sprites for a "simple strategy game" and
+I asked Claude to mock up some sprites for a "simple strategy game" and
 then immediately changed my mind. Turns out what I actually wanted was a
 side-scrolling jump-and-run. With fish. Underwater. With pearls.
 
-By the end of the afternoon I had a full sprite reference sheet, a scrolling demo scene, and then — because once you have a scrolling demo you obviously also want to play it — a real, playable game running in the browser. Here's the bits I'm happiest about.
+By the end of the afternoon I had a full sprite reference sheet (all designed by Claude), a scrolling demo scene, and then, because once you have a scrolling demo you obviously also want to play it, a real, playable game running in the browser. Here's the bits I'm happiest about.
 
 ## It's just a kid in a bubble helmet
 
-The hero is a little scuba-diver kid with a yellow oxygen tank and bright fins. Ten animation states all hand-drawn as flat-vector SVG: idle, run, jump, fall, crouch, attack, hurt, death, climb, and a victory pose I haven't used yet but absolutely will if I add a boss.
+The hero is a little scuba-diver kid with a yellow oxygen tank and bright fins. Claude generated ten animation states as flat-vector SVG: idle, run, jump, fall, crouch, attack, hurt, death, climb, and a victory pose I haven't used yet but absolutely will if I add a boss.
 
-Everything is SVG, which means the whole thing scales pixel-perfectly on any screen. No spritesheet, no texture packer, no asset pipeline — just components I can read and edit by hand. That mattered more than I expected once I started tweaking proportions.
+Everything is SVG, which means the whole thing scales pixel-perfectly on any screen. No spritesheet, no texture packer, no asset pipeline: just components I can read and edit by hand. That mattered more than I expected once I started tweaking proportions.
 
 > "Flat-vector + a tight palette" is a cheat code for making things look intentional even when you're moving fast.
 
@@ -40,32 +40,36 @@ The combat is built around a single attack: a little air-bubble that fires from 
 | Eel        |  10 |
 | Anglerfish |  14 |
 
-Originally enemies died in one hit and it felt awful. There was no rhythm to combat — you'd ping a crab, it'd disappear, and you'd move on. Bumping the HP up forced me to _commit_ to taking a fight, which is way more interesting. The anglerfish at 14 hits is basically a mini-boss now.
+Originally enemies died in one hit and it felt awful. There was no rhythm to combat: you'd ping a crab, it'd disappear, and you'd move on. Bumping the HP up forced me to _commit_ to taking a fight, which is way more interesting. The anglerfish at 14 hits is basically a mini-boss now.
 
 ## The double jump
 
-This one I added late and I'm so glad I did. Tap jump once on the ground, and tap it again at the right moment in mid-air, and the diver fires a second jump — about 85% the strength of the first — with a little spray of bubbles at his feet for feedback.
+This one I added late and I'm so glad I did. Tap jump once on the ground, and tap it again at the right moment in mid-air, and the diver fires a second jump (about 85% the strength of the first) with a little spray of bubbles at his feet for feedback.
 
 The game gets meaningfully more readable with it. Platforms that used to require a perfectly-timed running jump now reward a riskier "miss the first jump on purpose, save the second one as a save" play. It's a small change that opens up a lot of platform geometry.
 
 ## Quarter-heart damage
 
-Three hearts is the natural amount of health for a platformer. But three hits to game over felt brutal once enemies got tankier — you'd commit to a fight, take one nick, and suddenly you're playing scared.
+Three hearts is the natural amount of health for a platformer. But three hits to game over felt brutal once enemies got tankier. You'd commit to a fight, take one nick, and suddenly you're playing scared.
 
-So I split each heart into quarters. The same three hearts, but enemies now nibble at you one quarter at a time. Spikes and sea urchins still do a full heart — they're meant to be respected — but a glancing crab won't end your run anymore.
+So I split each heart into quarters. The same three hearts, but enemies now nibble at you one quarter at a time. Spikes and sea urchins still do a full heart (they're meant to be respected), but a glancing crab won't end your run anymore.
 
 Each heart drains left-to-right with a smooth animation. Watching the last quarter of your last heart slowly empty is way tenser than just losing a heart.
 
 ## Mobile worked out of the box (mostly)
 
-The whole game runs in a fixed 1280×720 logical stage that auto-scales to fit any viewport. On a phone in landscape it looks the same as on desktop, just smaller. I added on-screen D-pad + jump + attack buttons that only appear on touch devices, and that was it — no separate mobile build, no different physics, no different level.
+The whole game runs in a fixed 1280×720 logical stage that auto-scales to fit any viewport. On a phone in landscape it looks the same as on desktop, just smaller. I added on-screen D-pad + jump + attack buttons that only appear on touch devices, and that was it: no separate mobile build, no different physics, no different level.
 
 - One HTML file, one logical resolution, ResizeObserver does the rest.
 - Touch controls live outside the scaled stage so they stay readable on small screens.
 - Camera follows the player with an eased lerp, not a hard snap.
 
+## Shipped with AWS Amplify
+
+Deployment was almost embarrassingly easy. I pointed AWS Amplify at the repo, clicked through the wizard, and a minute later the game was live at tide-trouble.uullrich.com with HTTPS, a CDN, and a CI pipeline I didn't have to think about. Push to main, it rebuilds. That's it.
+
 ## What I'd change next
 
-I want a checkpoint system — right now dying sends you back to the start, which is fine for the current world length but won't scale. I also want the chest at the end to actually _open_ on win with a little particle burst, and maybe a coin total that ticks up.
+I want a checkpoint system. Right now dying sends you back to the start, which is fine for the current world length but won't scale. I also want the chest at the end to actually _open_ on win with a little particle burst, and maybe a coin total that ticks up.
 
 A second level. A boss. A title screen with the hero idling in the background. The list keeps getting longer, which is honestly the sign that this is the most fun project I've shipped in a while.
