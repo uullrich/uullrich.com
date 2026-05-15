@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('node:path')
 
 /**
  * Generate custom schema for MdxFrontmatter.
@@ -47,11 +47,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const posts = result?.data?.allMdx?.nodes
-  if (!posts || posts.length === 0) {
+  const allPosts = result?.data?.allMdx?.nodes
+  if (!allPosts || allPosts.length === 0) {
     reporter.warn(`No blog posts found`)
     return
   }
+
+  const posts = allPosts.filter(
+    node => !node?.frontmatter?.slug?.startsWith('/blog/demo')
+  )
 
   posts.forEach((node, index) => {
     if (!node?.frontmatter?.slug) {

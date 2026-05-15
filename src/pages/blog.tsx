@@ -33,12 +33,9 @@ type DataProps = {
 const BlogOverview: React.FC<PageProps<DataProps>> = ({ data }) => {
   const { edges: allPosts } = data.allMdx
 
-  const posts =
-    process.env.NODE_ENV === 'production'
-      ? allPosts.filter(
-          ({ node }) => !node?.frontmatter?.slug?.startsWith('/blog/demo')
-        )
-      : allPosts
+  const posts = allPosts.filter(
+    ({ node }) => !node?.frontmatter?.slug?.startsWith('/blog/demo')
+  )
 
   return (
     <MainLayout isNavigationTransparent={false} isSmallLogo={true}>
@@ -46,8 +43,8 @@ const BlogOverview: React.FC<PageProps<DataProps>> = ({ data }) => {
         <Section>
           <AuthorDescription enableBackground={true} />
           {posts.length > 0 ? (
-            posts.map(({ node: post }, index) => (
-              <PostPreview key={index} post={post}></PostPreview>
+            posts.map(({ node: post }) => (
+              <PostPreview key={post.id} post={post}></PostPreview>
             ))
           ) : (
             <EmptyBlog />
