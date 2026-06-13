@@ -1,0 +1,307 @@
+---
+title: 'Frida & C++: Watching a Program Lie'
+slug: '/blog/frida-cpp'
+date: '2026-06-10'
+spoiler: 'A hands-on intro to Frida. We build a C++ program and burrow in step by step: trace functions, read arguments live, hook a running process and fake return values at runtime. On Linux, with real code to follow along.'
+author: 'Uwe Ullrich'
+---
+
+import FridaMentalModelHero from '../mdxComponents/FridaMentalModelHero'
+
+<br />
+**…and teaching it to lie for me. A hands-on intro with real code to follow
+along. On Linux.**
+
+Imagine you could freeze a running program, watch it think, whisper in its ear _"nah, use this value instead"_, and it just… does. No recompiling, no source patch, nothing. That's **Frida**, and in this post I'll show you exactly what that feels like.
+
+We're not staying in dry theory. We'll build a tiny C++ program, our lab rat, and burrow in layer by layer. By the end we'll rewrite a function's return value live, without ever touching the binary. Promise: once you've seen this, you'll never look at software quite the same way again.
+
+> **Ground rules (read this first)**
+>
+> First: **only hook software you own or have permission to touch.** Bending someone else's app at runtime can get legally dicey fast depending on where you are and what it is, which is exactly why our self-compiled `playground` is the perfect playground. Second: real targets fight back. Banking, gaming and DRM apps often ship **Frida detection** and anti-tampering, and they bail the moment they smell instrumentation. That's a cat-and-mouse game of its own, and material for a later post.
+
+> **Prerequisites**
+>
+> You should be able to read C++ roughly and not get lost in a terminal. Everything else is covered here. I'm on **Linux** (the commands assume a Debian/Ubuntu-ish setup, but nothing here is picky).
+
+## 0x00 · What Frida actually is
+
+Short version: Frida is a toolkit for **dynamic instrumentation**. It injects a small JavaScript engine straight into a foreign process. You write a bit of JavaScript, and that code runs _inside the target's address space_, with full rights and every function within reach.
+
+The magic word is **hooking**: we plant ourselves at a function's entrance and exit and get to listen in or interfere. We drive the whole thing comfortably from the outside, here from the terminal.
+
+And now the part most tutorials quietly skip: the mental model, without which everything later feels like magic. Your JavaScript doesn't run _next to_ the program, it runs _inside_ it. Frida slots a little JS engine right into the target process's address space. Your `hook.js` ends up sitting desk-to-desk with the function you're hunting, which is exactly why you can reach its arguments, return values and memory at all. Mission control stays outside, in your terminal.
+
+<FridaMentalModelHero />
+
+Two doors lead in, and you should burn the difference into memory now: **attach** latches onto a process that's already running. **spawn** (the `-f` you'll see in our commands) starts the program fresh and hands you control _before the first line runs_. For our lab rat we'll start with spawn, so we don't miss a single call. (We'll walk through the front door, attach, a bit later, once the hook works.)
+
+## 0x01 · Setup
+
+Frida ships as a Python package. If you've got Python 3 (you do), one command does it:
+
+```bash
+pip install frida-tools
+```
+
+Check it landed:
+
+```bash
+frida --version
+```
+
+Mine says `17.11.0` right now. Remember the major version **17**: it matters, because the API changed versus most tutorials floating around the web. That's exactly where people walk face-first into a wall, and that's exactly what we're saving you here.
+
+## 0x02 · The lab rat
+
+Now we need something to dissect. Something that **keeps running** (so we can climb in at our leisure) and has one clearly named function. Create `playground.cpp`:
+
+```cpp
+// playground.cpp
+#include <cstdio>
+#include <unistd.h>
+
+// extern "C" keeps the function name clean.
+// More on that later, it'll be our aha moment.
+extern "C" int calc(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int i = 0;
+    while (true) {
+        int result = calc(i, i + 1);
+        printf("[%d] calc(%d, %d) = %d\n", i, i, i + 1, result);
+        fflush(stdout);   // without flush the output stays stuck in the buffer
+        sleep(1);
+        i++;
+    }
+    return 0;
+}
+```
+
+Compile with g++. The `-g -O0` flags keep the symbols in and turn off optimizations, because we want to find our function later:
+
+```bash
+g++ -g -O0 -o playground playground.cpp
+```
+
+And run it:
+
+```bash
+./playground
+```
+
+You should see something tick by once a second:
+
+```text
+[0] calc(0, 1) = 1
+[1] calc(1, 2) = 3
+[2] calc(2, 3) = 5
+...
+```
+
+Leave that window running. We'll do the exciting stuff in a **second terminal**.
+
+## 0x03 · First contact: who's even running?
+
+Frida needs to know which process to climb into. Get the lay of the land:
+
+```bash
+frida-ps | grep playground
+```
+
+There's our `playground`. Nice. But before we write our own script, here's a freebie win: `frida-trace`. It traces function calls at the push of a button. Let's hook onto the `sleep` call from the C standard library that our program makes every second:
+
+```bash
+frida-trace -f ./playground -i "sleep"
+```
+
+`-f` starts the program fresh under Frida's control, `-i` means "include this function". Result:
+
+```text
+Instrumenting...
+sleep: Loaded handler at "..."
+Started tracing 1 function.
+sleep()
+sleep()
+sleep()
+...
+```
+
+Every `sleep()` is an intercepted call. You just eavesdropped on a running program without writing a single line of your own code.
+
+> **A snag, handled right away**
+>
+> Try `frida-trace -f ./playground -i "calc"` instead of `sleep`. Result: _"Started tracing 0 functions."_ Huh? The reason is instructive: `frida-trace -i` matches a module's **exports**. `sleep` is imported from libc and exported there, but our own `calc` only lives as a _local symbol_ in the binary and isn't an export. For functions like that we need more control. Perfect segue.
+
+## 0x04 · Now ourselves: the first hook script
+
+`frida-trace` is cute, but we want the reins. We'll write our own JavaScript that hooks `calc` and shows us the arguments. Create `hook.js`:
+
+```javascript
+// hook.js
+// Process.mainModule is our main program
+const mainMod = Process.mainModule
+console.log(`[*] main module: ${mainMod.name}`)
+
+// We search the SYMBOL TABLE (not just the exports!).
+const addr = mainMod.getSymbolByName('calc')
+console.log(`[*] calc found @ ${addr}`)
+
+Interceptor.attach(addr, {
+  onEnter(args) {
+    // The calling convention puts arguments in args[0], args[1], ...
+    this.a = args[0].toInt32()
+    this.b = args[1].toInt32()
+    console.log(`[+] calc(${this.a}, ${this.b}) was called`)
+  },
+  onLeave(retval) {
+    console.log(`[+] ... and returns ${retval.toInt32()}`)
+  },
+})
+```
+
+The heart of it is `Interceptor.attach`. We hand it an address and two functions: `onEnter` runs _before_ the function does its work (that's where we have the arguments), `onLeave` runs _after_ (that's where we have the return value).
+
+Mind the route to the address: `Process.mainModule` is our program. Never rely on `enumerateModules()[0]`; it usually works but isn't guaranteed to be the main module. `getSymbolByName` then searches the full symbol table, not just the exports. That's exactly why it finds `calc` where `frida-trace -i` came up empty earlier.
+
+Now let's climb in. We let Frida start the program itself and load our script:
+
+```bash
+frida -f ./playground -l hook.js
+```
+
+And suddenly your script narrates every single call live:
+
+```text
+[*] main module: playground
+[*] calc found @ 0x55a3f4189000
+[+] calc(0, 1) was called
+[+] ... and returns 1
+[+] calc(1, 2) was called
+[+] ... and returns 3
+```
+
+You're reading a foreign process's thoughts in real time. Lean back for a second and let that sink in.
+
+## 0x05 · The moment of power: faking return values
+
+Listening is nice. But Frida can _interfere_. In `onLeave` we don't just get to see the return value, we get to **overwrite** it. Extend the `onLeave` block in `hook.js`:
+
+```javascript
+onLeave(retval) {
+  const original = retval.toInt32()
+  retval.replace(1337)   // whatever came out, it's 1337 now
+  console.log(`[+] original was ${original}, telling the program: 1337`)
+}
+```
+
+Reload the script (`frida -f ./playground -l hook.js`) and watch the drama in the **first** terminal where `playground` runs:
+
+```text
+[41] calc(41, 42) = 1337
+[42] calc(42, 43) = 1337
+[43] calc(43, 44) = 1337
+```
+
+Read that again. The program dutifully computes `42 + 43`, but we slip it `1337`, and it believes us unconditionally. We rewrote the program's reality, from the outside, at runtime, without changing a single line of its code.
+
+And now think one step further: what if `calc` weren't a harmless `a + b`, but `check_license()` or `password_correct()`? That's where it clicks why Frida is so beloved in the security world, for understanding protection mechanisms just as much as for testing your own.
+
+> **A small catch with replace()**
+>
+> As gloriously simple as it is, it only works for values that fit in a normal register: `int`, pointers, `bool`. If your function returns a `float` or `double`, that lives in a totally different register (`xmm0` on x86-64, `v0` on ARM64), and `replace(...)` fizzles out with no effect. Then you'd reach the right register through `this.context`. For now you can happily ignore that, but don't be surprised when your first attempt with floating-point numbers seems to do nothing.
+
+## 0x06 · Same game, the other door: attach
+
+Remember the two doors from the start? So far we've only used **spawn** (`-f`). Time for the front door: **attach**, hooking a process that's _already_ running, mid-stride, without restarting it.
+
+Your `playground` from the first terminal is still going, right? Good. In the second terminal, instead of spawning a fresh copy, latch onto the live one by name:
+
+```bash
+frida -n playground -l hook.js
+```
+
+(or by PID, if the name is ambiguous: `frida -p <PID> -l hook.js`, grab the PID from `frida-ps`.)
+
+Now watch the first terminal. The numbers were honest right up until Frida showed up, and the moment the script loads, they flip to `1337`. Hit `Ctrl-D` to detach, and watch closely: the program goes right back to telling the truth. You hooked _and_ unhooked a running process, and it never so much as paused.
+
+> **The Linux ptrace catch**
+>
+> On most desktops (Ubuntu/Debian ship it this way), the kernel's Yama `ptrace_scope` is set to `1`: a process may only attach to its own children. Frida didn't spawn the running `playground`, so attach bounces off with a permission error. Two ways through: run it with `sudo`, or loosen the policy for your session with `sudo sysctl kernel.yama.ptrace_scope=0` (resets on reboot). Notice that **spawn (`-f`) never hits this wall**, because there Frida _is_ the parent. That's the practical reason spawn is the comfier default while you're learning.
+
+## 0x07 · Reality bites: C++ name mangling
+
+Up to now `calc` had an `extern "C"` in front of it. I promised this would be our aha moment, and here it is. Drop the `extern "C"`:
+
+```cpp
+int calc(int a, int b) { return a + b; }   // "real" C++ now
+```
+
+Recompile, then look at the function name in the binary:
+
+```bash
+g++ -g -O0 -o playground playground.cpp
+nm playground | grep calc
+```
+
+Instead of a tidy `calc`, this stares back at you:
+
+```text
+_Z4calcii
+```
+
+Welcome to **name mangling**. C++ lets you overload functions (`calc(int, int)` and `calc(double)` can coexist), so the compiler encodes the signature into the symbol name: `_Z4calcii` means "a function called `calc` (4 chars) with two `int` parameters (`ii`)".
+
+Translate it back with `c++filt`:
+
+```bash
+echo "_Z4calcii" | c++filt
+# -> calc(int, int)
+```
+
+For our hook that means: we have to use the mangled name. Either directly …
+
+```javascript
+const addr = Process.mainModule.getSymbolByName('_Z4calcii')
+```
+
+… or, far more relaxed, we search fuzzily and let Frida find the exact name itself:
+
+```javascript
+const mainMod = Process.mainModule
+const hit = mainMod.enumerateSymbols().find(s => s.name.includes('calc'))
+
+console.log(`[*] found: ${hit.name} @ ${hit.address}`)
+
+Interceptor.attach(hit.address, {
+  onLeave(retval) {
+    retval.replace(1337)
+  },
+})
+```
+
+This second variant is my favorite for real targets: you usually don't know the exact signature of someone else's software, so you let Frida rummage through the symbol table and grab the matching hit. Robust and lazy at the same time, just how I like it.
+
+## 0x08 · A few Linux snags
+
+- **Stripped binaries:** Run `strip` on the binary (or grab one that's already stripped) and the symbol table is gone, so `getSymbolByName` comes up empty. Our `-g` build keeps everything; for stripped targets you'd hunt by pattern or raw offset instead.
+- **PIE & ASLR:** Modern binaries are position-independent and load at a random address every run. Don't sweat it, because `getSymbolByName` resolves at runtime, so you always get the real, current address.
+- **x86-64 vs ARM64:** Frida has you covered on both. Arguments sit in different registers under the hood, but `args[0]`, `args[1]` and co. abstract that away for you.
+- **ptrace, again:** If attach refuses to cooperate, it's almost always Yama (see above). Use `sudo`, or lower `ptrace_scope`.
+
+## 0x09 · What you can do now, and what's coming
+
+Quick rewind over the last half hour: you built a C++ program, eavesdropped with `frida-trace`, wrote your own hook script, read arguments live, faked a return value, hooked a running process and let it go again, and you now know why C++ functions wear those cryptic names and how to find them anyway. That's exactly the foundation the exciting stuff builds on.
+
+From here the roads fan out in every direction:
+
+- **Change arguments**, not just read them, i.e. interfere right in `onEnter`.
+- **Call functions yourself** with `NativeFunction`, to poke at program logic from outside.
+- **Read and write memory** via `Memory.read*` / `Memory.write*`.
+- And the big leap: the same game on **Android and iOS**, where Frida is basically the standard tool in mobile reverse engineering.
+
+I'm saving those for the next parts. Until then: grab `playground.cpp`, rework the function, hook in and see what happens. You learn the most by watching a program lie, and then teaching it to lie yourself.
+
+_Questions, or a cool hack you built with this? Drop me a line, I'm curious._
