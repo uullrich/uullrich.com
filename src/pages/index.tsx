@@ -1,7 +1,9 @@
 import * as React from 'react'
+import type { HeadFC } from 'gatsby'
 import Cover from '../components/Cover'
 import AboutMe from '../components/AboutMe'
 import MainLayout from '../layout/MainLayout'
+import Seo from '../components/Seo'
 import { useIsUnderCoverImage } from '../components/CoverImage'
 
 const IndexPage = () => {
@@ -20,3 +22,11 @@ const IndexPage = () => {
 }
 
 export default IndexPage
+
+export const Head: HeadFC = () => (
+  <Seo
+    title="Uwe Ullrich – Fullstack Software Engineer"
+    pathname="/"
+    type="website"
+  />
+)

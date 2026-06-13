@@ -8,8 +8,13 @@ const config: GatsbyConfig = {
     title: `Uwe Ullrich`,
     siteUrl,
     author: `Uwe Ullrich`,
-    description: `Freelance software developer - Node.js, React, C++, Qt, ABAP, ABAP OO`,
-    keywords: `softwareentwicklung, freelance, freiberuflich, nodejs, react, c++, qt, abap, abap oo`,
+    description: `Fullstack software engineer based in Kirchheim unter Teck, Germany. Building software with React, Node.js, C++ and Qt.`,
+    image: `/og-default.jpg`,
+    social: {
+      github: `https://github.com/uullrich`,
+      linkedin: `https://www.linkedin.com/in/uwe-ullrich-a900a7271`,
+      xing: `https://www.xing.com/profile/Uwe_Ullrich19/cv`,
+    },
   },
   plugins: [
     'gatsby-plugin-remove-console',
@@ -80,8 +85,6 @@ const config: GatsbyConfig = {
         environments: ['production', 'development'],
       },
     },
-    'gatsby-plugin-image',
-    'gatsby-plugin-react-helmet',
     'gatsby-transformer-json',
     {
       resolve: 'gatsby-plugin-manifest',

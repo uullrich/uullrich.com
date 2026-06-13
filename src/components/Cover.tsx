@@ -64,14 +64,15 @@ const Jumbo = styled.div`
   align-items: center;
 `
 
-const Name = styled.div`
+const Name = styled.h1`
   font-family: 'Arvo', sans-serif;
   font-size: 60px;
   font-weight: bold;
   border-bottom: 1px solid ${props => props.theme.palette.separator};
   letter-spacing: 5.5px;
   text-align: center;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
+  color: inherit;
 
   ${media.lessThan('small')`
         font-size: 25px;

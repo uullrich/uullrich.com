@@ -62,7 +62,7 @@ const Card = styled.div`
   border-radius: ${props => props.theme.borderRadiusNormal};
   max-width: 700px;
 
-  h1 {
+  h2 {
     color: ${props => props.theme.palette.card.contrastText};
     margin-top: 15px;
   }
@@ -102,7 +102,7 @@ const AboutMe: React.FC<Props> = () => {
       <Section>
         <Card>
           <Header>
-            <h1>About Me</h1>
+            <h2>About Me</h2>
             <Line />
             <StaticImage
               id="me"
@@ -136,7 +136,7 @@ const AboutMe: React.FC<Props> = () => {
         </Card>
         <Card>
           <Header>
-            <h1>How my story began...</h1>
+            <h2>How my story began...</h2>
             <Line />
           </Header>
           <Description style={{ marginBottom: '20px' }}>
@@ -166,7 +166,7 @@ const AboutMe: React.FC<Props> = () => {
         </Card>
         <Card>
           <Header>
-            <h1>Career by now...</h1>
+            <h2>Career by now...</h2>
             <Line />
           </Header>
           <Description style={{ marginBottom: '20px' }}>
@@ -236,7 +236,7 @@ const AboutMe: React.FC<Props> = () => {
         </Card>
         <Card>
           <Header>
-            <h1>Certifications</h1>
+            <h2>Certifications</h2>
             <Line />
           </Header>
           <Description style={{ marginBottom: '20px' }}>
@@ -277,7 +277,7 @@ const AboutMe: React.FC<Props> = () => {
         </Card>
         <Card>
           <Header>
-            <h1>Developer Buzzwords...</h1>
+            <h2>Developer Buzzwords...</h2>
             <Line />
           </Header>
           <Description style={{ marginBottom: '20px' }}>

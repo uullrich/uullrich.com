@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { graphql, PageProps } from 'gatsby'
+import { graphql, PageProps, HeadFC } from 'gatsby'
 import MainLayout from '../layout/MainLayout'
+import Seo from '../components/Seo'
 import PostPreview from '../components/blog/PostPreview'
 import AuthorDescription from '../components/blog/AuthorDescription'
 import EmptyBlog from '../components/blog/EmptyBlog'
@@ -12,6 +13,7 @@ export type Frontmatter = {
   date: string
   spoiler: string
   author: string
+  image?: string
 }
 
 export type Post = {
@@ -75,3 +77,12 @@ export const pageQuery = graphql`
 `
 
 export default BlogOverview
+
+export const Head: HeadFC = () => (
+  <Seo
+    title="Blog"
+    description="Articles on software development, C++, React, Node.js and reverse engineering by Uwe Ullrich."
+    pathname="/blog/"
+    type="website"
+  />
+)

@@ -2,7 +2,6 @@ import * as React from 'react'
 import Footer from './Footer'
 import GlobalStyle from './GlobalStyle'
 import Navigation from './Navigation'
-import SeoWrapper from './Seo'
 
 type Props = {
   children?: React.ReactNode
@@ -16,7 +15,7 @@ const MainLayout: React.FC<Props> = ({
   isSmallLogo,
 }) => {
   return (
-    <SeoWrapper>
+    <>
       <GlobalStyle />
       <Navigation
         isNavigationTransparent={isNavigationTransparent}
@@ -24,7 +23,7 @@ const MainLayout: React.FC<Props> = ({
       />
       <div>{children}</div>
       <Footer />
-    </SeoWrapper>
+    </>
   )
 }
 

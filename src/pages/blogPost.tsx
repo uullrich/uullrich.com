@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { graphql, PageProps } from 'gatsby'
+import { graphql, PageProps, HeadProps } from 'gatsby'
 import MainLayout from '../layout/MainLayout'
+import Seo from '../components/Seo'
 import PostComponent from '../components/blog/Post'
 import type { Post } from '../pages/blog'
 import AuthorDescription from '../components/blog/AuthorDescription'
@@ -56,9 +57,26 @@ export const pageQuery = graphql`
         title
         date
         author
+        slug
+        spoiler
+        image
       }
     }
   }
 `
 
 export default BlogPost
+
+export const Head = ({ data: { mdx } }: HeadProps<DataProps>) => {
+  const { title, spoiler, author, date, slug, image } = mdx.frontmatter
+  return (
+    <Seo
+      title={title}
+      description={spoiler}
+      pathname={slug}
+      image={image}
+      type="article"
+      article={{ date, author }}
+    />
+  )
+}

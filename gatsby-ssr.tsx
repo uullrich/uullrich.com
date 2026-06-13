@@ -8,3 +8,7 @@ export const wrapRootElement = ({ element }) => (
     <Provider>{element}</Provider>
   </ThemeProvider>
 )
+
+export const onRenderBody = ({ setHtmlAttributes }) => {
+  setHtmlAttributes({ lang: 'en' })
+}

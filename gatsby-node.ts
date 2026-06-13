@@ -15,6 +15,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       author: String
       spoiler: String
       title: String
+      image: String
     }
   `)
 }

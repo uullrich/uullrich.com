@@ -1,7 +1,9 @@
 import * as React from 'react'
+import type { HeadFC } from 'gatsby'
 import styled from 'styled-components'
 import media from 'styled-media-query'
 import MainLayout from '../layout/MainLayout'
+import Seo from '../components/Seo'
 
 const Content = styled.main`
   padding-top: 60px;
@@ -243,3 +245,7 @@ const LegalPage = () => {
 }
 
 export default LegalPage
+
+export const Head: HeadFC = () => (
+  <Seo title="Legal Notice" pathname="/legal/" type="website" noindex />
+)

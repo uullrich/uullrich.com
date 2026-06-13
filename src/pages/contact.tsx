@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { useCallback, useState, useEffect } from 'react'
+import type { HeadFC } from 'gatsby'
 import styled from 'styled-components'
 import media from 'styled-media-query'
 import MainLayout from '../layout/MainLayout'
+import Seo from '../components/Seo'
 import IconSuccess from '../images/circle-check-regular.inline.svg'
 import IconError from '../images/circle-xmark-regular.inline.svg'
 
@@ -420,3 +422,12 @@ const ContactPage = () => {
 }
 
 export default ContactPage
+
+export const Head: HeadFC = () => (
+  <Seo
+    title="Contact"
+    description="Get in touch with Uwe Ullrich for software development, freelance work or collaboration."
+    pathname="/contact/"
+    type="website"
+  />
+)
