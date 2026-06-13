@@ -113,25 +113,26 @@ const AboutMe: React.FC<Props> = () => {
             />
           </Header>
           <Description>
-          Hi! <br />
-          I'm Uwe Ullrich, a fullstack software engineer based in Kirchheim unter Teck. 
-          I'm passionate about frontend development with the <strong>React</strong>&nbsp;
-          ecosystem and backend development using <strong>Node.js</strong>.
-          <br />
-          <br />
-          Currently, I develop software for professional coffee machines. 
-          <br />
-          <br />
-          I'm also open to smaller freelance gigs – don't hesitate to reach out! If you need support with any of the 
-          following, let's connect:
-          <br />
-          <br />
-          <ul>
-            <li>Frontend development (JavaScript / TypeScript)</li>
-            <li>Backend development (Node.js)</li>
-            <li>Cross-platform development (Qt Framework in C++)</li>
-            <li>SAP ABAP OO development</li>
-          </ul>
+            Hi! <br />
+            I'm Uwe Ullrich, a fullstack software engineer based in Kirchheim
+            unter Teck. I'm passionate about frontend development with the{' '}
+            <strong>React</strong>&nbsp; ecosystem and backend development using{' '}
+            <strong>Node.js</strong>.
+            <br />
+            <br />
+            Currently, I develop software for professional coffee machines.
+            <br />
+            <br />
+            I'm also open to smaller freelance gigs – don't hesitate to reach
+            out! If you need support with any of the following, let's connect:
+            <br />
+            <br />
+            <ul>
+              <li>Frontend development (JavaScript / TypeScript)</li>
+              <li>Backend development (Node.js)</li>
+              <li>Cross-platform development (Qt Framework in C++)</li>
+              <li>SAP ABAP OO development</li>
+            </ul>
           </Description>
         </Card>
         <Card>

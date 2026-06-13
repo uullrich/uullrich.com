@@ -150,7 +150,7 @@ const FridaHeroPreview: React.FC = () => (
       >
         <div>
           <span style={{ color: '#5f6675', fontStyle: 'italic' }}>
-            // the function we want to spy on
+            {'// the function we want to spy on'}
           </span>
         </div>
         <div>
@@ -177,7 +177,7 @@ const FridaHeroPreview: React.FC = () => (
           }}
         >
           <span style={{ color: '#5f6675', fontStyle: 'italic' }}>
-            // calc(42, 43)
+            {'// calc(42, 43)'}
           </span>
           <span
             style={{

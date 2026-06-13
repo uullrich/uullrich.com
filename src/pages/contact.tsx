@@ -233,7 +233,11 @@ const ContactPage = () => {
         }
 
         setSendButtonStatus(false)
-        const contactEndpoint = process.env.GATSBY_CONTACT_ENDPOINT;
+        const contactEndpoint = process.env.GATSBY_CONTACT_ENDPOINT
+        if (!contactEndpoint) {
+          console.error('GATSBY_CONTACT_ENDPOINT is not configured')
+          return
+        }
         const body = JSON.stringify({
           senderFirstName: userInput.firstName,
           senderLastName: userInput.lastName,
