@@ -127,6 +127,10 @@ const Status = styled.div`
   height: 40px;
   color: ${props => props.theme.palette.secondary.main};
 
+  p {
+    margin: 0;
+  }
+
   ${media.lessThan('small')`
         height: 70px;
     `};
@@ -144,6 +148,10 @@ const StatusWrapper = styled.div`
 
   svg {
     width: 100px;
+  }
+
+  p {
+    margin: 0;
   }
 
   ${media.lessThan('small')`
@@ -316,40 +324,48 @@ const ContactPage = () => {
                 <form>
                   <Inputs>
                     <h2>About you</h2>
-                    <label>First Name:</label>
+                    <label htmlFor="firstName">First Name:</label>
                     <Input
+                      id="firstName"
                       name="firstName"
                       type="text"
                       onChange={inputChangeHandler}
                     />
-                    <label>Last Name:</label>
+                    <label htmlFor="lastName">Last Name:</label>
                     <Input
+                      id="lastName"
                       name="lastName"
                       type="text"
                       onChange={inputChangeHandler}
                     />
-                    <label>Email:</label>
+                    <label htmlFor="email">Email:</label>
                     <Input
+                      id="email"
                       name="email"
                       type="email"
                       onChange={inputChangeHandler}
                     />
-                    <label style={{ display: 'none' }}>Bot protection</label>
+                    <label htmlFor="url" style={{ display: 'none' }}>
+                      Bot protection
+                    </label>
                     <Input
+                      id="url"
                       style={{ display: 'none' }}
                       name="url"
                       type="text"
                       onChange={inputChangeHandler}
                     />
                     <h2>Message</h2>
-                    <label>Subject:</label>
+                    <label htmlFor="subject">Subject:</label>
                     <Input
+                      id="subject"
                       name="subject"
                       type="text"
                       onChange={inputChangeHandler}
                     />
-                    <label>Your Message:</label>
+                    <label htmlFor="message">Your Message:</label>
                     <TextArea
+                      id="message"
                       name="message"
                       onChange={inputChangeHandler}
                     ></TextArea>
@@ -368,8 +384,14 @@ const ContactPage = () => {
                     </div>
 
                     <Task>
-                      <label>{numbers[0] + ' + ' + numbers[1] + ' ='}</label>
-                      <TaskInput type="number" onChange={taskInputHandler} />
+                      <label htmlFor="captcha">
+                        {numbers[0] + ' + ' + numbers[1] + ' ='}
+                      </label>
+                      <TaskInput
+                        id="captcha"
+                        type="number"
+                        onChange={taskInputHandler}
+                      />
                     </Task>
                     <Button
                       disabled={!sendButtonStatus || !isPrivacyAgreed}
@@ -381,9 +403,9 @@ const ContactPage = () => {
                 </form>
                 {isFieldMissing && (
                   <Status>
-                    <label>
+                    <p>
                       All fields are mandatory. Fill out every field please.
-                    </label>
+                    </p>
                   </Status>
                 )}
               </Description>
@@ -397,10 +419,10 @@ const ContactPage = () => {
               </Header>
               <SuccessWrapper>
                 <IconSuccess />
-                <label>
+                <p>
                   I have recieved your note. Please feel free to look around!
                   Talk to you soon!
-                </label>
+                </p>
               </SuccessWrapper>
             </Card>
           )}
@@ -412,10 +434,10 @@ const ContactPage = () => {
               </Header>
               <FailedWrapper>
                 <IconError />
-                <label>
+                <p>
                   Something went wrong! I have not received your message. Please
                   send me an email to: mail(at)uullrich.com
-                </label>
+                </p>
               </FailedWrapper>
             </Card>
           )}

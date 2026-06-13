@@ -1,13 +1,13 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
 export type Buzzword = {
-  title: String
+  title: string
   githubLink?: string
-  explanation: String
+  explanation: string
 }
 
 export type Category = {
-  title: String
+  title: string
   buzzwords: Buzzword[]
 }
 

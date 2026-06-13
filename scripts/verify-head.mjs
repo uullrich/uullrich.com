@@ -18,13 +18,16 @@ const run = async () => {
     await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle' })
 
     const meta = await page.evaluate(() => {
-      const get = sel => document.querySelector(sel)?.getAttribute('content') ?? null
+      const get = sel =>
+        document.querySelector(sel)?.getAttribute('content') ?? null
       return {
         lang: document.documentElement.lang,
         title: document.title,
         description: get('meta[name="description"]'),
         canonical:
-          document.querySelector('link[rel="canonical"]')?.getAttribute('href') ?? null,
+          document
+            .querySelector('link[rel="canonical"]')
+            ?.getAttribute('href') ?? null,
         ogTitle: get('meta[property="og:title"]'),
         ogType: get('meta[property="og:type"]'),
         ogImage: get('meta[property="og:image"]'),
@@ -33,7 +36,9 @@ const run = async () => {
         robots: get('meta[name="robots"]'),
         keywords: get('meta[name="keywords"]'),
         h1count: document.querySelectorAll('h1').length,
-        h1text: [...document.querySelectorAll('h1')].map(h => h.textContent?.trim()),
+        h1text: [...document.querySelectorAll('h1')].map(h =>
+          h.textContent?.trim()
+        ),
         jsonLdType: (() => {
           const s = document.querySelector('script[type="application/ld+json"]')
           if (!s) return null
@@ -67,7 +72,9 @@ const run = async () => {
   }
 
   await browser.close()
-  console.log(`\n${failures === 0 ? 'ALL CHECKS PASSED' : `FAILURES: ${failures}`}`)
+  console.log(
+    `\n${failures === 0 ? 'ALL CHECKS PASSED' : `FAILURES: ${failures}`}`
+  )
   process.exit(failures === 0 ? 0 : 1)
 }
 

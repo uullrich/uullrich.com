@@ -1,4 +1,4 @@
-const path = require('node:path')
+import path from 'node:path'
 
 /**
  * Generate custom schema for MdxFrontmatter.
@@ -64,8 +64,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       return
     }
 
-    let previous = index > 0 ? posts[index - 1] : null
-    let next = index < posts.length - 1 ? posts[index + 1] : null
+    const previous = index > 0 ? posts[index - 1] : null
+    const next = index < posts.length - 1 ? posts[index + 1] : null
 
     reporter.info(`Creating page at path: ${node.frontmatter.slug}`)
 
@@ -78,9 +78,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 }
 
 exports.onCreateWebpackConfig = ({ getConfig, actions }) => {
-  if (getConfig().mode === 'production') {
+  const config = getConfig()
+
+  if (config.mode === 'production') {
     actions.setWebpackConfig({
       devtool: false,
     })
   }
+
+  // Gatsby 5 injects eslint-webpack-plugin with ESLint 8 options
+  // (extensions/useEslintrc/rulePaths) that were removed in ESLint 9.
+  // Strip it and rely on the standalone `npm run lint` (flat config) instead.
+  config.plugins = config.plugins.filter(
+    plugin => plugin?.constructor?.name !== 'ESLintWebpackPlugin'
+  )
+  actions.replaceWebpackConfig(config)
 }

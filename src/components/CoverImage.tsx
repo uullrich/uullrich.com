@@ -22,7 +22,7 @@ const CoverImage: React.FC<Props> = () => {
   )
 }
 
-export const useIsUnderCoverImage = (tolerance: number) => {
+export const useIsUnderCoverImage = (_tolerance: number) => {
   const scrollY = useScrollPosition(5) //Throttle as parameter
   const [coverImageHeight, setCoverImageHeight] = useState(0)
   const [isUnderCoverImage, setIsUnderCoverImage] = useState(false)

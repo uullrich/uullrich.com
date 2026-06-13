@@ -217,19 +217,20 @@ const LegalPage = () => {
           <h3>Content-Delivery-Network</h3>
           AWS-CloudFront (Amazon)
           <br />
-          Auf meiner Website verwende ich das Content Delivery Network ("CDN")
-          „AWS CloudFront“ des Dienstanbieters „Amazon“ (Amazon EU S.a. r.l., 38
-          avenue John F. Kennedy, L-1855 Luxemburg). Bei einem Content Delivery
-          Network handelt es sich um einen Online-Dienst, mit dessen Hilfe
-          insbesondere große Mediendateien (wie z.B. Grafiken, Seiteninhalte
-          oder Skripte) durch ein Netz regional verteilter und über das Internet
-          verbundener Server ausgeliefert werden. Der Einsatz des Content
-          Delivery Network von Amazon hilft mir bei der Optimierung der
-          Ladegeschwindigkeiten meiner Website. Die Verarbeitung erfolgt gemäß
-          Art. 6 Abs. 1 lit. f DSGVO auf Basis meines berechtigten Interesses an
-          einer sicheren und effizienten Bereitstellung, sowie Verbesserung der
-          Stabilität und Funktionalität meiner Website. Weitere Informationen
-          finden Sie in der Datenschutzerklärung von Amazon unter
+          Auf meiner Website verwende ich das Content Delivery Network
+          (&quot;CDN&quot;) „AWS CloudFront“ des Dienstanbieters „Amazon“
+          (Amazon EU S.a. r.l., 38 avenue John F. Kennedy, L-1855 Luxemburg).
+          Bei einem Content Delivery Network handelt es sich um einen
+          Online-Dienst, mit dessen Hilfe insbesondere große Mediendateien (wie
+          z.B. Grafiken, Seiteninhalte oder Skripte) durch ein Netz regional
+          verteilter und über das Internet verbundener Server ausgeliefert
+          werden. Der Einsatz des Content Delivery Network von Amazon hilft mir
+          bei der Optimierung der Ladegeschwindigkeiten meiner Website. Die
+          Verarbeitung erfolgt gemäß Art. 6 Abs. 1 lit. f DSGVO auf Basis meines
+          berechtigten Interesses an einer sicheren und effizienten
+          Bereitstellung, sowie Verbesserung der Stabilität und Funktionalität
+          meiner Website. Weitere Informationen finden Sie in der
+          Datenschutzerklärung von Amazon unter
           https://docs.aws.amazon.com/de_de/AmazonCloudFront/latest/DeveloperGuide/data-protection-summary.html
           <h3>Widerruf, Änderungen, Berichtigungen und Aktualisierungen</h3>
           Der Nutzer hat das Recht, auf Antrag unentgeltlich Auskunft zu

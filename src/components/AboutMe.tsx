@@ -114,17 +114,18 @@ const AboutMe: React.FC<Props> = () => {
           </Header>
           <Description>
             Hi! <br />
-            I'm Uwe Ullrich, a fullstack software engineer based in Kirchheim
-            unter Teck. I'm passionate about frontend development with the{' '}
-            <strong>React</strong>&nbsp; ecosystem and backend development using{' '}
-            <strong>Node.js</strong>.
+            I&apos;m Uwe Ullrich, a fullstack software engineer based in
+            Kirchheim unter Teck. I&apos;m passionate about frontend development
+            with the <strong>React</strong>&nbsp; ecosystem and backend
+            development using <strong>Node.js</strong>.
             <br />
             <br />
             Currently, I develop software for professional coffee machines.
             <br />
             <br />
-            I'm also open to smaller freelance gigs – don't hesitate to reach
-            out! If you need support with any of the following, let's connect:
+            I&apos;m also open to smaller freelance gigs – don&apos;t hesitate
+            to reach out! If you need support with any of the following,
+            let&apos;s connect:
             <br />
             <br />
             <ul>
@@ -145,8 +146,8 @@ const AboutMe: React.FC<Props> = () => {
             hung around with my friends in Teamspeak. There was this cool
             programming dude who was able to create a tool to control the
             Teamspeak server. He showed me how it worked under the hood and I
-            was on fire. That's why I would say my first programming language I
-            got in touch with was Visual Basic 6.0. <br />
+            was on fire. That&apos;s why I would say my first programming
+            language I got in touch with was Visual Basic 6.0. <br />
             <br />
             Several years later I got the chance to make my german Abitur
             (graduation) with a strong focus on information technology. During

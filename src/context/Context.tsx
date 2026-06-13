@@ -25,7 +25,7 @@ const defaultValue: Context = {
       enabled: undefined,
     },
   },
-  changeGoogleAnalyticsCookie: (value: boolean) => {},
+  changeGoogleAnalyticsCookie: (_value: boolean) => {},
 }
 
 const GlobalContext = React.createContext<Context>(defaultValue)

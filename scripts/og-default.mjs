@@ -25,7 +25,9 @@ const svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http
 
 const run = async () => {
   await mkdir('static', { recursive: true })
-  await sharp(Buffer.from(svg)).jpeg({ quality: 90 }).toFile('static/og-default.jpg')
+  await sharp(Buffer.from(svg))
+    .jpeg({ quality: 90 })
+    .toFile('static/og-default.jpg')
   console.log('saved static/og-default.jpg')
 }
 
